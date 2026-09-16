@@ -126,7 +126,9 @@ ByFoot = P.mkAdv ("步行") ;
 -- Actions: the predication patterns are very often language-dependent.
  
 
-AHasAge p nu = mkCl (lin NP {s = p.name.s ++ nu.s}) (mkV "岁") ; ----
+AHasAge p nu = 
+  let person : NP = p.name ** {s = p.name.s ++ nu.s} ;
+   in mkCl person (mkV "岁") ; ----
 AHasChildren p num = mkCl p.name have_V2 (mkNP num L.child_N) ;
 AHasRoom p num = mkCl p.name have_V2
 (mkNP (mkNP a_Det (mkN "房间" ) ) (SyntaxChi.mkAdv for_gei_Prep (mkNP num (L.person_N ) ))) ;
@@ -152,7 +154,7 @@ AThirsty p = mkCl p.name (mkV "渴了") ;
 ATired p = mkCl p.name (lin V (mkV "累了")) ;
 AUnderstand p = mkCl p.name (lin V (mkV "理解" ) ) ;
 AWant p obj = mkCl p.name (mkV2 "要") obj ;
-AWantGo p place = mkCl p.name want_VV  (mkVP  L.go_V place.name) ;
+AWantGo p place = mkCl p.name want_VV  (mkVP (mkVP L.go_V) place.to) ;
 
 -- LangNat l = l.lang  ;  -- ++  "语" ;  
 -- miscellaneous
@@ -276,7 +278,7 @@ by = SyntaxChi.mkAdv by_Prep (mkNP n) ;
 way = m;
 } ;
 
-mkSuperl : A -> Det = \a -> SyntaxChi.mkDet the_Art ({s = ResChi.superlative_s ++ a.s ++ R.word "的那"}) ;  --  (SyntaxChi.mkOrd a) ;
+mkSuperl : A -> Det = \a -> SyntaxChi.mkDet the_Art ({s = ResChi.superlative_s ++ (mkUtt (mkAP a)).s ++ R.word "的那"}) ;  --  (SyntaxChi.mkOrd a) ;
 
 -- mkCurrency : Str -> CN = \s -> mkCN (mkN [] s) ; ---- just a classifier
 

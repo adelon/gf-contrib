@@ -22,7 +22,7 @@ lin
       to = mkAdv kind.to (lin NP name)
     } ;
 
-  ACitizen p n = mkCl p.name (lin N {s = n.s ++ "人" } ) ; --  to get 俄罗斯人, not 俄罗斯（人）的 ;  
+  ACitizen p n = mkCl p.name (lin N {s = (mkUtt (mkAP n)).s ++ "人" }) ; --  to get 俄罗斯人, not 俄罗斯（人）的 ;  
   CitiNat n = n.prop ; -- lin A { s = n.prop.s ++ "人" ; lock_A = <> ; monoSyl = False} ;
 
   PropCit c  =  lin A { s = c.s ; lock_A = <>; monoSyl = True     }  ;
