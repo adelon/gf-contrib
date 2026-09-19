@@ -7,38 +7,53 @@ trap 'rm -rf "$work"' EXIT HUP INT TERM
 tab=$(printf '\t')
 count=0
 log=${pgf%.pgf}.roundtrips.log
-: > "$log"
 
-# A time limit also bounds malformed or unexpectedly expensive parser inputs.
-run_gf() {
-  perl -e 'alarm 15; exec @ARGV or die $!' "$GF" -run "$pgf"
-}
-
+# Import the PGF once: loading the Czech morphology for every assertion is slow.
+# Each parse has a 100-candidate budget, with one lookahead for truncation.
 while IFS="$tab" read -r category tree english czech; do
   for lang in Eng Cze; do
-    case "$lang" in Eng) expected=$english ;; Cze) expected=$czech ;; esac
-    printf 'l -lang=Phrasebook%s %s\nq\n' "$lang" "$tree" | run_gf > "$work/linearization"
-    actual=$(sed '/^$/d' "$work/linearization")
-    if test "$actual" != "$expected"; then
-      printf '%s\nExpected: %s\nActual: %s\n' "$tree ($lang)" "$expected" "$actual" >&2
-      exit 1
-    fi
-    # One extra candidate detects truncation; no first-parse assumption.
-    printf 'p -lang=Phrasebook%s -cat=%s "%s" | pt -number=101\nq\n' \
-      "$lang" "$category" "$expected" | run_gf | sed '/^$/d' > "$work/parses"
-    candidates=$(wc -l < "$work/parses" | tr -d ' ')
-    printf '%s: %s (%s candidates)\n' "$lang" "$expected" "$candidates" >> "$log"
-    cat "$work/parses" >> "$log"
-    if test "$candidates" -ge 101; then
-      echo "Parse budget exceeded; candidate list is truncated: $expected" >&2
-      exit 1
-    fi
-    if ! grep -Fxq "$tree" "$work/parses"; then
-      printf 'Intended tree missing for %s: %s\n' "$lang" "$expected" >&2
-      cat "$work/parses" >&2
-      exit 1
-    fi
     count=$((count + 1))
+    case "$lang" in Eng) expected=$english ;; Cze) expected=$czech ;; esac
+    printf '%s\t%s\t%s\t%s\n' "$count" "$lang" "$tree" "$expected" >> "$work/expected"
+    printf 'ps "GEN %s"\nl -lang=Phrasebook%s %s\n' "$count" "$lang" "$tree" >> "$work/commands"
+    printf 'ps "PARSE %s"\np -lang=Phrasebook%s -cat=%s "%s" | pt -number=101\n' \
+      "$count" "$lang" "$category" "$expected" >> "$work/commands"
   done
 done < tests/czech.tsv
-printf 'Passed %s generation and parse round trips. Candidates: %s\n' "$count" "$log"
+printf 'ps "DONE"\nq\n' >> "$work/commands"
+# Bound the whole batch as well as the number of parses. A timeout is a failure.
+perl -e 'alarm 120; exec @ARGV or die $!' "$GF" -run "$pgf" < "$work/commands" > "$work/actual"
+
+awk -F '\t' -v log_path="$log" -v total="$count" '
+  NR == FNR {lang[$1]=$2; tree[$1]=$3; expected[$1]=$4; next}
+  function fail(message) {print message > "/dev/stderr"; failed=1}
+  function finish() {
+    if (mode == "GEN" && generated != 1) fail("Expected one default linearization for " tree[id]);
+    if (mode == "PARSE") {
+      if (candidates >= 101) fail("Parse budget exceeded; candidates truncated: " expected[id]);
+      if (!found) fail("Intended tree missing for " lang[id] ": " expected[id] "\n" tree[id]);
+      checked++;
+    }
+  }
+  /^GEN [0-9]+$/ {
+    finish(); split($0, marker, " "); id=marker[2]; mode="GEN"; generated=0; next
+  }
+  /^PARSE [0-9]+$/ {
+    finish(); split($0, marker, " "); id=marker[2]; mode="PARSE"; candidates=0; found=0;
+    print lang[id] ": " expected[id] > log_path; next
+  }
+  /^DONE$/ {finish(); mode=""; done=1; next}
+  /^$/ {next}
+  mode == "GEN" {
+    generated++;
+    if ($0 != expected[id]) fail(tree[id] " (" lang[id] ")\nExpected: " expected[id] "\nActual: " $0);
+    next
+  }
+  mode == "PARSE" {candidates++; if ($0 == tree[id]) found=1; print > log_path; next}
+  {fail("Unexpected GF output: " $0)}
+  END {
+    if (!done || checked != total) fail("Incomplete test batch");
+    if (failed) exit 1;
+    print "Passed " total " generation and parse round trips. Candidates: " log_path;
+  }
+' "$work/expected" "$work/actual"
