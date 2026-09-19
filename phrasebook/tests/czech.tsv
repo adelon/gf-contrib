@@ -216,3 +216,6 @@ Word	PByTransport (ByTransp Taxi)	by taxi	taxíkem
 Phrase	PQuestion (WhichTranspPlace Bus (ThePlace Hotel))	which bus goes to the hotel ?	který autobus jede do hotelu ?
 Phrase	PQuestion (WhichTranspPlace Plane (ThePlace Airport))	which airplane goes to the airport ?	které letadlo letí na letiště ?
 Phrase	PQuestion (WhichTranspPlace Ferry (ThePlace Center))	which ferry goes to the center ?	který trajekt pluje do centra ?
+Phrase	PSentence (SProp (PropAction (ABePlace IMale (SuperlPlace TheBest School))))	I am at the best school .	jsem v nejlepší škole .
+Phrase	PQuestion (HowFarFrom (ThePlace Hotel) (ThePlace Center))	how far is the center from the hotel ?	jak daleko je centrum od hotelu ?
+Phrase	PQuestion (HowFarFromBy (ThePlace Hotel) (ThePlace Center) ByFoot)	how far is the center from the hotel by foot ?	jak daleko je centrum od hotelu pěšky ?

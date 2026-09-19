@@ -40,14 +40,14 @@ lin
   Disco = place (mkCN (zenaN "diskotéka")) on_Prep (P.mkPrep "na" accusative) ;
   Hospital = indoors (ruzeN "nemocnice") ;
   Hotel = indoors (hradN "hotel") ;
-  Museum = place (mkCN (mkN "muzeum" "muzea" neuter)) (P.mkPrep "v" locative) to_Prep ;
+  Museum = place (mkCN (mkN "muzeum" "muzea" neuter)) in_Prep to_Prep ;
   Park = indoors (hradN "park") ;
   Parking = place (mkCN ((moreN "parkoviště") ** {pgen = "parkovišť"})) on_Prep (P.mkPrep "na" accusative) ;
   Pharmacy = indoors (zenaN "lékárna") ;
   PostOffice = place (mkCN (zenaN "pošta")) on_Prep (P.mkPrep "na" accusative) ;
   Pub = indoors (zenaN "hospoda") ;
   Restaurant = indoors restaurant_N ;
-  School = place (mkCN L.school_N) (P.mkPrep "ve" locative) to_Prep ;
+  School = place (mkCN L.school_N) in_Prep to_Prep ;
   Shop = indoors ((hradN "obchod") ** {sloc = "obchodě"}) ;
   Station = place (mkCN (staveniN "nádraží")) on_Prep (P.mkPrep "na" accusative) ;
   Supermarket = indoors (hradN "supermarket") ;
@@ -72,56 +72,56 @@ lin
 
   Bulgarian = nationality (citizenship (mkA "bulharský") ((panN "Bulhar") ** {pnom = "Bulhaři"})
     ((zenaN "Bulharka") ** {pgen = "Bulharek"}))
-    (language (zenaN "bulharština") "bulharsky") (country (mestoN "Bulharsko") (P.mkPrep "v" locative)) ;
+    (language (zenaN "bulharština") "bulharsky") (country (mestoN "Bulharsko") in_Prep) ;
   Catalan = nationality (citizenship (mkA "katalánský") ((muzN "Katalánec") ** {pnom = "Katalánci"})
     ((zenaN "Katalánka") ** {pgen = "Katalánek"}))
-    (language (zenaN "katalánština") "katalánsky") (country (mestoN "Katalánsko") (P.mkPrep "v" locative)) ;
+    (language (zenaN "katalánština") "katalánsky") (country (mestoN "Katalánsko") in_Prep) ;
   Chinese = nationality (citizenship (mkA "čínský") ((panN "Číňan") ** {pnom = "Číňané"})
     ((zenaN "Číňanka") ** {pgen = "Číňanek"}))
-    (language (zenaN "čínština") "čínsky") (country (zenaN "Čína") (P.mkPrep "v" locative)) ;
+    (language (zenaN "čínština") "čínsky") (country (zenaN "Čína") in_Prep) ;
   Danish = nationality (citizenship (mkA "dánský") ((panN "Dán") ** {pnom = "Dánové"})
     ((zenaN "Dánka") ** {pgen = "Dánek"}))
-    (language (zenaN "dánština") "dánsky") (country (mestoN "Dánsko") (P.mkPrep "v" locative)) ;
+    (language (zenaN "dánština") "dánsky") (country (mestoN "Dánsko") in_Prep) ;
   Dutch = nationality (citizenship (mkA "nizozemský") ((muzN "Nizozemec") ** {pnom = "Nizozemci"})
     ((zenaN "Nizozemka") ** {pgen = "Nizozemek"}))
-    (language (zenaN "nizozemština") "nizozemsky") (country (mestoN "Nizozemsko") (P.mkPrep "v" locative)) ;
+    (language (zenaN "nizozemština") "nizozemsky") (country (mestoN "Nizozemsko") in_Prep) ;
   English = nationality (citizenship (mkA "anglický") ((panN "Angličan") ** {pnom = "Angličané"})
     ((zenaN "Angličanka") ** {pgen = "Angličanek"}))
-    (language (zenaN "angličtina") "anglicky") (country (ruzeN "Anglie") (P.mkPrep "v" locative)) ;
+    (language (zenaN "angličtina") "anglicky") (country (ruzeN "Anglie") in_Prep) ;
   Finnish = nationality (citizenship (mkA "finský") ((panN "Fin") ** {pnom = "Finové"})
     ((zenaN "Finka") ** {pgen = "Finek"}))
-    (language (zenaN "finština") "finsky") (country (mestoN "Finsko") (P.mkPrep "ve" locative)) ;
+    (language (zenaN "finština") "finsky") (country (mestoN "Finsko") in_Prep) ;
   French = nationality (citizenship (mkA "francouzský") ((panN "Francouz") ** {pnom = "Francouzi"})
     ((zenaN "Francouzka") ** {pgen = "Francouzek"}))
-    (language (zenaN "francouzština") "francouzsky") (country (ruzeN "Francie") (P.mkPrep "ve" locative)) ;
+    (language (zenaN "francouzština") "francouzsky") (country (ruzeN "Francie") in_Prep) ;
   German = nationality (citizenship (mkA "německý") ((muzN "Němec") ** {pnom = "Němci"})
     ((zenaN "Němka") ** {pgen = "Němek"}))
-    (language (zenaN "němčina") "německy") (country (mestoN "Německo") (P.mkPrep "v" locative)) ;
+    (language (zenaN "němčina") "německy") (country (mestoN "Německo") in_Prep) ;
   Italian = nationality (citizenship (mkA "italský") ((panN "Ital") ** {pnom = "Italové"})
     ((zenaN "Italka") ** {pgen = "Italek"}))
-    (language (zenaN "italština") "italsky") (country (ruzeN "Itálie") (P.mkPrep "v" locative)) ;
+    (language (zenaN "italština") "italsky") (country (ruzeN "Itálie") in_Prep) ;
   Norwegian = nationality (citizenship (mkA "norský") ((panN "Nor") ** {pnom = "Norové"})
     ((zenaN "Norka") ** {pgen = "Norek"}))
-    (language (zenaN "norština") "norsky") (country (mestoN "Norsko") (P.mkPrep "v" locative)) ;
+    (language (zenaN "norština") "norsky") (country (mestoN "Norsko") in_Prep) ;
   Polish = nationality (citizenship (mkA "polský") ((panN "Polák") ** {pnom = "Poláci"})
     ((zenaN "Polka") ** {pgen = "Polek"}))
-    (language (zenaN "polština") "polsky") (country (mestoN "Polsko") (P.mkPrep "v" locative)) ;
+    (language (zenaN "polština") "polsky") (country (mestoN "Polsko") in_Prep) ;
   Romanian = nationality (citizenship (mkA "rumunský") ((panN "Rumun") ** {pnom = "Rumuni"})
     ((zenaN "Rumunka") ** {pgen = "Rumunek"}))
-    (language (zenaN "rumunština") "rumunsky") (country (mestoN "Rumunsko") (P.mkPrep "v" locative)) ;
+    (language (zenaN "rumunština") "rumunsky") (country (mestoN "Rumunsko") in_Prep) ;
   Russian = nationality (citizenship (mkA "ruský") ((panN "Rus") ** {pnom = "Rusové"})
     ((zenaN "Ruska") ** {pgen = "Rusek"}))
-    (language (zenaN "ruština") "rusky") (country (mestoN "Rusko") (P.mkPrep "v" locative)) ;
+    (language (zenaN "ruština") "rusky") (country (mestoN "Rusko") in_Prep) ;
   Spanish = nationality (citizenship (mkA "španělský") ((panN "Španěl") ** {pnom = "Španělé"})
     ((zenaN "Španělka") ** {pgen = "Španělek"}))
-    (language (zenaN "španělština") "španělsky") (country (mestoN "Španělsko") (P.mkPrep "ve" locative)) ;
+    (language (zenaN "španělština") "španělsky") (country (mestoN "Španělsko") in_Prep) ;
   Swedish = nationality (citizenship (mkA "švédský") ((panN "Švéd") ** {pnom = "Švédové"})
     ((zenaN "Švédka") ** {pgen = "Švédek"}))
-    (language (zenaN "švédština") "švédsky") (country (mestoN "Švédsko") (P.mkPrep "ve" locative)) ;
+    (language (zenaN "švédština") "švédsky") (country (mestoN "Švédsko") in_Prep) ;
   Belgian = citizenship (mkA "belgický") ((panN "Belgičan") ** {pnom = "Belgičané"}) ((zenaN "Belgičanka") ** {pgen = "Belgičanek"}) ;
   Indian = citizenship (mkA "indický") ((panN "Ind") ** {pnom = "Indové"}) ((zenaN "Indka") ** {pgen = "Indek"}) ;
-  Belgium = country (ruzeN "Belgie") (P.mkPrep "v" locative) ;
-  India = country (ruzeN "Indie") (P.mkPrep "v" locative) ;
+  Belgium = country (ruzeN "Belgie") in_Prep ;
+  India = country (ruzeN "Indie") in_Prep ;
   Flemish = language (zenaN "vlámština") "vlámsky" ;
   Hindi = language (zenaN "hindština") "hindsky" ;
 
@@ -154,7 +154,7 @@ lin
   ALike p item = mkCl p.name (predV2AP have_V2 like_AP item) ;
   ALive p country = mkCl p.name (mkVP (mkVP live_V) country.at) ;
   AMarried p = case p.unknownGender of {
-    True => mkCl p.name (SyntaxCze.mkAdv (P.mkPrep "v" locative) (mkNP (staveniN "manželství"))) ;
+    True => mkCl p.name (SyntaxCze.mkAdv in_Prep (mkNP (staveniN "manželství"))) ;
     False => mkCl p.name (genderedAP (mkAP (mkA "ženatý")) (mkAP (mkA "vdaný")))
     } ;
 
@@ -201,9 +201,9 @@ lin
   Tomorrow = P.mkAdv "zítra" ;
 
   HowFar place = mkQS (mkQCl far_IAdv place.name) ;
-  HowFarFrom x y = mkQS (mkQCl far_IAdv (mkCl y.name (SyntaxCze.mkAdv from_Prep x.name))) ;
+  HowFarFrom x y = mkQS (mkQCl far_IAdv (mkCl y.name (SyntaxCze.mkAdv (P.mkPrep "od" genitive) x.name))) ;
   HowFarBy y t = mkQS (mkQCl far_IAdv (mkCl y.name t)) ;
-  HowFarFromBy x y t = mkQS (mkQCl far_IAdv (mkCl y.name (mkVP (mkVP (SyntaxCze.mkAdv from_Prep x.name)) t))) ;
+  HowFarFromBy x y t = mkQS (mkQCl far_IAdv (mkCl y.name (mkVP (mkVP (SyntaxCze.mkAdv (P.mkPrep "od" genitive) x.name)) t))) ;
   WhichTranspPlace t p = mkQS (mkQCl (mkIP which_IDet t.name) (mkVP (mkVP t.motion) p.to)) ;
   IsTranspPlace t p = mkQS (mkQCl (mkCl (mkCN t.name p.to))) ;
 
@@ -237,7 +237,7 @@ oper
     name = mkCN n ; motion = v ; by = SyntaxCze.mkAdv (P.mkPrep "" instrumental) (mkNP n)
     } ;
   day : N -> NPDay = \n -> mkNPDay (mkNP n)
-    (SyntaxCze.mkAdv (P.mkPrep (pre {"st" | "čt" => "ve" ; _ => "v"}) accusative) (mkNP n))
-    (SyntaxCze.mkAdv (P.mkPrep (pre {"st" | "čt" => "ve" ; _ => "v"}) accusative) (mkNP aPl_Det n)) ;
+    (SyntaxCze.mkAdv (P.v_Prep accusative) (mkNP n))
+    (SyntaxCze.mkAdv (P.v_Prep accusative) (mkNP aPl_Det n)) ;
   far_IAdv : IAdv = lin IAdv {s = "jak daleko"} ;
 }
