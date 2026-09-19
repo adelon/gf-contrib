@@ -3,7 +3,7 @@ BUILD_DIR ?= build
 export GF RGL_DIR BUILD_DIR
 compile = runghc Compile
 
-.PHONY: Eng Cze EngCze
+.PHONY: Eng Cze EngCze test-czech
 Eng:
 	sh ./build.sh Eng
 
@@ -12,6 +12,9 @@ Cze:
 
 EngCze:
 	sh ./build.sh -make Eng Cze
+
+test-czech: EngCze
+	sh tests/check.sh "$(BUILD_DIR)/Phrasebook.pgf"
 
 forApp: 
 	$(compile) -opt Bul Cat Chi Dut Eng Est Fin Fre Ger Hin Ita Jpn Rus Spa Swe Tha Urd

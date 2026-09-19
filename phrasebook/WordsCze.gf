@@ -1,313 +1,144 @@
---# -path=.:wordnet
+concrete WordsCze of Words = SentencesCze **
+  open SyntaxCze, ParadigmsCze, (L = LexiconCze), (P = ParadigmsCze) in {
 
-concrete WordsCze of Words = SentencesCze ** 
-    open 
-      SyntaxCze, 
-      ParadigmsCze, 
-      (L = LexiconCze), 
-      (P = ParadigmsCze), 
-      (W = WordNetCze), 
-      Prelude in {
-  lin
+-- Initial Czech coverage: food, places, actions, family and dates.
+-- Unimplemented abstract functions deliberately have no linearization;
+-- see README.md. Do not fill coverage gaps with English words.
+lin
+  Apple = mkCN L.apple_N ;
+  Beer = mkCN L.beer_N ;
+  Bread = mkCN L.bread_N ;
+  Cheese = mkCN (hradN "sýr") ;
+  Chicken = mkCN (mkA "kuřecí") (mestoN "maso") ;
+  Coffee = mkCN (zenaN "káva") ;
+  Fish = mkCN L.fish_N ;
+  Meat = mkCN (mestoN "maso") ;
+  Milk = mkCN L.milk_N ;
+  Pizza = mkCN (zenaN "pizza") ;
+  Salt = mkCN L.salt_N ;
+  Tea = mkCN (strojN "čaj") ;
+  Water = mkCN L.water_N ;
+  Wine = mkCN L.wine_N ;
 
--- Kinds; many of them are in the resource lexicon, others can be built by $mkN$.
+  Bad = L.bad_A ;
+  Boring = mkA "nudný" ;
+  Cheap = mkA "levný" ;
+  Cold = L.cold_A ;
+  Delicious = mkA "chutný" ;
+  Expensive = mkA "drahý" ;
+  Fresh = mkA "čerstvý" ;
+  Good = L.good_A ;
+  Suspect = mkA "podezřelý" ;
+  Warm = L.warm_A ;
 
-    Apple = mkCN L.apple_N ;
-    Beer = mkCN L.beer_N ;
-    Bread = mkCN L.bread_N ;
-    Cheese = mkCN (mkN "cheese") ;
-    Chicken = mkCN (mkN "chicken") ;
-    Coffee = mkCN (mkN "coffee") ;
-    Fish = mkCN L.fish_N ;
-    Meat = mkCN (mkN "meat") ;
-    Milk = mkCN L.milk_N ;
-    Pizza = mkCN (mkN "pizza") ;
-    Salt = mkCN L.salt_N ;
-    Tea = mkCN (mkN "tea") ;
-    Water = mkCN L.water_N ;
-    Wine = mkCN L.wine_N ;
+  Airport = place (mkCN ((moreN "letiště") ** {pgen = "letišť"})) on_Prep (P.mkPrep "na" accusative) ;
+  AmusementPark = place (mkCN (mkA "zábavní") (hradN "park")) in_Prep to_Prep ;
+  Bank = indoors (zenaN "banka") ;
+  Bar = indoors (hradN "bar") ;
+  Cafeteria = indoors (zenaN "jídelna") ;
+  Center = indoors (mkN "centrum" "centra" neuter) ;
+  Cinema = indoors ((mestoN "kino") ** {sloc = "kině"}) ;
+  Church = indoors ((hradN "kostel") ** {sloc = "kostele"}) ;
+  Disco = place (mkCN (zenaN "diskotéka")) on_Prep (P.mkPrep "na" accusative) ;
+  Hospital = indoors (ruzeN "nemocnice") ;
+  Hotel = indoors (hradN "hotel") ;
+  Museum = place (mkCN (mkN "muzeum" "muzea" neuter)) (P.mkPrep "v" locative) to_Prep ;
+  Park = indoors (hradN "park") ;
+  Parking = place (mkCN ((moreN "parkoviště") ** {pgen = "parkovišť"})) on_Prep (P.mkPrep "na" accusative) ;
+  Pharmacy = indoors (zenaN "lékárna") ;
+  PostOffice = place (mkCN (zenaN "pošta")) on_Prep (P.mkPrep "na" accusative) ;
+  Pub = indoors (zenaN "hospoda") ;
+  Restaurant = indoors restaurant_N ;
+  School = place (mkCN L.school_N) (P.mkPrep "ve" locative) to_Prep ;
+  Shop = indoors ((hradN "obchod") ** {sloc = "obchodě"}) ;
+  Station = place (mkCN (staveniN "nádraží")) on_Prep (P.mkPrep "na" accusative) ;
+  Supermarket = indoors (hradN "supermarket") ;
+  Theatre = indoors ((mestoN "divadlo") ** {sloc = "divadle" ; pgen = "divadel"}) ;
+  Toilet = place (mkCN (zenaN "toaleta")) on_Prep (P.mkPrep "na" accusative) ;
+  University = place (mkCN (zenaN "univerzita")) on_Prep (P.mkPrep "na" accusative) ;
+  Zoo = place (mkCN (mkA "zoologický") (zenaN "zahrada")) in_Prep to_Prep ;
+  CitRestaurant cit = place (mkCN cit restaurant_N) in_Prep to_Prep ;
 
--- Properties; many of them are in the resource lexicon, others can be built by $mkA$.
+  Euro = mkCN ((mestoN "euro") ** {pgen = "eur"}) ;
+  Dollar = mkCN (hradN "dolar") ;
+  Pound = mkCN (zenaN "libra") ;
+  Rouble = mkCN (hradN "rubl") ;
+  DanishCrown = mkCN (mkA "dánský") (zenaN "koruna") ;
+  NorwegianCrown = mkCN (mkA "norský") (zenaN "koruna") ;
+  SwedishCrown = mkCN (mkA "švédský") (zenaN "koruna") ;
 
-    Bad = L.bad_A ;
-    Boring = mkA "boring" ;
-    Cheap = mkA "cheap" ;
-    Cold = L.cold_A ;
-    Delicious = mkA "delicious" ;
-    Expensive = mkA "expensive" ;
-    Fresh = mkA "fresh" ;
-    Good = L.good_A ;
-    Suspect = mkA "suspect" ;
-    Warm = L.warm_A ;
+  ByFoot = P.mkAdv "pěšky" ;
+  Bike = transport (mestoN "kolo") ;
+  Bus = transport (hradN "autobus") ;
+  Car = transport (mestoN "auto") ;
+  Ferry = transport (hradN "trajekt") ;
+  Plane = transport (mestoN "letadlo") ;
+  Subway = transport (mestoN "metro") ;
+  Taxi = transport (mkN "taxi" "taxi" neuter) ;
+  Train = transport (hradN "vlak") ;
+  Tram = transport ((pisenN "tramvaj") ** {sgen,pnom,pacc = "tramvaje"}) ;
 
--- Places require different prepositions to express location; in some languages 
--- also the directional preposition varies, but in Czelish we use $to$, as
--- defined by $mkPlace$.
+  AHasRoom p n = capacity p n room_N ;
+  AHasTable p n = capacity p n ((hradN "stůl") ** {sgen = "stolu" ; sdat,sloc = "stolu" ; sins = "stolem"}) ;
+  AHasName p n = mkCl (nameOf p) n ;
+  AHungry p = mkCl p.name have_V2 (mkNP (hradN "hlad")) ;
+  AIll p = mkCl p.name (mkA "nemocný") ;
+  AKnow p = mkCl p.name (lin V L.know_VS) ;
+  ALove p q = mkCl p.name L.love_V2 q.name ;
+  AReady p = mkCl p.name (mkA "připravený") ;
+  AScared p = mkCl p.name have_V2 (mkNP (hradN "strach")) ;
+  AThirsty p = mkCl p.name have_V2 (mkNP (kostN "žízeň")) ;
+  ATired p = mkCl p.name (mkA "unavený") ;
+  AUnderstand p = mkCl p.name understand_V ;
+  AWant p obj = mkCl p.name (mkV2 (lin V want_VV)) obj ;
+  AWantGo p place = mkCl p.name want_VV (mkVP (mkVP L.go_V) place.to) ;
 
-    Airport = mkPlace "airport" "at" ;
-    AmusementPark = mkCompoundPlace "amusement" "park" "at" ;
-    Bank = mkPlace "bank" "at" ;
-    Bar = mkPlace "bar" "in" ;
-    Cafeteria = mkPlace "canteen" "in" ;
-    Center = mkPlace "center" "in" ;
-    Cinema = mkPlace "cinema" "at" ;
-    Church = mkPlace "church" "in" ;
-    Disco = mkPlace "disco" "at" ;
-    Hospital = mkPlace "hospital" "in" ;
-    Hotel = mkPlace "hotel" "in" ;
-    Museum = mkPlace "museum" "at" ;
-    Park = mkPlace "park" "in" ;
-    Parking = mkCompoundPlace "car" "park" "in" ; 
-    Pharmacy = mkPlace "pharmacy" "at" ;
-    PostOffice = mkCompoundPlace "post" "office" "at" ;
-    Pub = mkPlace "pub" "at" ;
-    Restaurant = mkPlace "restaurant" "in" ;
-    School = mkPlace "school" "at" ;
-    Shop = mkPlace "shop" "at" ;
-    Station = mkPlace "station" "at" ;
-    Supermarket = mkPlace "supermarket" "at" ; 
-    Theatre = mkPlace "theatre" "at" ;
-    Toilet = mkPlace "toilet" "in" ;
-    University = mkPlace "university" "at" ;
-    Zoo = mkPlace "zoo" "at" ;
-   
-    CitRestaurant cit = mkCNPlace (mkCN cit (mkN "restaurant")) in_Prep to_Prep ;
+  QWhatName p = mkQS (mkQCl (mkIComp whatSg_IP) (nameOf p)) ;
+  HowMuchCost item = mkQS (mkQCl how8much_IAdv (mkCl item cost_V)) ;
+  ItCost item price = mkCl item (mkV2 cost_V) price ;
+  PropOpen p = mkCl p.name (mkA "otevřený") ;
+  PropClosed p = mkCl p.name (mkA "zavřený") ;
+  PropOpenDate p d = mkCl p.name (mkVP (mkVP (mkA "otevřený")) d) ;
+  PropClosedDate p d = mkCl p.name (mkVP (mkVP (mkA "zavřený")) d) ;
+  PropOpenDay p d = mkCl p.name (mkVP (mkVP (mkA "otevřený")) d.habitual) ;
+  PropClosedDay p d = mkCl p.name (mkVP (mkVP (mkA "zavřený")) d.habitual) ;
 
+  Wife = mkRelative sing (mkCN (zenaN "manželka")) ;
+  Husband = mkRelative sing (mkCN L.husband_N) ;
+  Son = mkRelative sing (mkCN ((panN "syn") ** {pnom = "synové"})) ;
+  Daughter = mkRelative sing (mkCN ((zenaN "dcera") ** {sdat,sloc = "dceři"})) ;
 
--- Currencies; $crown$ is ambiguous between Danish and Swedish crowns.
+  Monday = day (staveniN "pondělí") ;
+  Tuesday = day (staveniN "úterý") ;
+  Wednesday = day (zenaN "středa") ;
+  Thursday = day (hradN "čtvrtek") ;
+  Friday = day (hradN "pátek") ;
+  Saturday = day (zenaN "sobota") ;
+  Sunday = day (ruzeN "neděle") ;
+  Tomorrow = P.mkAdv "zítra" ;
 
-    DanishCrown = mkCN (mkA "Danish") (mkN "crown") | mkCN (mkN "crown") ;
-    Dollar = mkCN (mkN "dollar") ;
-    Euro = mkCN (mkN "euro" "euros") ; -- to prevent euroes
-    Lei = mkCN (mkN "leu" "lei") ;
-    Leva = mkCN (mkN "lev") ;
-    NorwegianCrown = mkCN (mkA "Norwegian") (mkN "crown") | mkCN (mkN "crown") ;
-    Pound = mkCN (mkN "pound") ;
-    Rouble = mkCN (mkN "rouble") ;
-    Rupee = mkCN (mkN "rupee") ;
-    SwedishCrown = mkCN (mkA "Swedish") (mkN "crown") | mkCN (mkN "crown") ;
-    Zloty = mkCN (mkN "zloty" "zloty") ;
-    Yuan = mkCN (mkN "yuan" "yuan") ;
+  HowFar place = mkQS (mkQCl far_IAdv place.name) ;
+  HowFarFrom x y = mkQS (mkQCl far_IAdv (mkCl y.name (SyntaxCze.mkAdv from_Prep x.name))) ;
+  HowFarBy y t = mkQS (mkQCl far_IAdv (mkCl y.name t)) ;
+  HowFarFromBy x y t = mkQS (mkQCl far_IAdv (mkCl y.name (mkVP (mkVP (SyntaxCze.mkAdv from_Prep x.name)) t))) ;
+  WhichTranspPlace t p = mkQS (mkQCl (mkIP which_IDet t.name) (mkVP (mkVP L.go_V) p.to)) ;
+  IsTranspPlace t p = mkQS (mkQCl (mkCl (mkCN t.name p.to))) ;
 
--- Nationalities
-
-    Belgian = mkA "Belgian" ;
-    Belgium = mkNP (mkPN "Belgium") ;
-    Bulgarian = mkNat "Bulgarian" "Bulgaria" ;
-    Catalan = mkNPNationality (mkNP (mkPN "Catalan")) (mkNP (mkPN "Catalonia")) (mkA "Catalonian") ;
-    Chinese = mkNat "Chinese" "China" ;
-    Danish = mkNat "Danish" "Denmark" ;
-    Dutch =  mkNPNationality (mkNP (mkPN "Dutch")) (mkNP the_Quant (mkN "Netherlands")) (mkA "Dutch") ;
-    Czelish = mkNat "Czelish" "Czeland" ;
-    Finnish = mkNat "Finnish" "Finland" ;
-    Flemish = mkNP (mkPN "Flemish") ;
-    French = mkNat "French" "France" ; 
-    German = mkNat "German" "Germany" ;
-    Hindi = mkNP (mkPN "Hindi") ;
-    India = mkNP (mkPN "India") ;
-    Indian = mkA "Indian" ;
-    Italian = mkNat "Italian" "Italy" ;
-    Norwegian = mkNat "Norwegian" "Norway" ;
-    Polish = mkNat "Polish" "Poland" ;
-    Romanian = mkNat "Romanian" "Romania" ;
-    Russian = mkNat "Russian" "Russia" ;
-    Spanish = mkNat "Spanish" "Spain" ;
-    Swedish = mkNat "Swedish" "Sweden" ;
-
--- Means of transportation 
-
-   Bike = mkTransport L.bike_N ;
-   Bus = mkTransport (mkN "bus") ;
-   Car = mkTransport L.car_N ;
-   Ferry = mkTransport (mkN "ferry") ;
-   Plane = mkTransport L.airplane_N ;
-   Subway = mkTransport (mkN "subway") ;
-   Taxi = mkTransport (mkN "taxi") ;
-   Train = mkTransport (mkN "train") ;
-   Tram = mkTransport (mkN "tram") ;
-
-   ByFoot = P.mkAdv "by foot" ;
-
--- Actions: the predication patterns are very often language-dependent.
-
-    AHasAge p num = mkCl p.name (mkNP (mkNP num L.year_N) (ParadigmsCze.mkAdv "old"));
-    AHasChildren p num = mkCl p.name have_V2 (mkNP num L.child_N) ;
-    AHasRoom p num = mkCl p.name have_V2 
-      (mkNP (mkNP a_Det (mkN "room")) (SyntaxCze.mkAdv for_Prep (mkNP num (mkN "person")))) ;
-    AHasTable p num = mkCl p.name have_V2 
-      (mkNP (mkNP a_Det (mkN "table")) (SyntaxCze.mkAdv for_Prep (mkNP num (mkN "person")))) ;
-    AHasName p name = mkCl (nameOf p) name ;
-    AHungry p = mkCl p.name (mkA "hungry") ;
-    AIll p = mkCl p.name (mkA "ill") ;
-    AKnow p = mkCl p.name W.know_1_V ;
-    ALike p item = mkCl p.name (mkV2 (mkV "like")) item ;
-    ALive p co = mkCl p.name (mkVP (mkVP (mkV "live")) (SyntaxCze.mkAdv in_Prep co)) ;
-    ALove p q = mkCl p.name (mkV2 (mkV "love")) q.name ;
-    AMarried p = mkCl p.name (mkA "married") ;
-    AReady p = mkCl p.name (mkA "ready") ;
-    AScared p = mkCl p.name (mkA "scared") ;
-    ASpeak p lang = mkCl p.name  (mkV2 W.speak_1_V) lang ;
-    AThirsty p = mkCl p.name (mkA "thirsty") ;
-    ATired p = mkCl p.name (mkA "tired") ;
-    AUnderstand p = mkCl p.name W.understand_V ;
-    AWant p obj = mkCl p.name (mkV2 (mkV "want")) obj ;
-    AWantGo p place = mkCl p.name want_VV (mkVP (mkVP W.go_1_V) place.to) ;
-
--- miscellaneous
-
-    QWhatName p = mkQS (mkQCl (mkIComp whatSg_IP) (nameOf p)) ;
---    QWhatName p = mkQS (mkQCl whatSg_IP (mkVP (nameOf p))) ;
-    QWhatAge p = mkQS (mkQCl (ICompAP (mkAP L.old_A)) p.name) ;
-    HowMuchCost item = mkQS (mkQCl how8much_IAdv (mkCl item W.cost_V)) ; 
-    ItCost item price = mkCl item (mkV2 W.cost_V) price ;
-
-    PropOpen p = mkCl p.name open_Adv ;
-    PropClosed p = mkCl p.name closed_Adv ;
-    PropOpenDate p d = mkCl p.name (mkVP (mkVP open_Adv) d) ; 
-    PropClosedDate p d = mkCl p.name (mkVP (mkVP closed_Adv) d) ; 
-    PropOpenDay p d = mkCl p.name (mkVP (mkVP open_Adv) d.habitual) ; 
-    PropClosedDay p d = mkCl p.name (mkVP (mkVP closed_Adv) d.habitual) ; 
-
--- Building phrases from strings is complicated: the solution is to use
--- mkText : Text -> Text -> Text ;
-
-    PSeeYouDate d = mkText (lin Text (ss ("see you"))) (mkPhrase (mkUtt d)) ;
-    PSeeYouPlace p = mkText (lin Text (ss ("see you"))) (mkPhrase (mkUtt p.at)) ;
-    PSeeYouPlaceDate p d = 
-      mkText (lin Text (ss ("see you"))) 
-        (mkText (mkPhrase (mkUtt p.at)) (mkPhrase (mkUtt d))) ;
-
--- Relations are expressed as "my wife" or "my son's wife", as defined by $xOf$
--- below. Languages without productive genitives must use an equivalent of
--- "the wife of my son" for non-pronouns.
-
-    Wife = xOf sing (mkN "wife") ;
-    Husband = xOf sing (mkN "husband") ;
-    Son = xOf sing (mkN "son") ;
-    Daughter = xOf sing (mkN "daughter") ;
-    Children = xOf plur L.child_N ;
-
--- week days
-
-    Monday = mkDay "Monday" ;
-    Tuesday = mkDay "Tuesday" ;
-    Wednesday = mkDay "Wednesday" ;
-    Thursday = mkDay "Thursday" ;
-    Friday = mkDay "Friday" ;
-    Saturday = mkDay "Saturday" ;
-    Sunday = mkDay "Sunday" ;
- 
-    Tomorrow = P.mkAdv "tomorrow" ;
-
--- modifiers of places
-
-    TheBest = mkSuperl L.good_A ;
-    TheClosest = mkSuperl L.near_A ; 
-    TheCheapest = mkSuperl (mkA "cheap") ;
-    TheMostExpensive = mkSuperl (mkA "expensive") ;
-    TheMostPopular = mkSuperl (mkA "popular") ;
-    TheWorst = mkSuperl L.bad_A ;
-
-    SuperlPlace sup p = placeNP sup p ;
-
-
--- transports
-
-    HowFar place = mkQS (mkQCl far_IAdv place.name) ;
-    HowFarFrom x y = 
-      mkQS (mkQCl far_IAdv (mkCl y.name (SyntaxCze.mkAdv from_Prep x.name))) ;
-    HowFarFromBy x y t = 
-      mkQS (mkQCl far_IAdv (mkCl y.name (SyntaxCze.mkAdv from_Prep (mkNP x.name t)))) ;
-    HowFarBy y t = mkQS (mkQCl far_IAdv (mkCl y.name t)) ;
- 
-    WhichTranspPlace trans place = 
-      mkQS (mkQCl (mkIP which_IDet trans.name) (mkVP (mkVP L.go_V) place.to)) ;
-
-    IsTranspPlace trans place =
-      mkQS (mkQCl (mkCl (mkCN trans.name place.to))) ;
-
-
-
--- auxiliaries
-
-  oper
-
-    mkNat : Str -> Str -> NPNationality = \nat,co -> 
-      mkNPNationality (mkNP (mkPN nat)) (mkNP (mkPN co)) (mkA nat) ;
-
-    mkDay : Str -> {name : NP ; point : Adv ; habitual : Adv} = \d ->
-      let day = mkNP (mkPN d) in 
-      mkNPDay day (SyntaxCze.mkAdv on_Prep day) 
-        (SyntaxCze.mkAdv on_Prep (mkNP a_Quant plNum (mkCN (mkN d)))) ;
-    
-    mkCompoundPlace : Str -> Str -> Str -> {name : CN ; at : Prep ; to : Prep; isPl : Bool} = \comp, p, i ->
-     mkCNPlace (mkCN (P.mkN comp (mkN p))) (P.mkPrep i) to_Prep ;
-
-    mkPlace : Str -> Str -> {name : CN ; at : Prep ; to : Prep; isPl : Bool} = \p,i -> 
-      mkCNPlace (mkCN (mkN p)) (P.mkPrep i) to_Prep ;
-
-    open_Adv = P.mkAdv "open" ;
-    closed_Adv = P.mkAdv "closed" ;
-
-    xOf : GNumber -> N -> NPPerson -> NPPerson = \n,x,p -> 
-      relativePerson n (mkCN x) (\a,b,c -> mkNP (GenNP b) a c) p ;
-
-    nameOf : NPPerson -> NP = \p -> (xOf sing (mkN "name") p).name ;
-
-
-    mkTransport : N -> {name : CN ; by : Adv} = \n -> {
-      name = mkCN n ; 
-      by = SyntaxCze.mkAdv by8means_Prep (mkNP n)
-      } ;
-
-    mkSuperl : A -> Det = \a -> SyntaxCze.mkDet the_Art (SyntaxCze.mkOrd a) ;
-    
-   far_IAdv = ExtraCze.IAdvAdv (ss "far") ;
-
---------------------------------------------------
--- New 30/11/2011 AR
---------------------------------------------------
-
-  lin
-    Thai = mkNat "Thai" "Thailand" ;
-    Baht = mkCN (mkN "baht" "baht") ;
-
-    Rice = mkCN (mkN "rice") ;
-    Pork = mkCN (mkN "pork") ;
-    Beef = mkCN (mkN "beef") ;
-    Egg = mkCN L.egg_N ;
-    Noodles = mkCN (mkN "noodle") ;
-    Shrimps = mkCN (mkN "shrimp") ;
-    Chili = mkCN (mkN "chili") ;
-    Garlic = mkCN (mkN "garlic") ;
-    Durian = mkCN (mkN "durian") ;
-    Mango = mkCN (mkN "mango") ;
-    Pineapple = mkCN (mkN "pineapple") ;
-    Coke = mkCN (mkN "coke") ;
-    IceCream = mkCN (mkN "ice cream") ;
-    Salad = mkCN (mkN "salad") ;
-    OrangeJuice = mkCN (mkN "orange juice") ;
-    Lemonade = mkCN (mkN "lemonade") ;
-
-    Beach = mkPlace "beach" "on" ;
-
-    ItsRaining = mkCl (progressiveVP (mkVP L.rain_V0)) ;
-    ItsCold = mkCl (mkVP L.cold_A) ;
-    ItsWarm = mkCl (mkVP L.warm_A) ;
-    ItsWindy = mkCl (mkVP (P.mkA "windy")) ;
-    SunShine = mkCl (mkNP the_Det L.sun_N) (progressiveVP (mkVP shine_V)) ;
-
-    Smoke = mkVP (P.mkV "smoke") ;
-
-    ADoctor = mkProfession (mkN "doctor") ;
-    AProfessor = mkProfession (mkN "professor") ;
-    ALawyer = mkProfession (mkN "lawyer") ;
-    ACzeineer =  mkProfession (mkN "engineer") ;
-    ATeacher = mkProfession (mkN "teacher") ;
-    ACook = mkProfession (mkN "cook") ;
-    AStudent = mkProfession (mkN "student") ;
-    ABusinessman = mkProfession (mkN "businessman" "businessmen") ;
-
-  oper
-    mkProfession : N -> NPPerson -> Cl = \n,p -> mkCl p.name n ;
+oper
+  restaurant_N : N = ruzeN "restaurace" ;
+  room_N : N = strojN "pokoj" ;
+  understand_V : V = mkV "rozumět" "rozumím" "rozumíš" "rozumí" "rozumíme" "rozumíte" "rozumějí" "rozuměl" "rozuměli" "rozuměj" "rozumějme" "rozumějte" ;
+  cost_V : V = mkV "stát" "stojím" "stojíš" "stojí" "stojíme" "stojíte" "stojí" "stál" "stáli" "stůj" "stůjme" "stůjte" ;
+  place : CN -> Prep -> Prep -> CNPlace = mkCNPlace ;
+  indoors : N -> CNPlace = \n -> place (mkCN n) in_Prep to_Prep ;
+  capacity : NPPerson -> Card -> N -> Cl = \p,n,room ->
+    mkCl p.name have_V2 (mkNP (mkCN (mkCN room) (SyntaxCze.mkAdv for_Prep (mkNP n (zenaN "osoba"))))) ;
+  nameOf : NPPerson -> NP = \p -> (mkRelative sing (mkCN (mestoN "jméno")) p).name ;
+  transport : N -> {name : CN ; by : Adv} = \n -> {
+    name = mkCN n ; by = SyntaxCze.mkAdv (P.mkPrep "" instrumental) (mkNP n)
+    } ;
+  day : N -> NPDay = \n -> mkNPDay (mkNP n)
+    (SyntaxCze.mkAdv (P.mkPrep (pre {"st" | "čt" => "ve" ; _ => "v"}) accusative) (mkNP n))
+    (SyntaxCze.mkAdv (P.mkPrep (pre {"st" | "čt" => "ve" ; _ => "v"}) accusative) (mkNP aPl_Det n)) ;
+  far_IAdv : IAdv = lin IAdv {s = "jak daleko"} ;
 }

@@ -1,0 +1,45 @@
+Phrase	PSentence (SProp (PropAction (AHungry IMale)))	I am hungry .	já mám hlad .
+Phrase	PSentence (SProp (PropAction (ATired IFemale)))	I am tired .	já jsem unavená .
+Phrase	PSentence (SProp (PropAction (ATired IMale)))	I am tired .	já jsem unavený .
+Phrase	PSentence (SProp (PropAction (ATired YouFamFemale)))	you are tired .	ty jsi unavená .
+Phrase	PSentence (SProp (PropAction (ATired YouPolFemale)))	you are tired .	vy jste unavená .
+Phrase	PSentence (SPropNot (PropAction (ATired YouPolFemale)))	you aren't tired .	vy nejste unavená .
+Phrase	PSentence (SProp (PropAction (ATired WeFemale)))	we are tired .	my jsme unavené .
+Phrase	PSentence (SProp (PropAction (ATired TheyMale)))	they are tired .	oni jsou unavení .
+Phrase	PQuestion (WherePlace (ThePlace Hotel))	where is the hotel ?	kde je hotel ?
+Phrase	PSentence (SProp (PropAction (ABePlace IFemale (ThePlace School))))	I am at the school .	já jsem ve škole .
+Phrase	PSentence (SProp (PropAction (ABePlace IMale (ThePlace Bank))))	I am at the bank .	já jsem v bance .
+Phrase	PSentence (SProp (PropAction (AWantGo IMale (ThePlace Hotel))))	I want to go to the hotel .	já chci jít do hotelu .
+Phrase	PSentence (SProp (PropAction (AWantGo YouPolFemale (ThePlace Airport))))	you want to go to the airport .	vy chcete jít na letiště .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MCan IMale VSwim)))	I can swim .	já mohu plavat .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MMust IFemale VRead)))	I must read .	já musím číst .
+Phrase	PSentence (SPropNot (PropAction (AModVerbPhrase MWant IMale VDrink)))	I don't want to drink .	já nechci pít .
+Phrase	PQuestion (QWhereModVerbPhrase MCan IMale VSwim)	where can I swim ?	kde mohu já plavat ?
+Phrase	PImperativeFamPos VDrink	drink	pij
+Phrase	PImperativeFamNeg VDrink	don't drink	nepij
+Phrase	PImperativePolPos VDrink	drink	pijte
+Phrase	PImperativePolNeg VDrink	don't drink	nepijte
+Phrase	PImperativeFamPos VRead	read	čti
+Phrase	PImperativePlurPos VRead	read	čtěte
+Phrase	PImperativePolNeg (V2Eat (OneObj (ObjIndef Pizza)))	don't eat a pizza	nejezte pizzu
+Phrase	PSentence (SProp (PropAction (ALove IMale YouFamFemale)))	I love you .	já tě miluji .
+Phrase	PQuestion (WherePerson (Wife IMale))	where is my wife ?	kde je má manželka ?
+Phrase	PQuestion (WherePerson (Wife YouPolMale))	where is your wife ?	kde je vaše manželka ?
+Phrase	PQuestion (WherePerson (Wife (Son IMale)))	where is my son's wife ?	kde je manželka mého syna ?
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjIndef Pizza)))))	I want a pizza .	já chci pizzu .
+Phrase	PQuestion (QDoHave YouPolMale (OneObj (ObjIndef Pizza)))	do you have a pizza ?	máte vy pizzu ?
+Phrase	PSentence (SProp (Is (This Pizza) (PropQuality Good)))	this pizza is good .	tato pizza je dobrá .
+Phrase	PSentence (SProp (PropOpenDate (ThePlace Restaurant) Today))	the restaurant is open today .	restaurace je otevřená dnes .
+Phrase	PSentence (SProp (PropOpenDate (ThePlace Bank) (OnDay Wednesday)))	the bank is open on Wednesday .	banka je otevřená ve středu .
+Phrase	PSentence (SProp (PropAction (AKnowQuestion IMale (WherePlace (ThePlace Hotel)))))	I know where the hotel is .	já vím , kde je hotel .
+Word	PByTransport (ByTransp Train)	by train	vlakem
+Word	PByTransport (ByTransp Tram)	by tram	tramvají
+Phrase	PGreetingMale GExcuse	excuse me !	promiň !
+Phrase	PGreetingMale GExcusePol	excuse me !	promiňte !
+Phrase	PSentence (SPropNot (Is (This Pizza) (PropQuality Good)))	this pizza isn't good .	tato pizza není dobrá .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MKnow IFemale VSwim)))	I can swim .	já umím plavat .
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))) Pizza)))))	I want two pizzas .	já chci dvě pizzy .
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Pizza)))))	I want five pizzas .	já chci pět pizz .
+Phrase	PSentence (SProp (PropAction (ADoVerbPhrase IMale (V2Wait She))))	I wait for her .	já čekám na ni .
+Phrase	PSentence (SProp (PropAction (ALove IMale She)))	I love her .	já ji miluji .
+Phrase	PSentence (SProp (PropAction (AKnowQuestion IMale (QProp (PropAction (ATired YouFamMale))))))	I know if you are tired .	já vím , jestli ty jsi unavený .

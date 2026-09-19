@@ -1,27 +1,29 @@
-concrete GreetingsCze of Greetings = SentencesCze [Greeting,mkGreeting] ** open Prelude in {
-
-lin 
-  GBye = mkGreeting "bye" ;
-  GCheers = mkGreeting "cheers" ;
-  GDamn = mkGreeting "damn" ;
-  GExcuse, GExcusePol = mkGreeting "excuse me" ;
-  GGoodDay = mkGreeting "good afternoon" ; ----
-  GGoodEvening = mkGreeting "good evening" ;
-  GGoodMorning = mkGreeting "good morning" ;
-  GGoodNight = mkGreeting "good night" ;
-  GGoodbye = mkGreeting "goodbye" ;
-  GHello = mkGreeting "hello" ;
-  GHelp = mkGreeting "help" ;
-  GHowAreYou = mkGreeting "how are you" ;
-  GLookOut = mkGreeting "look out" ;
-  GNiceToMeetYou, GNiceToMeetYouPol = mkGreeting "nice to meet you" ;
-  GPleaseGive, GPleaseGivePol = mkGreeting "please" ;
-  GSeeYouSoon = mkGreeting "see you soon" ;
-  GSorry, GSorryPol = mkGreeting "sorry" ;
-  GThanks = mkGreeting "thank you" ;
-  GTheCheck = mkGreeting "the bill" ;
-  GCongratulations = mkGreeting "congratulations";
-  GHappyBirthday = mkGreeting "happy birthday" ;
-  GGoodLuck = mkGreeting "good luck" ; 
-  GWhatTime = mkGreeting "what time is it" | mkGreeting "what is the time" ;
+concrete GreetingsCze of Greetings = SentencesCze [Greeting,mkGreeting] ** {
+lin
+  GBye = mkGreeting "ahoj" ;
+  GCheers = mkGreeting "na zdraví" ;
+  GDamn = mkGreeting "sakra" ;
+  GExcuse = mkGreeting "promiň" ;
+  GExcusePol = mkGreeting "promiňte" ;
+  GGoodDay = mkGreeting "dobrý den" ;
+  GGoodEvening = mkGreeting "dobrý večer" ;
+  GGoodMorning = mkGreeting "dobré ráno" ;
+  GGoodNight = mkGreeting "dobrou noc" ;
+  GGoodbye = mkGreeting "na shledanou" ;
+  GHello = mkGreeting "ahoj" ;
+  GHelp = mkGreeting "pomoc" ;
+  GHowAreYou = mkGreeting "jak se máš" ;
+  GLookOut = mkGreeting "pozor" ;
+  GNiceToMeetYou = mkGreeting "těší mě" ;
+  GPleaseGive = mkGreeting "prosím" ;
+  GPleaseGivePol = mkGreeting "prosím" ;
+  GSeeYouSoon = mkGreeting "brzy na shledanou" ;
+  GSorry = mkGreeting "promiň" ;
+  GSorryPol = mkGreeting "promiňte" ;
+  GThanks = mkGreeting "děkuji" ;
+  GTheCheck = mkGreeting "účet prosím" ;
+  GCongratulations = mkGreeting "blahopřeji" ;
+  GHappyBirthday = mkGreeting "všechno nejlepší k narozeninám" ;
+  GGoodLuck = mkGreeting "hodně štěstí" ;
+  GWhatTime = mkGreeting "kolik je hodin" ;
 }

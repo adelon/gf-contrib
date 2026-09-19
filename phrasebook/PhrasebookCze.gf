@@ -1,5 +1,3 @@
---# -path=.:wordnet
+--# -path=.:alltenses
 
-concrete PhrasebookCze of Phrasebook = 
-  GreetingsCze,
-  WordsCze ;
+concrete PhrasebookCze of Phrasebook = GreetingsCze, WordsCze ;
