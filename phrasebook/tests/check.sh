@@ -20,7 +20,7 @@ while IFS="$tab" read -r category tree english czech; do
       "$count" "$lang" "$category" "$expected" >> "$work/commands"
   done
 done < tests/czech.tsv
-printf 'ps "DONE"\nq\n' >> "$work/commands"
+printf 'ps "MISSING"\npg -missing\nps "DONE"\nq\n' >> "$work/commands"
 # Bound the whole batch as well as the number of parses. A timeout is a failure.
 perl -e 'alarm 120; exec @ARGV or die $!' "$GF" -run "$pgf" < "$work/commands" > "$work/actual"
 
@@ -42,6 +42,8 @@ awk -F '\t' -v log_path="$log" -v total="$count" '
     finish(); split($0, marker, " "); id=marker[2]; mode="PARSE"; candidates=0; found=0;
     print lang[id] ": " expected[id] > log_path; next
   }
+  /^MISSING$/ {finish(); mode="MISSING"; next}
+  mode == "MISSING" && /^Phrasebook(Eng|Cze) : ObjPlur ThesPlur ThesePlur ThosePlur$/ {missing++; next}
   /^DONE$/ {finish(); mode=""; done=1; next}
   /^$/ {next}
   mode == "GEN" {
@@ -52,7 +54,7 @@ awk -F '\t' -v log_path="$log" -v total="$count" '
   mode == "PARSE" {candidates++; if ($0 == tree[id]) found=1; print > log_path; next}
   {fail("Unexpected GF output: " $0)}
   END {
-    if (!done || checked != total) fail("Incomplete test batch");
+    if (!done || checked != total || missing != 2) fail("Incomplete test batch");
     if (failed) exit 1;
     print "Passed " total " generation and parse round trips. Candidates: " log_path;
   }

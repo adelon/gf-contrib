@@ -1,9 +1,7 @@
 concrete WordsCze of Words = SentencesCze **
-  open SyntaxCze, ParadigmsCze, (L = LexiconCze), (P = ParadigmsCze) in {
+  open Prelude, SyntaxCze, SyntaxCzeExtra, ParadigmsCze, (L = LexiconCze), (P = ParadigmsCze) in {
 
--- Initial Czech coverage: food, places, actions, family and dates.
--- Unimplemented abstract functions deliberately have no linearization;
--- see README.md. Do not fill coverage gaps with English words.
+-- Domain meanings are realized through typed Czech RGL constructions.
 lin
   Apple = mkCN L.apple_N ;
   Beer = mkCN L.beer_N ;
@@ -57,30 +55,114 @@ lin
   Toilet = place (mkCN (zenaN "toaleta")) on_Prep (P.mkPrep "na" accusative) ;
   University = place (mkCN (zenaN "univerzita")) on_Prep (P.mkPrep "na" accusative) ;
   Zoo = place (mkCN (mkA "zoologický") (zenaN "zahrada")) in_Prep to_Prep ;
-  CitRestaurant cit = place (mkCN cit restaurant_N) in_Prep to_Prep ;
+  CitRestaurant cit = place (mkCN cit.modifier restaurant_N) in_Prep to_Prep ;
 
+  Lei = mkCN (mkN "lei" "lei" mascInanimate) ;
+  Leva = mkCN (hradN "lev") ;
+  Rupee = mkCN (ruzeN "rupie") ;
+  Zloty = mkCN (mkN "zlotý" "zlotého" mascInanimate) ;
+  Yuan = mkCN (hradN "jüan") ;
   Euro = mkCN ((mestoN "euro") ** {pgen = "eur"}) ;
   Dollar = mkCN (hradN "dolar") ;
-  Pound = mkCN (zenaN "libra") ;
+  Pound = mkCN ((zenaN "libra") ** {pgen = "liber"}) ;
   Rouble = mkCN (hradN "rubl") ;
   DanishCrown = mkCN (mkA "dánský") (zenaN "koruna") ;
   NorwegianCrown = mkCN (mkA "norský") (zenaN "koruna") ;
   SwedishCrown = mkCN (mkA "švédský") (zenaN "koruna") ;
 
+  Bulgarian = nationality (citizenship (mkA "bulharský") ((panN "Bulhar") ** {pnom = "Bulhaři"})
+    ((zenaN "Bulharka") ** {pgen = "Bulharek"}))
+    (language (zenaN "bulharština") "bulharsky") (country (mestoN "Bulharsko") (P.mkPrep "v" locative)) ;
+  Catalan = nationality (citizenship (mkA "katalánský") ((muzN "Katalánec") ** {pnom = "Katalánci"})
+    ((zenaN "Katalánka") ** {pgen = "Katalánek"}))
+    (language (zenaN "katalánština") "katalánsky") (country (mestoN "Katalánsko") (P.mkPrep "v" locative)) ;
+  Chinese = nationality (citizenship (mkA "čínský") ((panN "Číňan") ** {pnom = "Číňané"})
+    ((zenaN "Číňanka") ** {pgen = "Číňanek"}))
+    (language (zenaN "čínština") "čínsky") (country (zenaN "Čína") (P.mkPrep "v" locative)) ;
+  Danish = nationality (citizenship (mkA "dánský") ((panN "Dán") ** {pnom = "Dánové"})
+    ((zenaN "Dánka") ** {pgen = "Dánek"}))
+    (language (zenaN "dánština") "dánsky") (country (mestoN "Dánsko") (P.mkPrep "v" locative)) ;
+  Dutch = nationality (citizenship (mkA "nizozemský") ((muzN "Nizozemec") ** {pnom = "Nizozemci"})
+    ((zenaN "Nizozemka") ** {pgen = "Nizozemek"}))
+    (language (zenaN "nizozemština") "nizozemsky") (country (mestoN "Nizozemsko") (P.mkPrep "v" locative)) ;
+  English = nationality (citizenship (mkA "anglický") ((panN "Angličan") ** {pnom = "Angličané"})
+    ((zenaN "Angličanka") ** {pgen = "Angličanek"}))
+    (language (zenaN "angličtina") "anglicky") (country (ruzeN "Anglie") (P.mkPrep "v" locative)) ;
+  Finnish = nationality (citizenship (mkA "finský") ((panN "Fin") ** {pnom = "Finové"})
+    ((zenaN "Finka") ** {pgen = "Finek"}))
+    (language (zenaN "finština") "finsky") (country (mestoN "Finsko") (P.mkPrep "ve" locative)) ;
+  French = nationality (citizenship (mkA "francouzský") ((panN "Francouz") ** {pnom = "Francouzi"})
+    ((zenaN "Francouzka") ** {pgen = "Francouzek"}))
+    (language (zenaN "francouzština") "francouzsky") (country (ruzeN "Francie") (P.mkPrep "ve" locative)) ;
+  German = nationality (citizenship (mkA "německý") ((muzN "Němec") ** {pnom = "Němci"})
+    ((zenaN "Němka") ** {pgen = "Němek"}))
+    (language (zenaN "němčina") "německy") (country (mestoN "Německo") (P.mkPrep "v" locative)) ;
+  Italian = nationality (citizenship (mkA "italský") ((panN "Ital") ** {pnom = "Italové"})
+    ((zenaN "Italka") ** {pgen = "Italek"}))
+    (language (zenaN "italština") "italsky") (country (ruzeN "Itálie") (P.mkPrep "v" locative)) ;
+  Norwegian = nationality (citizenship (mkA "norský") ((panN "Nor") ** {pnom = "Norové"})
+    ((zenaN "Norka") ** {pgen = "Norek"}))
+    (language (zenaN "norština") "norsky") (country (mestoN "Norsko") (P.mkPrep "v" locative)) ;
+  Polish = nationality (citizenship (mkA "polský") ((panN "Polák") ** {pnom = "Poláci"})
+    ((zenaN "Polka") ** {pgen = "Polek"}))
+    (language (zenaN "polština") "polsky") (country (mestoN "Polsko") (P.mkPrep "v" locative)) ;
+  Romanian = nationality (citizenship (mkA "rumunský") ((panN "Rumun") ** {pnom = "Rumuni"})
+    ((zenaN "Rumunka") ** {pgen = "Rumunek"}))
+    (language (zenaN "rumunština") "rumunsky") (country (mestoN "Rumunsko") (P.mkPrep "v" locative)) ;
+  Russian = nationality (citizenship (mkA "ruský") ((panN "Rus") ** {pnom = "Rusové"})
+    ((zenaN "Ruska") ** {pgen = "Rusek"}))
+    (language (zenaN "ruština") "rusky") (country (mestoN "Rusko") (P.mkPrep "v" locative)) ;
+  Spanish = nationality (citizenship (mkA "španělský") ((panN "Španěl") ** {pnom = "Španělé"})
+    ((zenaN "Španělka") ** {pgen = "Španělek"}))
+    (language (zenaN "španělština") "španělsky") (country (mestoN "Španělsko") (P.mkPrep "ve" locative)) ;
+  Swedish = nationality (citizenship (mkA "švédský") ((panN "Švéd") ** {pnom = "Švédové"})
+    ((zenaN "Švédka") ** {pgen = "Švédek"}))
+    (language (zenaN "švédština") "švédsky") (country (mestoN "Švédsko") (P.mkPrep "ve" locative)) ;
+  Belgian = citizenship (mkA "belgický") ((panN "Belgičan") ** {pnom = "Belgičané"}) ((zenaN "Belgičanka") ** {pgen = "Belgičanek"}) ;
+  Indian = citizenship (mkA "indický") ((panN "Ind") ** {pnom = "Indové"}) ((zenaN "Indka") ** {pgen = "Indek"}) ;
+  Belgium = country (ruzeN "Belgie") (P.mkPrep "v" locative) ;
+  India = country (ruzeN "Indie") (P.mkPrep "v" locative) ;
+  Flemish = language (zenaN "vlámština") "vlámsky" ;
+  Hindi = language (zenaN "hindština") "hindsky" ;
+
+  TheBest = superlative L.good_A ;
+  TheWorst = superlative L.bad_A ;
+  TheClosest = superlative (mkA "blízký" "bližší") ;
+  TheCheapest = superlative (mkA "levný" "levnější") ;
+  TheMostExpensive = superlative (mkA "drahý" "dražší") ;
+  TheMostPopular = superlative (mkA "oblíbený" "oblíbenější") ;
+  SuperlPlace sup p = placeNP sup p ;
+
+  PSeeYouDate d = farewell d ;
+  PSeeYouPlace p = farewell p.at ;
+  PSeeYouPlaceDate p d = mkText (farewell p.at) (mkPhrase (mkUtt d)) ;
+
   ByFoot = P.mkAdv "pěšky" ;
-  Bike = transport (mestoN "kolo") ;
-  Bus = transport (hradN "autobus") ;
-  Car = transport (mestoN "auto") ;
-  Ferry = transport (hradN "trajekt") ;
-  Plane = transport (mestoN "letadlo") ;
-  Subway = transport (mestoN "metro") ;
-  Taxi = transport (mkN "taxi" "taxi" neuter) ;
-  Train = transport (hradN "vlak") ;
-  Tram = transport ((pisenN "tramvaj") ** {sgen,pnom,pacc = "tramvaje"}) ;
+  Bike = (transport ((mestoN "kolo") ** {sloc = "kole"}) ride_V) ** {by = SyntaxCze.mkAdv on_Prep (mkNP ((mestoN "kolo") ** {sloc = "kole"}))} ;
+  Bus = transport (hradN "autobus") ride_V ;
+  Car = transport (mestoN "auto") ride_V ;
+  Ferry = transport (hradN "trajekt") sail_V ;
+  Plane = transport (mestoN "letadlo") fly_V ;
+  Subway = transport (mestoN "metro") ride_V ;
+  Taxi = transport (hradN "taxík") ride_V ;
+  Train = transport (hradN "vlak") ride_V ;
+  Tram = transport ((pisenN "tramvaj") ** {sgen,pnom,pacc = "tramvaje"}) ride_V ;
+
+  AHasAge p n = dativeCopulaCl p.name (mkNP n L.year_N) ;
+  QWhatAge p = mkQS (dativeCopulaQCl p.name (mkIP how8many_IDet (mkCN L.year_N))) ;
+  AHasChildren p n = mkCl p.name have_V2 (mkNP n L.child_N) ;
+  ALike p item = mkCl p.name (predV2AP have_V2 like_AP item) ;
+  ALive p country = mkCl p.name (mkVP (mkVP live_V) country.at) ;
+  AMarried p = case p.unknownGender of {
+    True => mkCl p.name (SyntaxCze.mkAdv (P.mkPrep "v" locative) (mkNP (staveniN "manželství"))) ;
+    False => mkCl p.name (genderedAP (mkAP (mkA "ženatý")) (mkAP (mkA "vdaný")))
+    } ;
+
+  ASpeak p language = mkCl p.name (mkVP (mkVP speak_V) language.spoken) ;
 
   AHasRoom p n = capacity p n room_N ;
   AHasTable p n = capacity p n ((hradN "stůl") ** {sgen = "stolu" ; sdat,sloc = "stolu" ; sins = "stolem"}) ;
-  AHasName p n = mkCl (nameOf p) n ;
+  AHasName p n = mkCl p.name (mkV2 name_V) n ;
   AHungry p = mkCl p.name have_V2 (mkNP (hradN "hlad")) ;
   AIll p = mkCl p.name (mkA "nemocný") ;
   AKnow p = mkCl p.name (lin V L.know_VS) ;
@@ -93,7 +175,7 @@ lin
   AWant p obj = mkCl p.name (mkV2 (lin V want_VV)) obj ;
   AWantGo p place = mkCl p.name want_VV (mkVP (mkVP L.go_V) place.to) ;
 
-  QWhatName p = mkQS (mkQCl (mkIComp whatSg_IP) (nameOf p)) ;
+  QWhatName p = mkQS (mkQCl how_IAdv (mkCl p.name name_V)) ;
   HowMuchCost item = mkQS (mkQCl how8much_IAdv (mkCl item cost_V)) ;
   ItCost item price = mkCl item (mkV2 cost_V) price ;
   PropOpen p = mkCl p.name (mkA "otevřený") ;
@@ -103,6 +185,7 @@ lin
   PropOpenDay p d = mkCl p.name (mkVP (mkVP (mkA "otevřený")) d.habitual) ;
   PropClosedDay p d = mkCl p.name (mkVP (mkVP (mkA "zavřený")) d.habitual) ;
 
+  Children p = (mkRelative plur (mkCN L.child_N) p) ** {unknownGender = True} ;
   Wife = mkRelative sing (mkCN (zenaN "manželka")) ;
   Husband = mkRelative sing (mkCN L.husband_N) ;
   Son = mkRelative sing (mkCN ((panN "syn") ** {pnom = "synové"})) ;
@@ -121,10 +204,27 @@ lin
   HowFarFrom x y = mkQS (mkQCl far_IAdv (mkCl y.name (SyntaxCze.mkAdv from_Prep x.name))) ;
   HowFarBy y t = mkQS (mkQCl far_IAdv (mkCl y.name t)) ;
   HowFarFromBy x y t = mkQS (mkQCl far_IAdv (mkCl y.name (mkVP (mkVP (SyntaxCze.mkAdv from_Prep x.name)) t))) ;
-  WhichTranspPlace t p = mkQS (mkQCl (mkIP which_IDet t.name) (mkVP (mkVP L.go_V) p.to)) ;
+  WhichTranspPlace t p = mkQS (mkQCl (mkIP which_IDet t.name) (mkVP (mkVP t.motion) p.to)) ;
   IsTranspPlace t p = mkQS (mkQCl (mkCl (mkCN t.name p.to))) ;
 
 oper
+  citizenship : A -> N -> N -> CzechCitizenship = \a,m,f -> {
+    modifier = a ; male = mkCN m ; female = mkCN f
+    } ;
+  language : N -> Str -> CzechLanguage = \n,adv -> {name = mkNP n ; spoken = P.mkAdv adv} ;
+  country : N -> Prep -> CzechCountry = \n,p -> {name = mkNP n ; at = SyntaxCze.mkAdv p (mkNP n)} ;
+  nationality : CzechCitizenship -> CzechLanguage -> CzechCountry -> CzechNationality = \c,l,n -> {
+    citizenship = c ; language = l ; country = n
+    } ;
+  superlative : A -> Det = \a -> mkDet the_Quant (mkOrd a) ;
+  farewell : Adv -> Text = \a -> mkText (mkGreeting "na shledanou") (mkPhrase (mkUtt a)) ;
+  like_AP : AP = shortAP "rád" "ráda" "rádo" "rádi" "rády" "ráda" ;
+  name_V : V = reflV (mkV "jmenovat" "jmenuji" "jmenuješ" "jmenuje" "jmenujeme" "jmenujete" "jmenují" "jmenoval" "jmenovali" "jmenuj" "jmenujme" "jmenujte") accusative ;
+  live_V : V = mkV "žít" "žiji" "žiješ" "žije" "žijeme" "žijete" "žijí" "žil" "žili" "žij" "žijme" "žijte" ;
+  speak_V : V = mkV "mluvit" "mluvím" "mluvíš" "mluví" "mluvíme" "mluvíte" "mluví" "mluvil" "mluvili" "mluv" "mluvme" "mluvte" ;
+  ride_V : V = mkV "jet" "jedu" "jedeš" "jede" "jedeme" "jedete" "jedou" "jel" "jeli" "jeď" "jeďme" "jeďte" ;
+  fly_V : V = mkV "letět" "letím" "letíš" "letí" "letíme" "letíte" "letí" "letěl" "letěli" "leť" "leťme" "leťte" ;
+  sail_V : V = mkV "plout" "pluji" "pluješ" "pluje" "plujeme" "plujete" "plují" "plul" "pluli" "pluj" "plujme" "plujte" ;
   restaurant_N : N = ruzeN "restaurace" ;
   room_N : N = strojN "pokoj" ;
   understand_V : V = mkV "rozumět" "rozumím" "rozumíš" "rozumí" "rozumíme" "rozumíte" "rozumějí" "rozuměl" "rozuměli" "rozuměj" "rozumějme" "rozumějte" ;
@@ -133,9 +233,8 @@ oper
   indoors : N -> CNPlace = \n -> place (mkCN n) in_Prep to_Prep ;
   capacity : NPPerson -> Card -> N -> Cl = \p,n,room ->
     mkCl p.name have_V2 (mkNP (mkCN (mkCN room) (SyntaxCze.mkAdv for_Prep (mkNP n (zenaN "osoba"))))) ;
-  nameOf : NPPerson -> NP = \p -> (mkRelative sing (mkCN (mestoN "jméno")) p).name ;
-  transport : N -> {name : CN ; by : Adv} = \n -> {
-    name = mkCN n ; by = SyntaxCze.mkAdv (P.mkPrep "" instrumental) (mkNP n)
+  transport : N -> V -> CzechTransport = \n,v -> {
+    name = mkCN n ; motion = v ; by = SyntaxCze.mkAdv (P.mkPrep "" instrumental) (mkNP n)
     } ;
   day : N -> NPDay = \n -> mkNPDay (mkNP n)
     (SyntaxCze.mkAdv (P.mkPrep (pre {"st" | "čt" => "ve" ; _ => "v"}) accusative) (mkNP n))

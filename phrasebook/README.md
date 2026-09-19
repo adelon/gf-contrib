@@ -7,57 +7,101 @@ compiled libraries in `dist`. From this directory:
 make Eng RGL_DIR="$HOME/Code/gf-rgl"
 make Cze RGL_DIR="$HOME/Code/gf-rgl"
 make EngCze RGL_DIR="$HOME/Code/gf-rgl"
+make test-czech RGL_DIR="$HOME/Code/gf-rgl"
 ```
 
 The bilingual grammar is `build/Phrasebook.pgf`. Czech is compiled from RGL
 sources, so local Czech fixes are included without reinstalling the RGL.
-English uses the installed present-tense profile. `BUILD_DIR` can select a
-fresh output directory. The existing `GF_LIB_PATH` is left intact.
+English uses the installed present-tense profile. `BUILD_DIR` selects a fresh
+output directory, and the existing `GF_LIB_PATH` is left intact. The legacy
+multilingual targets still use `Compile.hs`; these targets use `build.sh` and
+`$GF`.
 
-The abstract API and start category (`Phrase`) are shared by both languages.
-Use explicit `-lang=PhrasebookCze` or `-lang=PhrasebookEng` in the GF shell,
-and `-cat=Phrase` when parsing complete phrases. Word translations use `Word`.
+The Czech source requires the gf-rgl changes through commit `5d74ba9d`, including
+`SyntaxCzeExtra`. The corresponding RGL checks are in `tests/czech/` in that
+checkout.
 
-## Czech milestone and tests
+## Semantic application grammar
 
-```sh
-make test-czech RGL_DIR="$HOME/Code/gf-rgl"
+The shared abstract API is unchanged. Its trees describe phrasebook meanings;
+the Czech concrete chooses vocabulary and constructions for those meanings.
+For example, `English` supplies several lexical realizations:
+
+| Context | Czech realization |
+| --- | --- |
+| `ACitizen IMale (CitiNat English)` | já jsem Angličan |
+| `ACitizen YouPolFemale (CitiNat English)` | vy jste Angličanka |
+| `ASpeak IFemale (LangNat English)` | já mluvím anglicky |
+| `PLanguage (LangNat English)` | angličtina |
+| `CitRestaurant (CitiNat English)` | anglická restaurace |
+| `ALive IMale (CountryNat English)` | já žiji v Anglii |
+
+The RGL supplies inflection, agreement, adjective degrees, reflexive clitic
+placement, case-governed complements and dative copular constructions. The
+phrasebook supplies nationality records, vocabulary, country prepositions,
+and the interpretation of each domain action:
+
+- `ALike` means general liking, realized with *mít rád*.
+- `AHasAge` uses *je mi pět let* / *jsou mi dva roky*.
+- `AHasName` uses *jmenovat se*.
+- `AMarried` selects *ženatý* or *vdaná* when the person tree supplies gender.
+- `VStop` means stopping oneself: statements and prohibitions use
+  *zastavovat se*, while modal infinitives and positive commands use
+  *zastavit se*. These are separate lexical VPs in the application;
+  the RGL does not mix the conjugations of two aspectual verbs.
+- Transport entries select motion verbs (*jet*, *letět*, *plout*) and
+  idiomatic manner expressions such as *na kole* and *taxíkem*.
+- Productive farewells combine the fixed idiom *na shledanou* with the
+  supplied place and date.
+
+Grammatical gender alone does not identify a person's sex. In particular,
+*děti* has feminine plural agreement. For `Children` and an opaque
+`PersonName`, nationality uses *mít ... národnost* and marital status uses
+*být v manželství*, avoiding an unsupported choice of male or female people.
+The `NN` person-name placeholder has default masculine grammatical agreement.
+Standalone citizenship vocabulary uses the masculine noun as its dictionary
+form. `Citizenship` here follows the existing nationality sense, not a claim
+about legal passport status.
+
+## Coverage and verification
+
+Czech implements all active, reachable phrasebook content: food and qualities,
+places and superlatives, currencies, nationalities, countries, languages,
+actions, family, dates, transport, greetings and imperatives. The historical
+expansion commented out in `Words.gf` is outside the active abstract API.
+
+`pg -missing` reports only `ObjPlur`, `ThesPlur`, `ThesePlur` and `ThosePlur`
+in both languages. Their argument category `PlurKind` has no active vocabulary;
+the concrete rules are implemented. The test runner checks this coverage
+boundary so a new missing Czech entry fails verification.
+
+The treebank contains 218 trees and tests default generation and parsing in both languages, including
+all nationality entries, count agreement, polite feminine address, irregular
+currency plurals, case after prepositions, reflexives under modals, and new
+combinations of the same constituents. Parsing must contain the intended tree;
+the runner does not choose the first parse. It retains at most 100 candidates,
+with one extra to detect truncation, and bounds the whole batch to 120 seconds.
+All candidates are recorded in `build/Phrasebook.roundtrips.log`. Standard shell
+utilities, awk and Perl are required.
+
+Use explicit languages and categories in the GF shell:
+
+```gf
+i build/Phrasebook.pgf
+l -lang=PhrasebookCze PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat English))))
+p -lang=PhrasebookCze -cat=Phrase "vy jste Angličanka ."
 ```
 
-This runs 45 trees through both English and Czech: exact generation followed
-by parsing and membership of the intended tree in the result set. Parsing is
-limited to 100 candidates with an extra candidate to detect truncation, and
-15 seconds per invocation. Ambiguities are recorded in
-`build/Phrasebook.roundtrips.log`; the test never selects the first parse.
-The test runner requires standard shell utilities and Perl for the timeout.
+The start category is `Phrase`; standalone vocabulary uses `Word`. Tests use
+GF token strings, with punctuation separated by spaces and `&+` binding markers
+in hyphenated English numerals and decimals. For display, pipe linearizations
+through `ps -bind`. Explicit subject pronouns preserve recoverable person
+arguments; the grammar does not yet offer neutral subject omission.
 
-Examples include `já mám hlad`, `vy nejste unavená`, `kde je hotel`,
-`já chci jít do hotelu`, `nepijte`, and `já chci pět pizz`. Tests cover
-gender and number, formal and informal address, negative verbs, modal verbs,
-imperatives, case after prepositions, possession, and embedded questions.
-Ordinary GF tokenization is used: punctuation is separated by spaces.
-
-This is an initial working subset, not a complete Czech phrasebook. Food,
-places, common actions, family relations, dates, transport, some currencies,
-and fixed greetings have Czech implementations. Countries, nationalities and
-languages, superlatives, age, children, liking, marriage, residence, speaking,
-compositional farewells, several currencies, and `VStop` remain unimplemented.
-The RGL also lacks some larger numeral constructors. Ask GF for the complete
-current list:
-
-```sh
-printf 'pg -missing\nq\n' | "$GF" -run build/PhrasebookCze.pgf
-```
-
-Missing entries deliberately have no Czech linearization. No English
-placeholder or `WordNetCze` dependency remains. The existing abstract API
-is unchanged. Explicit subject pronouns preserve person arguments in parse
-trees; recovering the same trees from omitted subjects is future work.
-The existing broad multilingual Makefile targets still use the legacy
-`Compile.hs`; the new targets use `build.sh` and `$GF`.
-
-The matching gf-rgl changes are required (commit `30b060eb`); their focused
-regressions live in `tests/czech/`. The automated suite verifies the stated examples, not every
-lexical form or possible recombination. Wider coverage needs further Czech
-linguistic review. Useful references are the RGL's cited *Czech: An Essential
-Grammar* and the [Czech Language Institute's language handbook](https://prirucka.ujc.cas.cz/).
+The tests establish these generation and parsing examples, not exhaustive
+linguistic correctness. Native-speaker review is still appropriate before
+using the material for teaching. Linguistic references include the RGL's cited
+*Czech: An Essential Grammar*, the Ministry of Education's
+[Czech A2 description](https://www.msmt.cz/uploads/soubory/mezinarodni_vztahy/cestinaA2.pdf),
+the [Oxford learner lexicon](https://czech.mml.ox.ac.uk/static/lexicon/Czech%20Lexicon%20for%20Learners%20-%20JDN.pdf),
+and the [Czech Language Institute handbook](https://prirucka.ujc.cas.cz/).
