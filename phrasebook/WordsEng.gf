@@ -143,7 +143,7 @@ concrete WordsEng of Words = SentencesEng **
     AKnow p = mkCl p.name IrregEng.know_V ;
     ALike p item = mkCl p.name (mkV2 (mkV "like")) item ;
     ALive p co = mkCl p.name (mkVP (mkVP (mkV "live")) (SyntaxEng.mkAdv in_Prep co)) ;
-    ALove p q = mkCl p.name (mkV2 (mkV "love")) q.name ;
+    ALove p q = mkCl p.name (personVP p.ref L.love_V2 q) ;
     AMarried p = mkCl p.name (mkA "married") ;
     AReady p = mkCl p.name (mkA "ready") ;
     AScared p = mkCl p.name (mkA "scared") ;
@@ -251,7 +251,7 @@ concrete WordsEng of Words = SentencesEng **
     closed_Adv = P.mkAdv "closed" ;
 
     xOf : GNumber -> N -> NPPerson -> NPPerson = \n,x,p -> 
-      relativePerson n (mkCN x) (\a,b,c -> mkNP (GenNP b) a c) p ;
+      mkRelative n (mkCN x) p ;
 
     nameOf : NPPerson -> NP = \p -> (xOf sing (mkN "name") p).name ;
 

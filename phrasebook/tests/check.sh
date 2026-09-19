@@ -54,8 +54,8 @@ awk -F '\t' -v log_path="$log" -v total="$count" '
   mode == "PARSE" {
     candidates++;
     if ($0 == tree[id]) found=1;
-    if (lang[id] == "Cze" && forbidden[id] != "" && $0 == forbidden[id])
-      fail("Incorrect meaning recovered for " expected[id] "\n" $0);
+    if (forbidden[id] != "" && $0 == forbidden[id])
+      fail("Incorrect meaning recovered for " lang[id] ": " expected[id] "\n" $0);
     print > log_path; next
   }
   {fail("Unexpected GF output: " $0)}

@@ -167,7 +167,7 @@ lin
   AHungry p = mkCl (personNP p) have_V2 (mkNP (hradN "hlad")) ;
   AIll p = mkCl (personNP p) (mkA "nemocný") ;
   AKnow p = mkCl (personNP p) (lin V L.know_VS) ;
-  ALove p q = mkCl (personNP p) L.love_V2 (personObject p.ref q) ;
+  ALove p q = mkCl (personNP p) (personVP p.ref L.love_V2 q) ;
   AReady p = mkCl (personNP p) (mkA "připravený") ;
   AScared p = mkCl (personNP p) have_V2 (mkNP (hradN "strach")) ;
   AThirsty p = mkCl (personNP p) have_V2 (mkNP (kostN "žízeň")) ;

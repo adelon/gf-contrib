@@ -18,9 +18,10 @@ multilingual targets still use `Compile.hs`; these targets use `build.sh` and
 `$GF`.
 
 The Czech source requires the companion RGL revisions providing `ExtraCze`,
+the standard `ExtendCze` reflexive noun-phrase constructions,
 subject omission, quantified agreement, clitic domains and `v_Prep`.
 Run `sh tests/czech/check.sh` in that checkout to check its source constructions
-and its standard installed API. `SyntaxCzeExtra` has been replaced by the
+and its standard installed language and API modules. `SyntaxCzeExtra` has been replaced by the
 conventional `ExtraCzeAbs` / `ExtraCze` extension.
 
 ## Semantic application grammar
@@ -80,12 +81,30 @@ of the existing abstract constructors, not a general rule that all Czech
 imperatives or infinitives must be perfective. Broader distinctions between
 habitual and episodic modal meanings would need an explicit abstract contrast.
 
-Pronoun constructors denote discourse participants. Czech tracks their identity
-separately from agreement and sex: `ALove He (Wife He)` uses *svou manželku*,
+Pronoun constructors denote discourse participants. English and Czech use the
+same identity rules from `PhrasebookReferents`, separately from RGL agreement
+and sex. Gender/address variants of the speaker, addressee and speaker group
+share identity; `He`, `She`, `TheyMale` and `TheyFemale` denote their respective
+third-person participants. `ALove He He` means *he loves himself* / *miluje sebe*.
+It does not denote loving another man. `ALove He (Wife He)` uses *svou manželku*,
 whereas `ALove He (Wife IMale)` uses *mou manželku*. The same binding applies
 inside verb phrases, including modal and imperative requests to wait for
 someone. The RGL supplies case and reflexive forms; the phrasebook decides
-whether the object or possessor denotes the subject.
+whether the object or possessor denotes the subject. Both concretes use the
+standard `Extend` RNP interface for oneself. Czech also uses `ReflPoss` for
+one's relative and `AdvRNP` to embed that relative within another description;
+English retains its ordinary possessives and genitives. Thus
+`ALove He (Wife (Son He))` means *he loves his son's wife* /
+*miluje manželku svého syna*. Czech retains the innermost participant's binding
+at arbitrary kinship depth. These identity rules are implemented and tested in
+English and Czech; the legacy language concretes have not been migrated.
+
+Each Czech person description retains an ordinary NP, a subject-bound RNP and
+the identity of its innermost participant. The application carries a participant's
+zero realization through binding so PGF can recover the complete original tree.
+The small `retainReferent` helpers touch only the RNP string fields; they add no
+surface token and do not implement agreement, case, or reflexive morphology.
+This parsing representation stays in the application, not in the RGL API.
 
 The `NN` placeholder and kinship descriptions do not introduce discourse
 identifiers. Repeating an arbitrary description does not establish identity.
@@ -110,7 +129,7 @@ all nationality entries, count agreement, polite feminine address, irregular
 currency plurals, case after prepositions, reflexives under modals, and new
 combinations of the same constituents. Parsing must contain the intended tree;
 the runner does not choose the first parse. An optional fifth TSV column names
-a forbidden Czech reading; the possession contrasts check meaning as well as
+a forbidden reading in either language; the possession contrasts check meaning as well as
 round-trip membership. It retains at most 100 candidates,
 with one extra to detect truncation, and bounds the whole batch to 120 seconds.
 All candidates are recorded in `build/Phrasebook.roundtrips.log`. Standard shell

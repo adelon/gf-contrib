@@ -18,13 +18,10 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
     (Syntax = SyntaxCze),
     (Symbolic = SymbolicCze),
     (Lexicon = LexiconCze)
-  ** open ParadigmsCze, SyntaxCze, ExtraCze, Prelude, (L = LexiconCze) in {
+  ** open ParadigmsCze, SyntaxCze, ExtraCze, Prelude, PhrasebookReferents,
+    (E = ExtendCze), (L = LexiconCze) in {
   param
     HumanSex = Male | Female | UnknownSex ;
-    -- The pronoun constructors identify discourse participants. Kinship
-    -- descriptions do not introduce a new globally identifiable participant.
-    Referent = Speaker | Addressee | MaleThird | FemaleThird |
-      SpeakerGroup | AddresseeGroup | ThirdMaleGroup | ThirdFemaleGroup | Unresolved ;
   lincat
     Object, PrimObject = CzechObject ;
     Modality = CzechModality ;
@@ -49,7 +46,7 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
     GObjectPlease o = lin Text (mkPhr noPConj (mkUtt o.np) please_Voc) | lin Text (mkUtt o.np) ;
     SHave p o = mkS (mkCl (personNP p) have_V2 o.np) ;
     QDoHave p o = mkQS (mkQCl (mkCl (personNP p) have_V2 o.np)) ;
-    AKnowPerson p q = mkCl (personNP p) L.know_V2 (personObject p.ref q) ;
+    AKnowPerson p q = mkCl (personNP p) (personVP p.ref L.know_V2 q) ;
 
     MCan = {verb = can_VV ; bounded = True} ;
     MKnow = {verb = can8know_VV ; bounded = False} ;
@@ -67,7 +64,7 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
       } ;
     NameNN = mkNP (mkPN "NN" mascAnimate) ;
     PersonName n = {
-      forms = plainPossessiveNP n ; ref = Unresolved ; owner = Unresolved ; sex = UnknownSex ;
+      name = n ; bound = E.ReflPron ; ref,anchor = Unresolved ; gap = [] ; sex = UnknownSex ;
       isPron = False ; poss = mkQuant he_Pron
       } ;
 
@@ -106,8 +103,8 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
     V2Drink o = consumption L.drink_V2 drinkPerfective_V2 o ;
     V2Eat o = consumption L.eat_V2 eatPerfective_V2 o ;
     V2Wait p = {
-      ongoing,event = \\bound => mkVP L.wait_V2 (boundPersonObject bound p) ;
-      owner = objectReferent p
+      ongoing,event = \\bound => boundPersonVP bound L.wait_V2 p ;
+      owner = p.anchor
       } ;
     VStop = eventActivity (mkVP stopImperfective_V) (mkVP stopPerfective_V) ;
 
@@ -127,40 +124,38 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
     TheyFemale = person ThirdFemaleGroup Female (genderPron feminine they_Pron) ;
   oper
     NPPerson : Type = {
-      forms : PossessiveNP ; ref,owner : Referent ; sex : HumanSex ;
+      name : NP ; bound : E.RNP ; ref,anchor : Referent ; gap : Str ; sex : HumanSex ;
       isPron : Bool ; poss : Quant
       } ;
     person : Referent -> HumanSex -> Pron -> NPPerson = \r,sex,p -> {
-      forms = plainPossessiveNP (mkNP p) ; ref = r ; owner = Unresolved ; sex = sex ;
+      name = mkNP p ; bound = E.ReflPron ; ref,anchor = r ; gap = [] ; sex = sex ;
       isPron = True ; poss = mkQuant p
       } ;
     mkRelative : GNumber -> CN -> NPPerson -> NPPerson = \n,x,p ->
       let num = if_then_else Num n plNum sgNum in {
-        forms = case p.isPron of {
-          True => possessiveNP p.forms p.poss num x ;
-          False => genitivePossessiveNP p.forms num x
+        name = case p.isPron of {
+          True => mkNP p.poss num x ;
+          False => mkNP (mkNP the_Quant num x) (SyntaxCze.mkAdv possess_Prep p.name)
           } ;
-        owner = p.ref ; ref = Unresolved ; sex = UnknownSex ;
+        bound = case p.isPron of {
+          True => E.ReflPoss num x ;
+          False => E.AdvRNP (mkNP the_Quant num x) possess_Prep p.bound
+          } ;
+        anchor = p.anchor ; ref = Unresolved ; gap = p.gap ; sex = UnknownSex ;
         isPron = False ; poss = mkQuant he_Pron
         } ;
-    personNP : NPPerson -> NP = \p -> usePossessiveNP False p.forms ;
-    personObject : Referent -> NPPerson -> NP = \subject,p ->
-      boundPersonObject (sameReferent subject (objectReferent p)) p ;
-    objectReferent : NPPerson -> Referent = \p -> case p.ref of {
-      Unresolved => p.owner ; _ => p.ref
+    personNP : NPPerson -> NP = \p -> p.name ;
+    personVP : Referent -> V2 -> NPPerson -> VP = \subject,v,p ->
+      boundPersonVP (sameReferent subject p.anchor) v p ;
+    boundPersonVP : Bool -> V2 -> NPPerson -> VP = \bound,v,p -> case bound of {
+      False => mkVP v p.name ;
+      True => E.ReflRNP (mkVPSlash v) (retainReferent p.gap p.bound)
       } ;
-    boundPersonObject : Bool -> NPPerson -> NP = \bound,p -> case bound of {
-      False => personNP p ;
-      True => case p.ref of {
-        Unresolved => usePossessiveNP True p.forms ;
-        _ => reflexiveObjectNP p.forms
-        }
-      } ;
-    sameReferent : Referent -> Referent -> Bool = \a,b -> case <a,b> of {
-      <Speaker,Speaker> | <Addressee,Addressee> | <MaleThird,MaleThird> |
-      <FemaleThird,FemaleThird> | <SpeakerGroup,SpeakerGroup> |
-      <AddresseeGroup,AddresseeGroup> |
-      <ThirdMaleGroup,ThirdMaleGroup> | <ThirdFemaleGroup,ThirdFemaleGroup> => True ; _ => False
+    -- A bound discourse participant is implicit. Consume its zero realization
+    -- so PGF can reconstruct the original Person subtree, including its owner.
+    -- This helper preserves every RNP field and changes no case or agreement.
+    retainReferent : Str -> E.RNP -> E.RNP = \gap,np -> np ** {
+      s = \\c => gap ++ np.s ! c ; prep = \\c => gap ++ np.prep ! c
       } ;
 
     CzechCitizenship : Type = {modifier : A ; male,female : CN} ;

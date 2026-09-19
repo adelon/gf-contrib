@@ -33,7 +33,13 @@ abstract Sentences = Numeral ** {
     PlaceKind ;   -- type of location                          e.g. "bar" 
     Currency ;    -- currency unit                             e.g. "leu"  
     Price ;       -- number of currency units                  e.g. "eleven leu"
-    Person ;      -- agent wanting or doing something          e.g. "you" 
+    Person ;      -- agent wanting or doing something          e.g. "you"
+                  -- English/Czech: pronoun constructors denote fixed discourse
+                  -- participants. Repetition denotes the same participant;
+                  -- gender/address variants of I, you and we share identity.
+                  -- A subject-bound object is reflexive, also when the
+                  -- participant is the possessor inside a nested relative.
+                  -- Names/descriptions alone do not establish coreference.
     Action ;      -- proposition about a Person                e.g. "you are here"
     Nationality ; -- complex of language, property, country    e.g. "Swedish, Sweden"
     LAnguage ;    -- language (can be without nationality)     e.g. "Flemish"
@@ -219,4 +225,3 @@ abstract Sentences = Numeral ** {
     TheyMale, TheyFemale : Person ;           -- they, said of men/women (affects agreement)
 
 }
-
