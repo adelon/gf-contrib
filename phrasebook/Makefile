@@ -1,4 +1,17 @@
-compile = runghc Compile 
+RGL_DIR ?= ../../gf-rgl
+BUILD_DIR ?= build
+export GF RGL_DIR BUILD_DIR
+compile = runghc Compile
+
+.PHONY: Eng Cze EngCze
+Eng:
+	sh ./build.sh Eng
+
+Cze:
+	sh ./build.sh Cze
+
+EngCze:
+	sh ./build.sh -make Eng Cze
 
 forApp: 
 	$(compile) -opt Bul Cat Chi Dut Eng Est Fin Fre Ger Hin Ita Jpn Rus Spa Swe Tha Urd
@@ -40,7 +53,7 @@ fin:
 	$(compile) -opt Fin
 
 missing:
-	echo "pg -missing | wf -file=missing.txt" | gf -run Phrasebook.pgf 
+	echo "pg -missing | wf -file=missing.txt" | "$(GF)" -run Phrasebook.pgf
 
 doc:
 	cat Sentences.gf Words.gf >Ontology.gf
