@@ -1,5 +1,5 @@
 concrete WordsCze of Words = SentencesCze **
-  open Prelude, SyntaxCze, SyntaxCzeExtra, ParadigmsCze, (L = LexiconCze), (P = ParadigmsCze) in {
+  open Prelude, SyntaxCze, ExtraCze, ParadigmsCze, (L = LexiconCze), (P = ParadigmsCze) in {
 
 -- Domain meanings are realized through typed Czech RGL constructions.
 lin
@@ -148,34 +148,35 @@ lin
   Train = transport (hradN "vlak") ride_V ;
   Tram = transport ((pisenN "tramvaj") ** {sgen,pnom,pacc = "tramvaje"}) ride_V ;
 
-  AHasAge p n = dativeCopulaCl p.name (mkNP n L.year_N) ;
-  QWhatAge p = mkQS (dativeCopulaQCl p.name (mkIP how8many_IDet (mkCN L.year_N))) ;
-  AHasChildren p n = mkCl p.name have_V2 (mkNP n L.child_N) ;
-  ALike p item = mkCl p.name (predV2AP have_V2 like_AP item) ;
-  ALive p country = mkCl p.name (mkVP (mkVP live_V) country.at) ;
-  AMarried p = case p.unknownGender of {
-    True => mkCl p.name (SyntaxCze.mkAdv in_Prep (mkNP (staveniN "manželství"))) ;
-    False => mkCl p.name (genderedAP (mkAP (mkA "ženatý")) (mkAP (mkA "vdaný")))
+  AHasAge p n = DativeCopulaCl (personNP p) (mkNP n L.year_N) ;
+  QWhatAge p = mkQS (DativeCopulaQCl (personNP p) (mkIP how8many_IDet (mkCN L.year_N))) ;
+  AHasChildren p n = mkCl (personNP p) have_V2 (mkNP n L.child_N) ;
+  ALike p item = mkCl (personNP p) (PredV2AP have_V2 like_AP item) ;
+  ALive p country = mkCl (personNP p) (mkVP (mkVP live_V) country.at) ;
+  AMarried p = case p.sex of {
+    Male => mkCl (personNP p) (mkA "ženatý") ;
+    Female => mkCl (personNP p) (mkA "vdaný") ;
+    UnknownSex => mkCl (personNP p) (SyntaxCze.mkAdv in_Prep (mkNP (staveniN "manželství")))
     } ;
 
-  ASpeak p language = mkCl p.name (mkVP (mkVP speak_V) language.spoken) ;
+  ASpeak p language = mkCl (personNP p) (mkVP (mkVP speak_V) language.spoken) ;
 
   AHasRoom p n = capacity p n room_N ;
   AHasTable p n = capacity p n ((hradN "stůl") ** {sgen = "stolu" ; sdat,sloc = "stolu" ; sins = "stolem"}) ;
-  AHasName p n = mkCl p.name (mkV2 name_V) n ;
-  AHungry p = mkCl p.name have_V2 (mkNP (hradN "hlad")) ;
-  AIll p = mkCl p.name (mkA "nemocný") ;
-  AKnow p = mkCl p.name (lin V L.know_VS) ;
-  ALove p q = mkCl p.name L.love_V2 q.name ;
-  AReady p = mkCl p.name (mkA "připravený") ;
-  AScared p = mkCl p.name have_V2 (mkNP (hradN "strach")) ;
-  AThirsty p = mkCl p.name have_V2 (mkNP (kostN "žízeň")) ;
-  ATired p = mkCl p.name (mkA "unavený") ;
-  AUnderstand p = mkCl p.name understand_V ;
-  AWant p obj = mkCl p.name (mkV2 <lin V want_VV : V>) obj ;
-  AWantGo p place = mkCl p.name want_VV (mkVP (mkVP L.go_V) place.to) ;
+  AHasName p n = mkCl (personNP p) (mkV2 name_V) n ;
+  AHungry p = mkCl (personNP p) have_V2 (mkNP (hradN "hlad")) ;
+  AIll p = mkCl (personNP p) (mkA "nemocný") ;
+  AKnow p = mkCl (personNP p) (lin V L.know_VS) ;
+  ALove p q = mkCl (personNP p) L.love_V2 (personObject p.ref q) ;
+  AReady p = mkCl (personNP p) (mkA "připravený") ;
+  AScared p = mkCl (personNP p) have_V2 (mkNP (hradN "strach")) ;
+  AThirsty p = mkCl (personNP p) have_V2 (mkNP (kostN "žízeň")) ;
+  ATired p = mkCl (personNP p) (mkA "unavený") ;
+  AUnderstand p = mkCl (personNP p) understand_V ;
+  AWant p obj = mkCl (personNP p) (mkV2 <lin V want_VV : V>) obj ;
+  AWantGo p place = mkCl (personNP p) want_VV (mkVP (mkVP L.go_V) place.to) ;
 
-  QWhatName p = mkQS (mkQCl how_IAdv (mkCl p.name name_V)) ;
+  QWhatName p = mkQS (mkQCl how_IAdv (mkCl (personNP p) name_V)) ;
   HowMuchCost item = mkQS (mkQCl how8much_IAdv (mkCl item cost_V)) ;
   ItCost item price = mkCl item (mkV2 cost_V) price ;
   PropOpen p = mkCl p.name (mkA "otevřený") ;
@@ -185,11 +186,11 @@ lin
   PropOpenDay p d = mkCl p.name (mkVP (mkVP (mkA "otevřený")) d.habitual) ;
   PropClosedDay p d = mkCl p.name (mkVP (mkVP (mkA "zavřený")) d.habitual) ;
 
-  Children p = (mkRelative plur (mkCN L.child_N) p) ** {unknownGender = True} ;
-  Wife = mkRelative sing (mkCN (zenaN "manželka")) ;
-  Husband = mkRelative sing (mkCN L.husband_N) ;
-  Son = mkRelative sing (mkCN ((panN "syn") ** {pnom = "synové"})) ;
-  Daughter = mkRelative sing (mkCN ((zenaN "dcera") ** {sdat,sloc = "dceři"})) ;
+  Children p = (mkRelative plur (mkCN L.child_N) p) ** {sex = UnknownSex} ;
+  Wife p = (mkRelative sing (mkCN (zenaN "manželka")) p) ** {sex = Female} ;
+  Husband p = (mkRelative sing (mkCN L.husband_N) p) ** {sex = Male} ;
+  Son p = (mkRelative sing (mkCN ((panN "syn") ** {pnom = "synové"})) p) ** {sex = Male} ;
+  Daughter p = (mkRelative sing (mkCN ((zenaN "dcera") ** {sdat,sloc = "dceři"})) p) ** {sex = Female} ;
 
   Monday = day (staveniN "pondělí") ;
   Tuesday = day (staveniN "úterý") ;
@@ -232,7 +233,7 @@ oper
   place : CN -> Prep -> Prep -> CNPlace = mkCNPlace ;
   indoors : N -> CNPlace = \n -> place (mkCN n) in_Prep to_Prep ;
   capacity : NPPerson -> Card -> N -> Cl = \p,n,room ->
-    mkCl p.name have_V2 (mkNP (mkCN (mkCN room) (SyntaxCze.mkAdv for_Prep (mkNP n (zenaN "osoba"))))) ;
+    mkCl (personNP p) have_V2 (mkNP (mkCN (mkCN room) (SyntaxCze.mkAdv for_Prep (mkNP n (zenaN "osoba"))))) ;
   transport : N -> V -> CzechTransport = \n,v -> {
     name = mkCN n ; motion = v ; by = SyntaxCze.mkAdv (P.mkPrep "" instrumental) (mkNP n)
     } ;

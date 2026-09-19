@@ -17,9 +17,11 @@ output directory, and the existing `GF_LIB_PATH` is left intact. The legacy
 multilingual targets still use `Compile.hs`; these targets use `build.sh` and
 `$GF`.
 
-The Czech source requires the gf-rgl changes through commit `5d74ba9d`, including
-`SyntaxCzeExtra`. The corresponding RGL checks are in `tests/czech/` in that
-checkout.
+The Czech source requires the companion RGL revisions providing `ExtraCze`,
+subject omission, quantified agreement, clitic domains and `v_Prep`.
+Run `sh tests/czech/check.sh` in that checkout to check its source constructions
+and its standard installed API. `SyntaxCzeExtra` has been replaced by the
+conventional `ExtraCzeAbs` / `ExtraCze` extension.
 
 ## Semantic application grammar
 
@@ -29,12 +31,12 @@ For example, `English` supplies several lexical realizations:
 
 | Context | Czech realization |
 | --- | --- |
-| `ACitizen IMale (CitiNat English)` | já jsem Angličan |
-| `ACitizen YouPolFemale (CitiNat English)` | vy jste Angličanka |
-| `ASpeak IFemale (LangNat English)` | já mluvím anglicky |
+| `ACitizen IMale (CitiNat English)` | jsem Angličan |
+| `ACitizen YouPolFemale (CitiNat English)` | jste Angličanka |
+| `ASpeak IFemale (LangNat English)` | mluvím anglicky |
 | `PLanguage (LangNat English)` | angličtina |
 | `CitRestaurant (CitiNat English)` | anglická restaurace |
-| `ALive IMale (CountryNat English)` | já žiji v Anglii |
+| `ALive IMale (CountryNat English)` | žiji v Anglii |
 
 The RGL supplies inflection, agreement, adjective degrees, reflexive clitic
 placement, case-governed complements and dative copular constructions. The
@@ -44,7 +46,8 @@ and the interpretation of each domain action:
 - `ALike` means general liking, realized with *mít rád*.
 - `AHasAge` uses *je mi pět let* / *jsou mi dva roky*.
 - `AHasName` uses *jmenovat se*.
-- `AMarried` selects *ženatý* or *vdaná* when the person tree supplies gender.
+- `AMarried` selects *ženatý* or *vdaná* from the person’s sex, independently
+  of grammatical gender.
 - `VStop` means stopping oneself: statements and prohibitions use
   *zastavovat se*, while modal infinitives and positive commands use
   *zastavit se*. These are separate lexical VPs in the application;
@@ -63,6 +66,19 @@ Standalone citizenship vocabulary uses the masculine noun as its dictionary
 form. `Citizenship` here follows the existing nationality sense, not a claim
 about legal passport status.
 
+Pronoun constructors denote discourse participants. Czech tracks their identity
+separately from agreement and sex: `ALove He (Wife He)` uses *svou manželku*,
+whereas `ALove He (Wife IMale)` uses *mou manželku*. The same binding applies
+inside verb phrases, including modal and imperative requests to wait for
+someone. The RGL supplies case and reflexive forms; the phrasebook decides
+whether the object or possessor denotes the subject.
+
+The `NN` placeholder and kinship descriptions do not introduce discourse
+identifiers. Repeating an arbitrary description does not establish identity.
+Content requiring distinct named participants or explicit coreference between
+descriptions needs discourse identifiers in the abstract grammar, rather than
+comparison of Czech strings or agreement features.
+
 ## Coverage and verification
 
 Czech implements all active, reachable phrasebook content: food and qualities,
@@ -75,11 +91,13 @@ in both languages. Their argument category `PlurKind` has no active vocabulary;
 the concrete rules are implemented. The test runner checks this coverage
 boundary so a new missing Czech entry fails verification.
 
-The treebank contains 218 trees and tests default generation and parsing in both languages, including
+The treebank tests default generation and parsing in both languages, including
 all nationality entries, count agreement, polite feminine address, irregular
 currency plurals, case after prepositions, reflexives under modals, and new
 combinations of the same constituents. Parsing must contain the intended tree;
-the runner does not choose the first parse. It retains at most 100 candidates,
+the runner does not choose the first parse. An optional fifth TSV column names
+a forbidden Czech reading; the possession contrasts check meaning as well as
+round-trip membership. It retains at most 100 candidates,
 with one extra to detect truncation, and bounds the whole batch to 120 seconds.
 All candidates are recorded in `build/Phrasebook.roundtrips.log`. Standard shell
 utilities, awk and Perl are required.
@@ -89,7 +107,7 @@ Use explicit languages and categories in the GF shell:
 ```gf
 i build/Phrasebook.pgf
 l -lang=PhrasebookCze PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat English))))
-p -lang=PhrasebookCze -cat=Phrase "vy jste Angličanka ."
+p -lang=PhrasebookCze -cat=Phrase "jste Angličanka ."
 ```
 
 The start category is `Phrase`; standalone vocabulary uses `Word`. Tests use

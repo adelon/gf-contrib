@@ -10,11 +10,11 @@ log=${pgf%.pgf}.roundtrips.log
 
 # Import the PGF once: loading the Czech morphology for every assertion is slow.
 # Each parse has a 100-candidate budget, with one lookahead for truncation.
-while IFS="$tab" read -r category tree english czech; do
+while IFS="$tab" read -r category tree english czech forbidden; do
   for lang in Eng Cze; do
     count=$((count + 1))
     case "$lang" in Eng) expected=$english ;; Cze) expected=$czech ;; esac
-    printf '%s\t%s\t%s\t%s\n' "$count" "$lang" "$tree" "$expected" >> "$work/expected"
+    printf '%s\t%s\t%s\t%s\t%s\n' "$count" "$lang" "$tree" "$expected" "$forbidden" >> "$work/expected"
     printf 'ps "GEN %s"\nl -lang=Phrasebook%s %s\n' "$count" "$lang" "$tree" >> "$work/commands"
     printf 'ps "PARSE %s"\np -lang=Phrasebook%s -cat=%s "%s" | pt -number=101\n' \
       "$count" "$lang" "$category" "$expected" >> "$work/commands"
@@ -25,7 +25,7 @@ printf 'ps "MISSING"\npg -missing\nps "DONE"\nq\n' >> "$work/commands"
 perl -e 'alarm 120; exec @ARGV or die $!' "$GF" -run "$pgf" < "$work/commands" > "$work/actual"
 
 awk -F '\t' -v log_path="$log" -v total="$count" '
-  NR == FNR {lang[$1]=$2; tree[$1]=$3; expected[$1]=$4; next}
+  NR == FNR {lang[$1]=$2; tree[$1]=$3; expected[$1]=$4; forbidden[$1]=$5; next}
   function fail(message) {print message > "/dev/stderr"; failed=1}
   function finish() {
     if (mode == "GEN" && generated != 1) fail("Expected one default linearization for " tree[id]);
@@ -51,7 +51,13 @@ awk -F '\t' -v log_path="$log" -v total="$count" '
     if ($0 != expected[id]) fail(tree[id] " (" lang[id] ")\nExpected: " expected[id] "\nActual: " $0);
     next
   }
-  mode == "PARSE" {candidates++; if ($0 == tree[id]) found=1; print > log_path; next}
+  mode == "PARSE" {
+    candidates++;
+    if ($0 == tree[id]) found=1;
+    if (lang[id] == "Cze" && forbidden[id] != "" && $0 == forbidden[id])
+      fail("Incorrect meaning recovered for " expected[id] "\n" $0);
+    print > log_path; next
+  }
   {fail("Unexpected GF output: " $0)}
   END {
     if (!done || checked != total || missing != 2) fail("Incomplete test batch");

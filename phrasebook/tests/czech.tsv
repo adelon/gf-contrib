@@ -219,3 +219,12 @@ Phrase	PQuestion (WhichTranspPlace Ferry (ThePlace Center))	which ferry goes to 
 Phrase	PSentence (SProp (PropAction (ABePlace IMale (SuperlPlace TheBest School))))	I am at the best school .	jsem v nejlepší škole .
 Phrase	PQuestion (HowFarFrom (ThePlace Hotel) (ThePlace Center))	how far is the center from the hotel ?	jak daleko je centrum od hotelu ?
 Phrase	PQuestion (HowFarFromBy (ThePlace Hotel) (ThePlace Center) ByFoot)	how far is the center from the hotel by foot ?	jak daleko je centrum od hotelu pěšky ?
+Phrase	PSentence (SProp (PropAction (ALove He (Wife He))))	he loves his wife .	miluje svou manželku .	PSentence (SProp (PropAction (ALove He (Wife IMale))))
+Phrase	PSentence (SProp (PropAction (ALove He (Wife IMale))))	he loves my wife .	miluje mou manželku .	PSentence (SProp (PropAction (ALove He (Wife He))))
+Phrase	PSentence (SProp (PropAction (ALove IMale (Wife IMale))))	I love my wife .	miluji svou manželku .
+Phrase	PSentence (SProp (PropAction (ALove YouPolFemale (Husband YouPolFemale))))	you love your husband .	milujete svého manžela .
+Phrase	PSentence (SProp (PropAction (AKnowPerson He (Son He))))	he knows his son .	zná svého syna .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MWant IMale (V2Wait (Wife IMale)))))	I want to wait for my wife .	chci čekat na svou manželku .
+Phrase	PImperativePolPos (V2Wait (Wife YouPolMale))	wait for your wife	čekejte na svou manželku
+Phrase	PSentence (SProp (PropAction (AMarried (Daughter IMale))))	my daughter is married .	má dcera je vdaná .
+Phrase	PSentence (SProp (PropAction (ACitizen (Children IMale) (CitiNat English))))	my children are English .	mé děti mají anglickou národnost .

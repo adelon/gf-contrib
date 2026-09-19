@@ -86,7 +86,7 @@ incomplete concrete SentencesI of Sentences = Numeral **
     QProp p = mkQS (mkQCl p) ;
 
     WherePlace place = mkQS (mkQCl where_IAdv place.name) ;
-    WherePerson person = mkQS (mkQCl where_IAdv person.name) ;
+    WherePerson person = mkQS (mkQCl where_IAdv (personNP person)) ;
 
     PropAction a = a ;
 
@@ -147,19 +147,19 @@ incomplete concrete SentencesI of Sentences = Numeral **
 
     NNumeral n = mkCard <lin Numeral n : Numeral>  ;
 
-    SHave   p obj = mkS (mkCl p.name have_V2 obj) ;
-    SHaveNo p k = mkS negativePol (mkCl p.name have_V2 (mkNP aPl_Det k)) ;
-    SHaveNoMass p m = mkS negativePol (mkCl p.name have_V2 (mkNP m)) ;
-    QDoHave p obj = mkQS (mkQCl (mkCl p.name have_V2 obj)) ;
+    SHave   p obj = mkS (mkCl (personNP p) have_V2 obj) ;
+    SHaveNo p k = mkS negativePol (mkCl (personNP p) have_V2 (mkNP aPl_Det k)) ;
+    SHaveNoMass p m = mkS negativePol (mkCl (personNP p) have_V2 (mkNP m)) ;
+    QDoHave p obj = mkQS (mkQCl (mkCl (personNP p) have_V2 obj)) ;
 
-    AHaveCurr p curr = mkCl p.name have_V2 (mkNP aPl_Det curr) ;
-    ACitizen p n = mkCl p.name n ;
-    ABePlace p place = mkCl p.name place.at ;
+    AHaveCurr p curr = mkCl (personNP p) have_V2 (mkNP aPl_Det curr) ;
+    ACitizen p n = mkCl (personNP p) n ;
+    ABePlace p place = mkCl (personNP p) place.at ;
     ByTransp t = t.by ;
 
-    AKnowSentence p s = mkCl p.name Lexicon.know_VS s ;
-    AKnowQuestion p s = mkCl p.name Lexicon.know_VQ s ;
-    AKnowPerson p q = mkCl p.name Lexicon.know_V2 q.name ;
+    AKnowSentence p s = mkCl (personNP p) Lexicon.know_VS s ;
+    AKnowQuestion p s = mkCl (personNP p) Lexicon.know_VQ s ;
+    AKnowPerson p q = mkCl (personNP p) Lexicon.know_V2 (personNP q) ;
 
 oper 
 
@@ -216,12 +216,14 @@ oper
 
   NPPerson : Type = {name : NP ; isPron : Bool ; poss : Quant} ;
 
+  personNP : NPPerson -> NP = \p -> p.name ;
+
   relativePerson : GNumber -> CN -> (Num -> NP -> CN -> NP) -> NPPerson -> NPPerson = 
     \n,x,f,p -> 
       let num = if_then_else Num n plNum sgNum in {
       name = case p.isPron of {
         True => mkNP p.poss num x ;
-        _    => f num p.name x
+        _    => f num (personNP p) x
         } ;
       isPron = False ;
       poss = mkQuant he_Pron -- not used because not pron
@@ -249,13 +251,13 @@ oper
     VerbPhrase  = VP ;
     Modality = VV ;
   lin
-    ADoVerbPhrase p vp = mkCl p.name vp ;
-    AModVerbPhrase m p vp = mkCl p.name (mkVP m vp) ;
-    ADoVerbPhrasePlace p vp x = mkCl p.name (mkVP vp x.at) ;
-    AModVerbPhrasePlace m p vp x = mkCl p.name (mkVP m (mkVP vp x.at)) ;
+    ADoVerbPhrase p vp = mkCl (personNP p) vp ;
+    AModVerbPhrase m p vp = mkCl (personNP p) (mkVP m vp) ;
+    ADoVerbPhrasePlace p vp x = mkCl (personNP p) (mkVP vp x.at) ;
+    AModVerbPhrasePlace m p vp x = mkCl (personNP p) (mkVP m (mkVP vp x.at)) ;
 
-    QWhereDoVerbPhrase p vp = mkQS (mkQCl where_IAdv (mkCl p.name vp)) ;
-    QWhereModVerbPhrase m p vp = mkQS (mkQCl where_IAdv (mkCl p.name (mkVP m vp))) ;
+    QWhereDoVerbPhrase p vp = mkQS (mkQCl where_IAdv (mkCl (personNP p) vp)) ;
+    QWhereModVerbPhrase m p vp = mkQS (mkQCl where_IAdv (mkCl (personNP p) (mkVP m vp))) ;
 
     MWant = want_VV ;
     MCan = can_VV ;
