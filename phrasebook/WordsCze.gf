@@ -172,7 +172,7 @@ lin
   AThirsty p = mkCl p.name have_V2 (mkNP (kostN "žízeň")) ;
   ATired p = mkCl p.name (mkA "unavený") ;
   AUnderstand p = mkCl p.name understand_V ;
-  AWant p obj = mkCl p.name (mkV2 (lin V want_VV)) obj ;
+  AWant p obj = mkCl p.name (mkV2 <lin V want_VV : V>) obj ;
   AWantGo p place = mkCl p.name want_VV (mkVP (mkVP L.go_V) place.to) ;
 
   QWhatName p = mkQS (mkQCl how_IAdv (mkCl p.name name_V)) ;

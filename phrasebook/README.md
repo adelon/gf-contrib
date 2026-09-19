@@ -95,8 +95,9 @@ p -lang=PhrasebookCze -cat=Phrase "vy jste Angličanka ."
 The start category is `Phrase`; standalone vocabulary uses `Word`. Tests use
 GF token strings, with punctuation separated by spaces and `&+` binding markers
 in hyphenated English numerals and decimals. For display, pipe linearizations
-through `ps -bind`. Explicit subject pronouns preserve recoverable person
-arguments; the grammar does not yet offer neutral subject omission.
+through `ps -bind`. Neutral Czech clauses omit personal subject pronouns.
+Parsing recovers their person from agreement and retains alternatives for
+unexpressed gender and formal or plural address.
 
 The tests establish these generation and parsing examples, not exhaustive
 linguistic correctness. Native-speaker review is still appropriate before

@@ -1,20 +1,20 @@
-Phrase	PSentence (SProp (PropAction (AHungry IMale)))	I am hungry .	já mám hlad .
-Phrase	PSentence (SProp (PropAction (ATired IFemale)))	I am tired .	já jsem unavená .
-Phrase	PSentence (SProp (PropAction (ATired IMale)))	I am tired .	já jsem unavený .
-Phrase	PSentence (SProp (PropAction (ATired YouFamFemale)))	you are tired .	ty jsi unavená .
-Phrase	PSentence (SProp (PropAction (ATired YouPolFemale)))	you are tired .	vy jste unavená .
-Phrase	PSentence (SPropNot (PropAction (ATired YouPolFemale)))	you aren't tired .	vy nejste unavená .
-Phrase	PSentence (SProp (PropAction (ATired WeFemale)))	we are tired .	my jsme unavené .
-Phrase	PSentence (SProp (PropAction (ATired TheyMale)))	they are tired .	oni jsou unavení .
+Phrase	PSentence (SProp (PropAction (AHungry IMale)))	I am hungry .	mám hlad .
+Phrase	PSentence (SProp (PropAction (ATired IFemale)))	I am tired .	jsem unavená .
+Phrase	PSentence (SProp (PropAction (ATired IMale)))	I am tired .	jsem unavený .
+Phrase	PSentence (SProp (PropAction (ATired YouFamFemale)))	you are tired .	jsi unavená .
+Phrase	PSentence (SProp (PropAction (ATired YouPolFemale)))	you are tired .	jste unavená .
+Phrase	PSentence (SPropNot (PropAction (ATired YouPolFemale)))	you aren't tired .	nejste unavená .
+Phrase	PSentence (SProp (PropAction (ATired WeFemale)))	we are tired .	jsme unavené .
+Phrase	PSentence (SProp (PropAction (ATired TheyMale)))	they are tired .	jsou unavení .
 Phrase	PQuestion (WherePlace (ThePlace Hotel))	where is the hotel ?	kde je hotel ?
-Phrase	PSentence (SProp (PropAction (ABePlace IFemale (ThePlace School))))	I am at the school .	já jsem ve škole .
-Phrase	PSentence (SProp (PropAction (ABePlace IMale (ThePlace Bank))))	I am at the bank .	já jsem v bance .
-Phrase	PSentence (SProp (PropAction (AWantGo IMale (ThePlace Hotel))))	I want to go to the hotel .	já chci jít do hotelu .
-Phrase	PSentence (SProp (PropAction (AWantGo YouPolFemale (ThePlace Airport))))	you want to go to the airport .	vy chcete jít na letiště .
-Phrase	PSentence (SProp (PropAction (AModVerbPhrase MCan IMale VSwim)))	I can swim .	já mohu plavat .
-Phrase	PSentence (SProp (PropAction (AModVerbPhrase MMust IFemale VRead)))	I must read .	já musím číst .
-Phrase	PSentence (SPropNot (PropAction (AModVerbPhrase MWant IMale VDrink)))	I don't want to drink .	já nechci pít .
-Phrase	PQuestion (QWhereModVerbPhrase MCan IMale VSwim)	where can I swim ?	kde mohu já plavat ?
+Phrase	PSentence (SProp (PropAction (ABePlace IFemale (ThePlace School))))	I am at the school .	jsem ve škole .
+Phrase	PSentence (SProp (PropAction (ABePlace IMale (ThePlace Bank))))	I am at the bank .	jsem v bance .
+Phrase	PSentence (SProp (PropAction (AWantGo IMale (ThePlace Hotel))))	I want to go to the hotel .	chci jít do hotelu .
+Phrase	PSentence (SProp (PropAction (AWantGo YouPolFemale (ThePlace Airport))))	you want to go to the airport .	chcete jít na letiště .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MCan IMale VSwim)))	I can swim .	mohu plavat .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MMust IFemale VRead)))	I must read .	musím číst .
+Phrase	PSentence (SPropNot (PropAction (AModVerbPhrase MWant IMale VDrink)))	I don't want to drink .	nechci pít .
+Phrase	PQuestion (QWhereModVerbPhrase MCan IMale VSwim)	where can I swim ?	kde mohu plavat ?
 Phrase	PImperativeFamPos VDrink	drink	pij
 Phrase	PImperativeFamNeg VDrink	don't drink	nepij
 Phrase	PImperativePolPos VDrink	drink	pijte
@@ -22,27 +22,27 @@ Phrase	PImperativePolNeg VDrink	don't drink	nepijte
 Phrase	PImperativeFamPos VRead	read	čti
 Phrase	PImperativePlurPos VRead	read	čtěte
 Phrase	PImperativePolNeg (V2Eat (OneObj (ObjIndef Pizza)))	don't eat a pizza	nejezte pizzu
-Phrase	PSentence (SProp (PropAction (ALove IMale YouFamFemale)))	I love you .	já tě miluji .
+Phrase	PSentence (SProp (PropAction (ALove IMale YouFamFemale)))	I love you .	miluji tě .
 Phrase	PQuestion (WherePerson (Wife IMale))	where is my wife ?	kde je má manželka ?
 Phrase	PQuestion (WherePerson (Wife YouPolMale))	where is your wife ?	kde je vaše manželka ?
 Phrase	PQuestion (WherePerson (Wife (Son IMale)))	where is my son's wife ?	kde je manželka mého syna ?
-Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjIndef Pizza)))))	I want a pizza .	já chci pizzu .
-Phrase	PQuestion (QDoHave YouPolMale (OneObj (ObjIndef Pizza)))	do you have a pizza ?	máte vy pizzu ?
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjIndef Pizza)))))	I want a pizza .	chci pizzu .
+Phrase	PQuestion (QDoHave YouPolMale (OneObj (ObjIndef Pizza)))	do you have a pizza ?	máte pizzu ?
 Phrase	PSentence (SProp (Is (This Pizza) (PropQuality Good)))	this pizza is good .	tato pizza je dobrá .
 Phrase	PSentence (SProp (PropOpenDate (ThePlace Restaurant) Today))	the restaurant is open today .	restaurace je otevřená dnes .
 Phrase	PSentence (SProp (PropOpenDate (ThePlace Bank) (OnDay Wednesday)))	the bank is open on Wednesday .	banka je otevřená ve středu .
-Phrase	PSentence (SProp (PropAction (AKnowQuestion IMale (WherePlace (ThePlace Hotel)))))	I know where the hotel is .	já vím , kde je hotel .
+Phrase	PSentence (SProp (PropAction (AKnowQuestion IMale (WherePlace (ThePlace Hotel)))))	I know where the hotel is .	vím , kde je hotel .
 Word	PByTransport (ByTransp Train)	by train	vlakem
 Word	PByTransport (ByTransp Tram)	by tram	tramvají
 Phrase	PGreetingMale GExcuse	excuse me !	promiň !
 Phrase	PGreetingMale GExcusePol	excuse me !	promiňte !
 Phrase	PSentence (SPropNot (Is (This Pizza) (PropQuality Good)))	this pizza isn't good .	tato pizza není dobrá .
-Phrase	PSentence (SProp (PropAction (AModVerbPhrase MKnow IFemale VSwim)))	I can swim .	já umím plavat .
-Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))) Pizza)))))	I want two pizzas .	já chci dvě pizzy .
-Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Pizza)))))	I want five pizzas .	já chci pět pizz .
-Phrase	PSentence (SProp (PropAction (ADoVerbPhrase IMale (V2Wait She))))	I wait for her .	já čekám na ni .
-Phrase	PSentence (SProp (PropAction (ALove IMale She)))	I love her .	já ji miluji .
-Phrase	PSentence (SProp (PropAction (AKnowQuestion IMale (QProp (PropAction (ATired YouFamMale))))))	I know if you are tired .	já vím , jestli ty jsi unavený .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MKnow IFemale VSwim)))	I can swim .	umím plavat .
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))) Pizza)))))	I want two pizzas .	chci dvě pizzy .
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Pizza)))))	I want five pizzas .	chci pět pizz .
+Phrase	PSentence (SProp (PropAction (ADoVerbPhrase IMale (V2Wait She))))	I wait for her .	čekám na ni .
+Phrase	PSentence (SProp (PropAction (ALove IMale She)))	I love her .	miluji ji .
+Phrase	PSentence (SProp (PropAction (AKnowQuestion IMale (QProp (PropAction (ATired YouFamMale))))))	I know if you are tired .	vím , jestli jsi unavený .
 Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 pot01))))))))	I am one year old .	je mi jeden rok .
 Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))))))	I am two years old .	jsou mi dva roky .
 Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))))))	I am five years old .	je mi pět let .
@@ -52,34 +52,34 @@ Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1
 Phrase	PSentence (SProp (PropAction (AHasAge (Son IMale) (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))))))	my son is five years old .	mému synovi je pět let .
 Phrase	PQuestion (QWhatAge YouPolFemale)	how old are you ?	kolik let vám je ?
 Phrase	PQuestion (QWhatAge (Daughter IMale))	how old is my daughter ?	kolik let je mé dceři ?
-Phrase	PSentence (SProp (PropAction (AHasChildren IFemale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 pot01))))))))	I have one child .	já mám jedno dítě .
-Phrase	PSentence (SProp (PropAction (AHasChildren IFemale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))))))	I have two children .	já mám dvě děti .
-Phrase	PSentence (SProp (PropAction (AHasChildren IFemale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))))))	I have five children .	já mám pět dětí .
+Phrase	PSentence (SProp (PropAction (AHasChildren IFemale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 pot01))))))))	I have one child .	mám jedno dítě .
+Phrase	PSentence (SProp (PropAction (AHasChildren IFemale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))))))	I have two children .	mám dvě děti .
+Phrase	PSentence (SProp (PropAction (AHasChildren IFemale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))))))	I have five children .	mám pět dětí .
 Phrase	PQuestion (WherePerson (Children IMale))	where are my children ?	kde jsou mé děti ?
 Phrase	PSentence (SProp (PropAction (ATired (Children IMale))))	my children are tired .	mé děti jsou unavené .
 Phrase	PSentence (SProp (PropAction (ACitizen (Children IMale) (CitiNat English))))	my children are English .	mé děti mají anglickou národnost .
 Phrase	PSentence (SProp (PropAction (ACitizen (PersonName NameNN) (CitiNat English))))	NN is English .	NN má anglickou národnost .
 Phrase	PSentence (SProp (PropAction (AMarried (PersonName NameNN))))	NN is married .	NN je v manželství .
-Phrase	PSentence (SProp (PropAction (ALike IMale (This Pizza))))	I like this pizza .	já mám rád tuto pizzu .
-Phrase	PSentence (SProp (PropAction (ALike IFemale (This Pizza))))	I like this pizza .	já mám ráda tuto pizzu .
-Phrase	PSentence (SProp (PropAction (ALike YouPolFemale (TheMass Cheese))))	you like the cheese .	vy máte ráda sýr .
+Phrase	PSentence (SProp (PropAction (ALike IMale (This Pizza))))	I like this pizza .	mám rád tuto pizzu .
+Phrase	PSentence (SProp (PropAction (ALike IFemale (This Pizza))))	I like this pizza .	mám ráda tuto pizzu .
+Phrase	PSentence (SProp (PropAction (ALike YouPolFemale (TheMass Cheese))))	you like the cheese .	máte ráda sýr .
 Phrase	PSentence (SProp (PropAction (ALike (Children IMale) (TheMass Cheese))))	my children like the cheese .	mé děti mají rády sýr .
-Phrase	PSentence (SPropNot (PropAction (ALike TheyFemale (This Pizza))))	they don't like this pizza .	ony nemají rády tuto pizzu .
-Phrase	PSentence (SProp (PropAction (AMarried IMale)))	I am married .	já jsem ženatý .
-Phrase	PSentence (SProp (PropAction (AMarried IFemale)))	I am married .	já jsem vdaná .
-Phrase	PSentence (SProp (PropAction (AMarried YouPolFemale)))	you are married .	vy jste vdaná .
-Phrase	PSentence (SProp (PropAction (AMarried WeMale)))	we are married .	my jsme ženatí .
-Phrase	PSentence (SProp (PropAction (AMarried WeFemale)))	we are married .	my jsme vdané .
-Phrase	PSentence (SProp (PropAction (AHasName YouPolFemale NameNN)))	your name is NN .	vy se jmenujete NN .
-Phrase	PQuestion (QWhatName YouFamFemale)	what is your name ?	jak se jmenuješ ty ?
-Phrase	PQuestion (QWhatName YouPolMale)	what is your name ?	jak se jmenujete vy ?
+Phrase	PSentence (SPropNot (PropAction (ALike TheyFemale (This Pizza))))	they don't like this pizza .	nemají rády tuto pizzu .
+Phrase	PSentence (SProp (PropAction (AMarried IMale)))	I am married .	jsem ženatý .
+Phrase	PSentence (SProp (PropAction (AMarried IFemale)))	I am married .	jsem vdaná .
+Phrase	PSentence (SProp (PropAction (AMarried YouPolFemale)))	you are married .	jste vdaná .
+Phrase	PSentence (SProp (PropAction (AMarried WeMale)))	we are married .	jsme ženatí .
+Phrase	PSentence (SProp (PropAction (AMarried WeFemale)))	we are married .	jsme vdané .
+Phrase	PSentence (SProp (PropAction (AHasName YouPolFemale NameNN)))	your name is NN .	jmenujete se NN .
+Phrase	PQuestion (QWhatName YouFamFemale)	what is your name ?	jak se jmenuješ ?
+Phrase	PQuestion (QWhatName YouPolMale)	what is your name ?	jak se jmenujete ?
 Phrase	PImperativeFamPos VStop	stop	zastav se
 Phrase	PImperativePolPos VStop	stop	zastavte se
 Phrase	PImperativeFamNeg VStop	don't stop	nezastavuj se
 Phrase	PImperativePolNeg VStop	don't stop	nezastavujte se
-Phrase	PSentence (SProp (PropAction (ADoVerbPhrase IMale VStop)))	I stop .	já se zastavuji .
-Phrase	PSentence (SProp (PropAction (AModVerbPhrase MWant IMale VStop)))	I want to stop .	já se chci zastavit .
-Phrase	PSentence (SProp (PropAction (AModVerbPhrasePlace MCan YouPolFemale VStop (ThePlace Hotel))))	you can stop in the hotel .	vy se můžete zastavit v hotelu .
+Phrase	PSentence (SProp (PropAction (ADoVerbPhrase IMale VStop)))	I stop .	zastavuji se .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MWant IMale VStop)))	I want to stop .	chci se zastavit .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrasePlace MCan YouPolFemale VStop (ThePlace Hotel))))	you can stop in the hotel .	můžete se zastavit v hotelu .
 Phrase	PGreetingFemale (PSeeYouDate Tomorrow)	see you tomorrow !	na shledanou zítra !
 Phrase	PGreetingMale (PSeeYouPlace (ThePlace Bar))	see you in the bar !	na shledanou v baru !
 Phrase	PGreetingMale (PSeeYouPlaceDate (ThePlace School) (OnDay Thursday))	see you at the school on Thursday !	na shledanou ve škole ve čtvrtek !
@@ -89,41 +89,41 @@ Phrase	PQuestion (WherePlace (SuperlPlace TheClosest Hotel))	where is the neares
 Phrase	PQuestion (WherePlace (SuperlPlace TheCheapest Hotel))	where is the cheapest hotel ?	kde je nejlevnější hotel ?
 Phrase	PQuestion (WherePlace (SuperlPlace TheMostExpensive Hotel))	where is the most expensive hotel ?	kde je nejdražší hotel ?
 Phrase	PQuestion (WherePlace (SuperlPlace TheMostPopular Hotel))	where is the most popular hotel ?	kde je nejoblíbenější hotel ?
-Phrase	PSentence (SProp (PropAction (AWantGo IMale (SuperlPlace TheBest Restaurant))))	I want to go to the best restaurant .	já chci jít do nejlepší restaurace .
-Phrase	PSentence (SProp (PropAction (ABePlace IMale (SuperlPlace TheClosest Airport))))	I am at the nearest airport .	já jsem na nejbližším letišti .
+Phrase	PSentence (SProp (PropAction (AWantGo IMale (SuperlPlace TheBest Restaurant))))	I want to go to the best restaurant .	chci jít do nejlepší restaurace .
+Phrase	PSentence (SProp (PropAction (ABePlace IMale (SuperlPlace TheClosest Airport))))	I am at the nearest airport .	jsem na nejbližším letišti .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Lei)	five lei .	pět lei .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Leva)	five levs .	pět levů .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Rupee)	five rupees .	pět rupií .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Zloty)	five zloty .	pět zlotých .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Yuan)	five yuan .	pět jüanů .
-Phrase	PSentence (SProp (PropAction (ACitizen IMale (CitiNat English))))	I am English .	já jsem Angličan .
-Phrase	PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat English))))	you are English .	vy jste Angličanka .
-Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat English))))	I speak English .	já mluvím anglicky .
-Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat English))))	I live in England .	já žiji v Anglii .
+Phrase	PSentence (SProp (PropAction (ACitizen IMale (CitiNat English))))	I am English .	jsem Angličan .
+Phrase	PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat English))))	you are English .	jste Angličanka .
+Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat English))))	I speak English .	mluvím anglicky .
+Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat English))))	I live in England .	žiji v Anglii .
 Word	PCountry (CountryNat English)	England	Anglie
 Phrase	PQuestion (WherePlace (ThePlace (CitRestaurant (CitiNat English))))	where is the English restaurant ?	kde je anglická restaurace ?
-Phrase	PSentence (SProp (PropAction (ACitizen IMale (CitiNat Finnish))))	I am Finnish .	já jsem Fin .
-Phrase	PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat Finnish))))	you are Finnish .	vy jste Finka .
-Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat Finnish))))	I speak Finnish .	já mluvím finsky .
-Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat Finnish))))	I live in Finland .	já žiji ve Finsku .
+Phrase	PSentence (SProp (PropAction (ACitizen IMale (CitiNat Finnish))))	I am Finnish .	jsem Fin .
+Phrase	PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat Finnish))))	you are Finnish .	jste Finka .
+Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat Finnish))))	I speak Finnish .	mluvím finsky .
+Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat Finnish))))	I live in Finland .	žiji ve Finsku .
 Word	PCountry (CountryNat Finnish)	Finland	Finsko
 Phrase	PQuestion (WherePlace (ThePlace (CitRestaurant (CitiNat Finnish))))	where is the Finnish restaurant ?	kde je finská restaurace ?
-Phrase	PSentence (SProp (PropAction (ACitizen IMale (CitiNat German))))	I am German .	já jsem Němec .
-Phrase	PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat German))))	you are German .	vy jste Němka .
-Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat German))))	I speak German .	já mluvím německy .
-Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat German))))	I live in Germany .	já žiji v Německu .
+Phrase	PSentence (SProp (PropAction (ACitizen IMale (CitiNat German))))	I am German .	jsem Němec .
+Phrase	PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat German))))	you are German .	jste Němka .
+Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat German))))	I speak German .	mluvím německy .
+Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat German))))	I live in Germany .	žiji v Německu .
 Word	PCountry (CountryNat German)	Germany	Německo
 Phrase	PQuestion (WherePlace (ThePlace (CitRestaurant (CitiNat German))))	where is the German restaurant ?	kde je německá restaurace ?
-Phrase	PSentence (SProp (PropAction (ACitizen IMale (CitiNat French))))	I am French .	já jsem Francouz .
-Phrase	PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat French))))	you are French .	vy jste Francouzka .
-Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat French))))	I speak French .	já mluvím francouzsky .
-Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat French))))	I live in France .	já žiji ve Francii .
+Phrase	PSentence (SProp (PropAction (ACitizen IMale (CitiNat French))))	I am French .	jsem Francouz .
+Phrase	PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat French))))	you are French .	jste Francouzka .
+Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat French))))	I speak French .	mluvím francouzsky .
+Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat French))))	I live in France .	žiji ve Francii .
 Word	PCountry (CountryNat French)	France	Francie
 Phrase	PQuestion (WherePlace (ThePlace (CitRestaurant (CitiNat French))))	where is the French restaurant ?	kde je francouzská restaurace ?
-Phrase	PSentence (SProp (PropAction (ACitizen IMale (CitiNat Swedish))))	I am Swedish .	já jsem Švéd .
-Phrase	PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat Swedish))))	you are Swedish .	vy jste Švédka .
-Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat Swedish))))	I speak Swedish .	já mluvím švédsky .
-Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat Swedish))))	I live in Sweden .	já žiji ve Švédsku .
+Phrase	PSentence (SProp (PropAction (ACitizen IMale (CitiNat Swedish))))	I am Swedish .	jsem Švéd .
+Phrase	PSentence (SProp (PropAction (ACitizen YouPolFemale (CitiNat Swedish))))	you are Swedish .	jste Švédka .
+Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat Swedish))))	I speak Swedish .	mluvím švédsky .
+Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat Swedish))))	I live in Sweden .	žiji ve Švédsku .
 Word	PCountry (CountryNat Swedish)	Sweden	Švédsko
 Phrase	PQuestion (WherePlace (ThePlace (CitRestaurant (CitiNat Swedish))))	where is the Swedish restaurant ?	kde je švédská restaurace ?
 Word	PLanguage (LangNat Bulgarian)	Bulgarian	bulharština
@@ -143,62 +143,62 @@ Word	PLanguage (LangNat Russian)	Russian	ruština
 Word	PLanguage (LangNat Spanish)	Spanish	španělština
 Word	PLanguage (LangNat Swedish)	Swedish	švédština
 Word	PCitizenship Belgian	Belgian	Belgičan
-Phrase	PSentence (SProp (PropAction (ACitizen She Indian)))	she is Indian .	ona je Indka .
-Phrase	PSentence (SProp (PropAction (ASpeak IMale Flemish)))	I speak Flemish .	já mluvím vlámsky .
-Phrase	PSentence (SProp (PropAction (ASpeak IFemale Hindi)))	I speak Hindi .	já mluvím hindsky .
-Phrase	PSentence (SProp (PropAction (ALive She India)))	she lives in India .	ona žije v Indii .
+Phrase	PSentence (SProp (PropAction (ACitizen She Indian)))	she is Indian .	je Indka .
+Phrase	PSentence (SProp (PropAction (ASpeak IMale Flemish)))	I speak Flemish .	mluvím vlámsky .
+Phrase	PSentence (SProp (PropAction (ASpeak IFemale Hindi)))	I speak Hindi .	mluvím hindsky .
+Phrase	PSentence (SProp (PropAction (ALive She India)))	she lives in India .	žije v Indii .
 Word	PCountry Belgium	Belgium	Belgie
 Phrase	PSentence (SProp (Is (This Pizza) (PropQuality (PropCit (CitiNat Italian)))))	this pizza is Italian .	tato pizza je italská .
 Phrase	PSentence (SProp (PropAction (ATired (PersonName NameNN))))	NN is tired .	NN je unavený .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Pound)	five pounds .	pět liber .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Bulgarian))))	we are Bulgarian .	my jsme Bulhaři .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Bulgarian))))	we are Bulgarian .	my jsme Bulharky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Bulgarian))))	you live in Bulgaria .	vy žijete v Bulharsku .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Catalan))))	we are Catalonian .	my jsme Katalánci .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Catalan))))	we are Catalonian .	my jsme Katalánky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Catalan))))	you live in Catalonia .	vy žijete v Katalánsku .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Chinese))))	we are Chinese .	my jsme Číňané .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Chinese))))	we are Chinese .	my jsme Číňanky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Chinese))))	you live in China .	vy žijete v Číně .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Danish))))	we are Danish .	my jsme Dánové .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Danish))))	we are Danish .	my jsme Dánky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Danish))))	you live in Denmark .	vy žijete v Dánsku .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Dutch))))	we are Dutch .	my jsme Nizozemci .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Dutch))))	we are Dutch .	my jsme Nizozemky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Dutch))))	you live in the Netherlands .	vy žijete v Nizozemsku .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat English))))	we are English .	my jsme Angličané .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat English))))	we are English .	my jsme Angličanky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat English))))	you live in England .	vy žijete v Anglii .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Finnish))))	we are Finnish .	my jsme Finové .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Finnish))))	we are Finnish .	my jsme Finky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Finnish))))	you live in Finland .	vy žijete ve Finsku .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat French))))	we are French .	my jsme Francouzi .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat French))))	we are French .	my jsme Francouzky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat French))))	you live in France .	vy žijete ve Francii .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat German))))	we are German .	my jsme Němci .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat German))))	we are German .	my jsme Němky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat German))))	you live in Germany .	vy žijete v Německu .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Italian))))	we are Italian .	my jsme Italové .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Italian))))	we are Italian .	my jsme Italky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Italian))))	you live in Italy .	vy žijete v Itálii .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Norwegian))))	we are Norwegian .	my jsme Norové .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Norwegian))))	we are Norwegian .	my jsme Norky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Norwegian))))	you live in Norway .	vy žijete v Norsku .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Polish))))	we are Polish .	my jsme Poláci .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Polish))))	we are Polish .	my jsme Polky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Polish))))	you live in Poland .	vy žijete v Polsku .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Romanian))))	we are Romanian .	my jsme Rumuni .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Romanian))))	we are Romanian .	my jsme Rumunky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Romanian))))	you live in Romania .	vy žijete v Rumunsku .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Russian))))	we are Russian .	my jsme Rusové .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Russian))))	we are Russian .	my jsme Rusky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Russian))))	you live in Russia .	vy žijete v Rusku .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Spanish))))	we are Spanish .	my jsme Španělé .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Spanish))))	we are Spanish .	my jsme Španělky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Spanish))))	you live in Spain .	vy žijete ve Španělsku .
-Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Swedish))))	we are Swedish .	my jsme Švédové .
-Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Swedish))))	we are Swedish .	my jsme Švédky .
-Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Swedish))))	you live in Sweden .	vy žijete ve Švédsku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Bulgarian))))	we are Bulgarian .	jsme Bulhaři .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Bulgarian))))	we are Bulgarian .	jsme Bulharky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Bulgarian))))	you live in Bulgaria .	žijete v Bulharsku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Catalan))))	we are Catalonian .	jsme Katalánci .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Catalan))))	we are Catalonian .	jsme Katalánky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Catalan))))	you live in Catalonia .	žijete v Katalánsku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Chinese))))	we are Chinese .	jsme Číňané .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Chinese))))	we are Chinese .	jsme Číňanky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Chinese))))	you live in China .	žijete v Číně .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Danish))))	we are Danish .	jsme Dánové .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Danish))))	we are Danish .	jsme Dánky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Danish))))	you live in Denmark .	žijete v Dánsku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Dutch))))	we are Dutch .	jsme Nizozemci .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Dutch))))	we are Dutch .	jsme Nizozemky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Dutch))))	you live in the Netherlands .	žijete v Nizozemsku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat English))))	we are English .	jsme Angličané .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat English))))	we are English .	jsme Angličanky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat English))))	you live in England .	žijete v Anglii .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Finnish))))	we are Finnish .	jsme Finové .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Finnish))))	we are Finnish .	jsme Finky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Finnish))))	you live in Finland .	žijete ve Finsku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat French))))	we are French .	jsme Francouzi .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat French))))	we are French .	jsme Francouzky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat French))))	you live in France .	žijete ve Francii .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat German))))	we are German .	jsme Němci .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat German))))	we are German .	jsme Němky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat German))))	you live in Germany .	žijete v Německu .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Italian))))	we are Italian .	jsme Italové .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Italian))))	we are Italian .	jsme Italky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Italian))))	you live in Italy .	žijete v Itálii .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Norwegian))))	we are Norwegian .	jsme Norové .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Norwegian))))	we are Norwegian .	jsme Norky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Norwegian))))	you live in Norway .	žijete v Norsku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Polish))))	we are Polish .	jsme Poláci .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Polish))))	we are Polish .	jsme Polky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Polish))))	you live in Poland .	žijete v Polsku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Romanian))))	we are Romanian .	jsme Rumuni .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Romanian))))	we are Romanian .	jsme Rumunky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Romanian))))	you live in Romania .	žijete v Rumunsku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Russian))))	we are Russian .	jsme Rusové .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Russian))))	we are Russian .	jsme Rusky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Russian))))	you live in Russia .	žijete v Rusku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Spanish))))	we are Spanish .	jsme Španělé .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Spanish))))	we are Spanish .	jsme Španělky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Spanish))))	you live in Spain .	žijete ve Španělsku .
+Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Swedish))))	we are Swedish .	jsme Švédové .
+Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Swedish))))	we are Swedish .	jsme Švédky .
+Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Swedish))))	you live in Sweden .	žijete ve Švédsku .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Euro)	five euros .	pět eur .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Dollar)	five dollars .	pět dolarů .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Rouble)	five roubles .	pět rublů .
