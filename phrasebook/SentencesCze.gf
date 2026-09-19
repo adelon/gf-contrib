@@ -1,5 +1,7 @@
 concrete SentencesCze of Sentences = NumeralCze ** SentencesI - [
-AKnowPerson,
+Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
+    ObjAndObj, OneObj, DrinkNumber, PObject, GObjectPlease, SHave, QDoHave,
+    Modality, MCan, MKnow, MMust, MWant, AKnowPerson,
     He, She, IMale, IFemale, YouFamMale, YouFamFemale, YouPolMale, YouPolFemale,
     WeMale, WeFemale, YouPlurFamMale, YouPlurFamFemale,
     YouPlurPolMale, YouPlurPolFemale, TheyMale, TheyFemale,
@@ -24,6 +26,8 @@ AKnowPerson,
     Referent = Speaker | Addressee | MaleThird | FemaleThird |
       SpeakerGroup | AddresseeGroup | ThirdMaleGroup | ThirdFemaleGroup | Unresolved ;
   lincat
+    Object, PrimObject = CzechObject ;
+    Modality = CzechModality ;
     Transport = CzechTransport ;
     Person = NPPerson ;
     Nationality = CzechNationality ;
@@ -32,7 +36,25 @@ AKnowPerson,
     Country = CzechCountry ;
     VerbPhrase = CzechActivity ;
   lin
+    ObjItem i = object True i ;
+    ObjNumber n k = object True (mkNP n k) ;
+    ObjIndef k = object True (mkNP a_Quant k) ;
+    ObjPlural k = object False (mkNP aPl_Det k) ;
+    ObjPlur k = object False (mkNP aPl_Det k) ;
+    ObjMass k = object False (mkNP k) ;
+    ObjAndObj a b = object (andB a.bounded b.bounded) (mkNP and_Conj a.np b.np) ;
+    OneObj o = o ;
+    DrinkNumber n k = object True (mkNP n k) ;
+    PObject o = mkPhrase (mkUtt o.np) ;
+    GObjectPlease o = lin Text (mkPhr noPConj (mkUtt o.np) please_Voc) | lin Text (mkUtt o.np) ;
+    SHave p o = mkS (mkCl (personNP p) have_V2 o.np) ;
+    QDoHave p o = mkQS (mkQCl (mkCl (personNP p) have_V2 o.np)) ;
     AKnowPerson p q = mkCl (personNP p) L.know_V2 (personObject p.ref q) ;
+
+    MCan = {verb = can_VV ; bounded = True} ;
+    MKnow = {verb = can8know_VV ; bounded = False} ;
+    MMust = {verb = must_VV ; bounded = True} ;
+    MWant = {verb = want_VV ; bounded = True} ;
 
     LangNat n = n.language ;
     CitiNat n = n.citizenship ;
@@ -54,11 +76,11 @@ AKnowPerson,
     PCitizenship c = mkPhrase (mkUtt c.male) ;
 
     ADoVerbPhrase p v = mkCl (personNP p) (activityVP False p.ref v) ;
-    AModVerbPhrase m p v = mkCl (personNP p) (mkVP m (activityVP True p.ref v)) ;
+    AModVerbPhrase m p v = mkCl (personNP p) (mkVP m.verb (activityVP m.bounded p.ref v)) ;
     ADoVerbPhrasePlace p v x = mkCl (personNP p) (mkVP (activityVP False p.ref v) x.at) ;
-    AModVerbPhrasePlace m p v x = mkCl (personNP p) (mkVP m (mkVP (activityVP True p.ref v) x.at)) ;
+    AModVerbPhrasePlace m p v x = mkCl (personNP p) (mkVP m.verb (mkVP (activityVP m.bounded p.ref v) x.at)) ;
     QWhereDoVerbPhrase p v = mkQS (mkQCl where_IAdv (mkCl (personNP p) (activityVP False p.ref v))) ;
-    QWhereModVerbPhrase m p v = mkQS (mkQCl where_IAdv (mkCl (personNP p) (mkVP m (activityVP True p.ref v)))) ;
+    QWhereModVerbPhrase m p v = mkQS (mkQCl where_IAdv (mkCl (personNP p) (mkVP m.verb (activityVP m.bounded p.ref v)))) ;
 
     PImperativeFamPos v = phrasePlease (mkUtt (mkImp (activityVP True Addressee v))) ;
     PImperativePolPos v = phrasePlease (mkUtt politeImpForm (mkImp (activityVP True Addressee v))) ;
@@ -78,9 +100,11 @@ AKnowPerson,
     VRead = activity (mkVP <lin V L.read_V2 : V>) ;
     VWait = activity (mkVP <lin V L.wait_V2 : V>) ;
     VWrite = activity (mkVP <lin V L.write_V2 : V>) ;
-    V2Buy o = activity (mkVP L.buy_V2 o) ;
-    V2Drink o = activity (mkVP L.drink_V2 o) ;
-    V2Eat o = activity (mkVP L.eat_V2 o) ;
+    -- Buying requests denote a purchase, including a purchase of an
+    -- unspecified amount. Consumption has an endpoint only for bounded objects.
+    V2Buy o = eventActivity (mkVP L.buy_V2 o.np) (mkVP buyPerfective_V2 o.np) ;
+    V2Drink o = consumption L.drink_V2 drinkPerfective_V2 o ;
+    V2Eat o = consumption L.eat_V2 eatPerfective_V2 o ;
     V2Wait p = {
       ongoing,event = \\bound => mkVP L.wait_V2 (boundPersonObject bound p) ;
       owner = objectReferent p
@@ -144,6 +168,9 @@ AKnowPerson,
     CzechLanguage : Type = {name : NP ; spoken : Adv} ;
     CzechNationality : Type = {language : CzechLanguage ; country : CzechCountry ; citizenship : CzechCitizenship} ;
     CzechTransport : Type = {name : CN ; by : Adv ; motion : V} ;
+    CzechObject : Type = {np : NP ; bounded : Bool} ;
+    object : Bool -> NP -> CzechObject = \bounded,np -> {np = np ; bounded = bounded} ;
+    CzechModality : Type = {verb : VV ; bounded : Bool} ;
     CzechActivity : Type = {ongoing,event : Bool => VP ; owner : Referent} ;
     activityVP : Bool -> Referent -> CzechActivity -> VP = \bounded,subject,v ->
       case bounded of {
@@ -154,6 +181,12 @@ AKnowPerson,
     eventActivity : VP -> VP -> CzechActivity = \ongoing,event -> {
       ongoing = \\_ => ongoing ; event = \\_ => event ; owner = Unresolved
       } ;
+    consumption : V2 -> V2 -> CzechObject -> CzechActivity = \ongoing,event,o ->
+      eventActivity (mkVP ongoing o.np)
+        (mkVP (case o.bounded of {True => event ; False => ongoing}) o.np) ;
+    buyPerfective_V2 : V2 = lin V2 (mkV2 (mkV "koupit" "koupím" "koupíš" "koupí" "koupíme" "koupíte" "koupí" "koupil" "koupili" "kup" "kupme" "kupte") );
+    eatPerfective_V2 : V2 = lin V2 (mkV2 (mkV "sníst" "sním" "sníš" "sní" "sníme" "sníte" "snědí" "snědl" "snědli" "sněz" "snězme" "snězte") );
+    drinkPerfective_V2 : V2 = lin V2 (mkV2 (mkV "vypít" "vypiji" "vypiješ" "vypije" "vypijeme" "vypijete" "vypijí" "vypil" "vypili" "vypij" "vypijme" "vypijte") );
     stopImperfective_V : V = reflV (mkV "zastavovat" "zastavuji" "zastavuješ" "zastavuje" "zastavujeme" "zastavujete" "zastavují" "zastavoval" "zastavovali" "zastavuj" "zastavujme" "zastavujte") accusative ;
     stopPerfective_V : V = reflV (mkV "zastavit" "zastavím" "zastavíš" "zastaví" "zastavíme" "zastavíte" "zastaví" "zastavil" "zastavili" "zastav" "zastavme" "zastavte") accusative ;
 }

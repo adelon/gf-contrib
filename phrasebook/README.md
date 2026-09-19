@@ -49,7 +49,7 @@ and the interpretation of each domain action:
 - `AMarried` selects *ženatý* or *vdaná* from the person’s sex, independently
   of grammatical gender.
 - `VStop` means stopping oneself: statements and prohibitions use
-  *zastavovat se*, while modal infinitives and positive commands use
+  *zastavovat se*, while episodic modal infinitives and positive commands use
   *zastavit se*. These are separate lexical VPs in the application;
   the RGL does not mix the conjugations of two aspectual verbs.
 - Transport entries select motion verbs (*jet*, *letět*, *plout*) and
@@ -65,6 +65,20 @@ The `NN` person-name placeholder has default masculine grammatical agreement.
 Standalone citizenship vocabulary uses the masculine noun as its dictionary
 form. `Citizenship` here follows the existing nationality sense, not a claim
 about legal passport status.
+
+Statements describe ongoing or habitual activities. Positive commands and
+`MWant`, `MMust`, and `MCan` request or discuss an event; `MKnow` denotes a
+skill. Where an activity has an endpoint, the event realization is perfective:
+*kupte pizzu* / *chci koupit pizzu*, versus *nekupujte pizzu* /
+*umím kupovat pizzu*. Statements and prohibitions remain imperfective.
+
+Object constructors retain whether a quantity is bounded. Identified or counted
+food and drink select *sníst* / *vypít* in event contexts, while unspecified
+amounts retain *jíst* / *pít*: *vypijte tuto vodu*, but *pijte vodu*. Buying is
+a purchase event even with an unspecified amount. This is a controlled reading
+of the existing abstract constructors, not a general rule that all Czech
+imperatives or infinitives must be perfective. Broader distinctions between
+habitual and episodic modal meanings would need an explicit abstract contrast.
 
 Pronoun constructors denote discourse participants. Czech tracks their identity
 separately from agreement and sex: `ALove He (Wife He)` uses *svou manželku*,

@@ -226,5 +226,14 @@ Phrase	PSentence (SProp (PropAction (ALove YouPolFemale (Husband YouPolFemale)))
 Phrase	PSentence (SProp (PropAction (AKnowPerson He (Son He))))	he knows his son .	zná svého syna .
 Phrase	PSentence (SProp (PropAction (AModVerbPhrase MWant IMale (V2Wait (Wife IMale)))))	I want to wait for my wife .	chci čekat na svou manželku .
 Phrase	PImperativePolPos (V2Wait (Wife YouPolMale))	wait for your wife	čekejte na svou manželku
+Phrase	PImperativePolPos (V2Buy (OneObj (ObjIndef Pizza)))	buy a pizza	kupte pizzu
+Phrase	PImperativePolNeg (V2Buy (OneObj (ObjIndef Pizza)))	don't buy a pizza	nekupujte pizzu
+Phrase	PSentence (SProp (PropAction (ADoVerbPhrase IMale (V2Buy (OneObj (ObjIndef Pizza))))))	I buy a pizza .	kupuji pizzu .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MWant IMale (V2Buy (OneObj (ObjIndef Pizza))))))	I want to buy a pizza .	chci koupit pizzu .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MKnow IMale (V2Buy (OneObj (ObjIndef Pizza))))))	I can buy a pizza .	umím kupovat pizzu .
+Phrase	PImperativePolPos (V2Eat (OneObj (ObjIndef Pizza)))	eat a pizza	snězte pizzu
+Phrase	PImperativePolNeg (V2Eat (OneObj (ObjIndef Pizza)))	don't eat a pizza	nejezte pizzu
+Phrase	PImperativePolPos (V2Drink (OneObj (ObjItem (ThisMass (MassDrink Water)))))	drink this water	vypijte tuto vodu
+Phrase	PImperativePolPos (V2Drink (OneObj (ObjMass (MassDrink Water))))	drink water	pijte vodu
 Phrase	PSentence (SProp (PropAction (AMarried (Daughter IMale))))	my daughter is married .	má dcera je vdaná .
 Phrase	PSentence (SProp (PropAction (ACitizen (Children IMale) (CitiNat English))))	my children are English .	mé děti mají anglickou národnost .
