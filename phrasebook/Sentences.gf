@@ -197,6 +197,8 @@ abstract Sentences = Numeral ** {
     QWhereDoVerbPhrase  : Person -> VerbPhrase -> Question ;                     -- where do you swim
     QWhereModVerbPhrase : Modality -> Person -> VerbPhrase -> Question ;         -- where can I swim
 
+    -- MMust denotes necessity. SPropNot applied to its proposition means
+    -- that the activity is not required; it does not express prohibition.
     MCan, MKnow, MMust, MWant : Modality ;
   
 -- lexical items given in the resource Lexicon

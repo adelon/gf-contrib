@@ -73,6 +73,13 @@ skill. Where an activity has an endpoint, the event realization is perfective:
 *kupte pizzu* / *chci koupit pizzu*, versus *nekupujte pizzu* /
 *umím kupovat pizzu*. Statements and prohibitions remain imperfective.
 
+`MMust` denotes necessity, and `SPropNot` negates the whole proposition.
+English uses *have to* and Czech uses *muset*: *he has to drink* / *musí pít*,
+but *he doesn't have to drink* / *nemusí pít*. This remains true in questions
+and embedded clauses. English *mustn't* would express prohibition instead;
+prohibition would need a separate meaning if added to the modal vocabulary.
+The other language concretes have not been checked against this scope contract.
+
 Object constructors retain whether a quantity is bounded. Identified or counted
 food and drink select *sníst* / *vypít* in event contexts, while unspecified
 amounts retain *jíst* / *pít*: *vypijte tuto vodu*, but *pijte vodu*. Buying is

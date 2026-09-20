@@ -3,7 +3,7 @@ concrete SentencesEng of Sentences = NumeralEng ** SentencesI - [
   He, She, IMale, IFemale, YouFamMale, YouFamFemale, YouPolMale, YouPolFemale,
   WeMale, WeFemale, YouPlurFamMale, YouPlurFamFemale,
   YouPlurPolMale, YouPlurPolFemale, TheyMale, TheyFemale, AKnowPerson,
-  VerbPhrase, VPlay, VRun, VSit, VSleep, VSwim, VWalk, VStop,
+  MMust, VerbPhrase, VPlay, VRun, VSit, VSleep, VSwim, VWalk, VStop,
   VDrink, VEat, VRead, VWait, VWrite, V2Buy, V2Drink, V2Eat, V2Wait,
   ADoVerbPhrase, AModVerbPhrase, ADoVerbPhrasePlace, AModVerbPhrasePlace,
   QWhereDoVerbPhrase, QWhereModVerbPhrase,
@@ -13,7 +13,8 @@ concrete SentencesEng of Sentences = NumeralEng ** SentencesI - [
   (Syntax = SyntaxEng),
   (Symbolic = SymbolicEng),
   (Lexicon = LexiconEng)
-  ** open SyntaxEng, Prelude, PhrasebookReferents, (E = ExtendEng), (L = LexiconEng) in {
+  ** open SyntaxEng, Prelude, PhrasebookReferents, (E = ExtendEng), (L = LexiconEng),
+    (P = ParadigmsEng), (Irreg = IrregEng) in {
   lincat
     Person = NPPerson ;
     VerbPhrase = EnglishActivity ;
@@ -32,6 +33,9 @@ concrete SentencesEng of Sentences = NumeralEng ** SentencesI - [
       isPron = False ; poss = mkQuant he_Pron
       } ;
     AKnowPerson p q = mkCl p.name (personVP p.ref L.know_V2 q) ;
+
+    -- Ordinary negation of necessity: does not have to, rather than must not.
+    MMust = P.mkVV Irreg.have_V ;
 
     ADoVerbPhrase p v = mkCl p.name (activityVP p.ref v) ;
     AModVerbPhrase m p v = mkCl p.name (mkVP m (activityVP p.ref v)) ;
