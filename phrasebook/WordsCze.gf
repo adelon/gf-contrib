@@ -206,7 +206,7 @@ lin
   HowFarBy y t = mkQS (mkQCl far_IAdv (mkCl y.name t)) ;
   HowFarFromBy x y t = mkQS (mkQCl far_IAdv (mkCl y.name (mkVP (mkVP (SyntaxCze.mkAdv (P.mkPrep "od" genitive) x.name)) t))) ;
   WhichTranspPlace t p = mkQS (mkQCl (mkIP which_IDet t.name) (mkVP (mkVP t.motion) p.to)) ;
-  IsTranspPlace t p = mkQS (mkQCl (mkCl (mkCN t.name p.to))) ;
+  IsTranspPlace t p = mkQS (mkQCl (mkCl (mkNP someSg_Det t.name) (mkVP (mkVP t.motion) p.to))) ;
 
 oper
   citizenship : A -> N -> N -> CzechCitizenship = \a,m,f -> {
