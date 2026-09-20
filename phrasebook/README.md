@@ -98,7 +98,7 @@ whereas `ALove He (Wife IMale)` uses *mou manželku*. The same binding applies
 inside verb phrases, including modal and imperative requests to wait for
 someone. The RGL supplies case and reflexive forms; the phrasebook decides
 whether the object or possessor denotes the subject. Both concretes use the
-standard `Extend` RNP interface for oneself. Czech also uses `ReflPoss` for
+standard `Extend` RNP interface for oneself. Czech also uses `ReflPossPron` for
 one's relative and `AdvRNP` to embed that relative within another description;
 English retains its ordinary possessives and genitives. Thus
 `ALove He (Wife (Son He))` means *he loves his son's wife* /
@@ -106,12 +106,17 @@ English retains its ordinary possessives and genitives. Thus
 at arbitrary kinship depth. These identity rules are implemented and tested in
 English and Czech; the legacy language concretes have not been migrated.
 
-Each Czech person description retains an ordinary NP, a subject-bound RNP and
-the identity of its innermost participant. The application carries a participant's
-zero realization through binding so PGF can recover the complete original tree.
-The small `retainReferent` helpers touch only the RNP string fields; they add no
-surface token and do not implement agreement, case, or reflexive morphology.
-This parsing representation stays in the application, not in the RGL API.
+Each person supplies its own reflexive RNP. Czech pronouns also supply ordinary
+and reflexive possessive quantifiers; kinship constructions consume the owner's
+appropriate quantifier and preserve nested bound RNPs. The owner therefore
+contributes actual forms such as *svou* or *svého* to the parsing derivation,
+without an artificial empty-string dependency. Czech projects the case forms
+of an RGL-built possessive NP into an RNP; the RGL still supplies all morphology.
+
+Parsing need not recover a unique tree: *miluje sebe* can describe either
+`ALove He He` or `ALove She She`. Round-trip tests require the intended tree to
+be among the candidates, allowing distinctions that the language leaves
+unexpressed while rejecting known incorrect bindings.
 
 The `NN` placeholder and kinship descriptions do not introduce discourse
 identifiers. Repeating an arbitrary description does not establish identity.

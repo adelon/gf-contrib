@@ -29,7 +29,7 @@ concrete SentencesEng of Sentences = NumeralEng ** SentencesI - [
     TheyMale = person ThirdMaleGroup they_Pron ;
     TheyFemale = person ThirdFemaleGroup they_Pron ;
     PersonName n = {
-      name = n ; ref = Unresolved ; gap = [] ;
+      name = n ; bound = E.ReflPron ; ref = Unresolved ;
       isPron = False ; poss = mkQuant he_Pron
       } ;
     AKnowPerson p q = mkCl p.name (personVP p.ref L.know_V2 q) ;
@@ -69,11 +69,11 @@ concrete SentencesEng of Sentences = NumeralEng ** SentencesI - [
     V2Wait p = {forms = \\bound => boundPersonVP bound L.wait_V2 p ; owner = p.ref} ;
   oper
     NPPerson : Type = {
-      name : NP ; ref : Referent ; gap : Str ;
+      name : NP ; bound : E.RNP ; ref : Referent ;
       isPron : Bool ; poss : Quant
       } ;
     person : Referent -> Pron -> NPPerson = \r,p -> {
-      name = mkNP p ; ref = r ; gap = [] ;
+      name = mkNP p ; bound = E.ReflPron ; ref = r ;
       isPron = True ; poss = mkQuant p
       } ;
     mkRelative : GNumber -> CN -> NPPerson -> NPPerson = \n,cn,p ->
@@ -81,17 +81,15 @@ concrete SentencesEng of Sentences = NumeralEng ** SentencesI - [
         name = mkNP (case p.isPron of {True => p.poss ; False => E.GenNP p.name}) num cn ;
         -- English keeps ordinary possessives under subject binding:
         -- his wife / his son's wife. Only a direct object pronoun changes.
-        ref = Unresolved ; gap = p.gap ;
+        bound = E.ReflPron ; ref = Unresolved ;
         isPron = False ; poss = mkQuant he_Pron
         } ;
     personVP : Referent -> V2 -> NPPerson -> VP = \subject,v,p ->
       boundPersonVP (sameReferent subject p.ref) v p ;
     boundPersonVP : Bool -> V2 -> NPPerson -> VP = \bound,v,p -> case bound of {
       False => mkVP v p.name ;
-      True => E.ReflRNP (mkVPSlash v) (retainReferent p.gap E.ReflPron)
+      True => E.ReflRNP (mkVPSlash v) p.bound
       } ;
-    -- Retain the implicit participant as a zero constituent for PGF parsing.
-    retainReferent : Str -> E.RNP -> E.RNP = \gap,np -> np ** {s = \\a => gap ++ np.s ! a} ;
     EnglishActivity : Type = {forms : Bool => VP ; owner : Referent} ;
     activity : VP -> EnglishActivity = \vp -> {forms = \\_ => vp ; owner = Unresolved} ;
     activityVP : Referent -> EnglishActivity -> VP = \subject,v -> v.forms ! sameReferent subject v.owner ;

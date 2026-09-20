@@ -53,6 +53,7 @@ awk -F '\t' -v log_path="$log" -v total="$count" '
   }
   mode == "PARSE" {
     candidates++;
+    if ($0 ~ /\?[0-9]+/) fail("Unresolved argument in parse for " lang[id] ": " expected[id] "\n" $0);
     if ($0 == tree[id]) found=1;
     if (forbidden[id] != "" && $0 == forbidden[id])
       fail("Incorrect meaning recovered for " lang[id] ": " expected[id] "\n" $0);

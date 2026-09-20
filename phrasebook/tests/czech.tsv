@@ -243,6 +243,8 @@ Phrase	PSentence (SProp (PropAction (ALove IMale IMale)))	I love myself .	miluji
 Phrase	PSentence (SProp (PropAction (ALove YouPolFemale YouPolFemale)))	you love yourself .	milujete sebe .
 Phrase	PSentence (SProp (PropAction (ALove WeMale WeMale)))	we love ourselves .	milujeme sebe .
 Phrase	PSentence (SProp (PropAction (ALove TheyFemale TheyFemale)))	they love themselves .	milují sebe .
+Phrase	PSentence (SProp (PropAction (ALove She (Children She))))	she loves her children .	miluje své děti .	PSentence (SProp (PropAction (ALove She (Children He))))
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MCan WeFemale (V2Wait (Children WeFemale)))))	we can wait for our children .	můžeme čekat na své děti .
 Phrase	PSentence (SProp (PropAction (ALove He (Wife (Son He)))))	he loves his son's wife .	miluje manželku svého syna .	PSentence (SProp (PropAction (ALove He (Wife (Son She)))))
 Phrase	PSentence (SProp (PropAction (ALove He (Wife (Son She)))))	he loves her son's wife .	miluje manželku jejího syna .	PSentence (SProp (PropAction (ALove He (Wife (Son He)))))
 Phrase	PSentence (SProp (PropAction (ALove He (Wife (Son (Daughter He))))))	he loves his daughter's son's wife .	miluje manželku syna své dcery .
