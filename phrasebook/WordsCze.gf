@@ -167,24 +167,24 @@ lin
   AHungry p = mkCl (personNP p) have_V2 (mkNP (hradN "hlad")) ;
   AIll p = mkCl (personNP p) (mkA "nemocný") ;
   AKnow p = mkCl (personNP p) (lin V L.know_VS) ;
-  ALove p q = mkCl (personNP p) (personVP p.ref L.love_V2 q) ;
+  ALove p q = mkCl (personNP p) (personVP (personRef p) L.love_V2 q) ;
   AReady p = mkCl (personNP p) (mkA "připravený") ;
   AScared p = mkCl (personNP p) have_V2 (mkNP (hradN "strach")) ;
   AThirsty p = mkCl (personNP p) have_V2 (mkNP (kostN "žízeň")) ;
   ATired p = mkCl (personNP p) (mkA "unavený") ;
   AUnderstand p = mkCl (personNP p) understand_V ;
-  AWant p obj = mkCl (personNP p) (mkV2 <lin V want_VV : V>) obj.np ;
+  AWant p obj = mkCl (personNP p) (mkV2 <lin V want_VV : V>) (objectNP obj) ;
   AWantGo p place = mkCl (personNP p) want_VV (mkVP (mkVP L.go_V) place.to) ;
 
   QWhatName p = mkQS (mkQCl how_IAdv (mkCl (personNP p) name_V)) ;
   HowMuchCost item = mkQS (mkQCl how8much_IAdv (mkCl item cost_V)) ;
   ItCost item price = mkCl item (mkV2 cost_V) price ;
-  PropOpen p = mkCl p.name (mkA "otevřený") ;
-  PropClosed p = mkCl p.name (mkA "zavřený") ;
-  PropOpenDate p d = mkCl p.name (mkVP (mkVP (mkA "otevřený")) d) ;
-  PropClosedDate p d = mkCl p.name (mkVP (mkVP (mkA "zavřený")) d) ;
-  PropOpenDay p d = mkCl p.name (mkVP (mkVP (mkA "otevřený")) d.habitual) ;
-  PropClosedDay p d = mkCl p.name (mkVP (mkVP (mkA "zavřený")) d.habitual) ;
+  PropOpen p = mkCl (placeName p) (mkA "otevřený") ;
+  PropClosed p = mkCl (placeName p) (mkA "zavřený") ;
+  PropOpenDate p d = mkCl (placeName p) (mkVP (mkVP (mkA "otevřený")) d) ;
+  PropClosedDate p d = mkCl (placeName p) (mkVP (mkVP (mkA "zavřený")) d) ;
+  PropOpenDay p d = mkCl (placeName p) (mkVP (mkVP (mkA "otevřený")) d.habitual) ;
+  PropClosedDay p d = mkCl (placeName p) (mkVP (mkVP (mkA "zavřený")) d.habitual) ;
 
   Children p = (mkRelative plur (mkCN L.child_N) p) ** {sex = UnknownSex} ;
   Wife p = (mkRelative sing (mkCN (zenaN "manželka")) p) ** {sex = Female} ;
@@ -201,10 +201,10 @@ lin
   Sunday = day (ruzeN "neděle") ;
   Tomorrow = P.mkAdv "zítra" ;
 
-  HowFar place = mkQS (mkQCl far_IAdv place.name) ;
-  HowFarFrom x y = mkQS (mkQCl far_IAdv (mkCl y.name (SyntaxCze.mkAdv (P.mkPrep "od" genitive) x.name))) ;
-  HowFarBy y t = mkQS (mkQCl far_IAdv (mkCl y.name t)) ;
-  HowFarFromBy x y t = mkQS (mkQCl far_IAdv (mkCl y.name (mkVP (mkVP (SyntaxCze.mkAdv (P.mkPrep "od" genitive) x.name)) t))) ;
+  HowFar place = mkQS (mkQCl far_IAdv (placeName place)) ;
+  HowFarFrom x y = mkQS (mkQCl far_IAdv (mkCl (placeName y) (SyntaxCze.mkAdv (P.mkPrep "od" genitive) (placeName x)))) ;
+  HowFarBy y t = mkQS (mkQCl far_IAdv (mkCl (placeName y) t)) ;
+  HowFarFromBy x y t = mkQS (mkQCl far_IAdv (mkCl (placeName y) (mkVP (mkVP (SyntaxCze.mkAdv (P.mkPrep "od" genitive) (placeName x))) t))) ;
   WhichTranspPlace t p = mkQS (mkQCl (mkIP which_IDet t.name) (mkVP (mkVP t.motion) p.to)) ;
   IsTranspPlace t p = mkQS (mkQCl (mkCl (mkNP someSg_Det t.name) (mkVP (mkVP t.motion) p.to))) ;
 
@@ -212,8 +212,8 @@ oper
   citizenship : A -> N -> N -> CzechCitizenship = \a,m,f -> {
     modifier = a ; male = mkCN m ; female = mkCN f
     } ;
-  language : N -> Str -> CzechLanguage = \n,adv -> {name = mkNP n ; spoken = P.mkAdv adv} ;
-  country : N -> Prep -> CzechCountry = \n,p -> {name = mkNP n ; at = SyntaxCze.mkAdv p (mkNP n)} ;
+  language : N -> Str -> CzechLanguage = \n,adv -> {label = mkUtt (mkNP n) ; spoken = P.mkAdv adv} ;
+  country : N -> Prep -> CzechCountry = \n,p -> {label = mkUtt (mkNP n) ; at = SyntaxCze.mkAdv p (mkNP n)} ;
   nationality : CzechCitizenship -> CzechLanguage -> CzechCountry -> CzechNationality = \c,l,n -> {
     citizenship = c ; language = l ; country = n
     } ;

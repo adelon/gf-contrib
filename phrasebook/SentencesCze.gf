@@ -1,7 +1,8 @@
 concrete SentencesCze of Sentences = NumeralCze ** SentencesI - [
-Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
+    Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
     ObjAndObj, OneObj, DrinkNumber, PObject, GObjectPlease, SHave, QDoHave,
     Modality, MCan, MKnow, MMust, MWant, AKnowPerson,
+    Place, NPPlace, placeNP, PPlace, WherePlace,
     He, She, IMale, IFemale, YouFamMale, YouFamFemale, YouPolMale, YouPolFemale,
     WeMale, WeFemale, YouPlurFamMale, YouPlurFamFemale,
     YouPlurPolMale, YouPlurPolFemale, TheyMale, TheyFemale,
@@ -19,10 +20,11 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
     (Symbolic = SymbolicCze),
     (Lexicon = LexiconCze)
   ** open ParadigmsCze, SyntaxCze, ExtraCze, Prelude, PhrasebookReferents,
-    (E = ExtendCze), (L = LexiconCze) in {
+    (E = ExtendCze), (L = LexiconCze), (R = ResCze) in {
   param
     HumanSex = Male | Female | UnknownSex ;
   lincat
+    Place = NPPlace ;
     Object, PrimObject = CzechObject ;
     Modality = CzechModality ;
     Transport = CzechTransport ;
@@ -39,14 +41,16 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
     ObjPlural k = object False (mkNP aPl_Det k) ;
     ObjPlur k = object False (mkNP aPl_Det k) ;
     ObjMass k = object False (mkNP k) ;
-    ObjAndObj a b = object (andB a.bounded b.bounded) (mkNP and_Conj a.np b.np) ;
+    ObjAndObj a b = object (andB a.bounded b.bounded) (mkNP and_Conj (objectNP a) (objectNP b)) ;
     OneObj o = o ;
     DrinkNumber n k = object True (mkNP n k) ;
-    PObject o = mkPhrase (mkUtt o.np) ;
-    GObjectPlease o = lin Text (mkPhr noPConj (mkUtt o.np) please_Voc) | lin Text (mkUtt o.np) ;
-    SHave p o = mkS (mkCl (personNP p) have_V2 o.np) ;
-    QDoHave p o = mkQS (mkQCl (mkCl (personNP p) have_V2 o.np)) ;
-    AKnowPerson p q = mkCl (personNP p) (personVP p.ref L.know_V2 q) ;
+    PObject o = mkPhrase (mkUtt (objectNP o)) ;
+    GObjectPlease o = lin Text (mkPhr noPConj (mkUtt (objectNP o)) please_Voc) | lin Text (mkUtt (objectNP o)) ;
+    SHave p o = mkS (mkCl (personNP p) have_V2 (objectNP o)) ;
+    QDoHave p o = mkQS (mkQCl (mkCl (personNP p) have_V2 (objectNP o))) ;
+    PPlace p = mkPhrase (mkUtt (placeName p)) ;
+    WherePlace p = mkQS (mkQCl where_IAdv (placeName p)) ;
+    AKnowPerson p q = mkCl (personNP p) (personVP (personRef p) L.know_V2 q) ;
 
     MCan = {verb = can_VV ; bounded = True} ;
     MKnow = {verb = can8know_VV ; bounded = False} ;
@@ -64,20 +68,20 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
       } ;
     NameNN = mkNP (mkPN "NN" mascAnimate) ;
     PersonName n = {
-      name = n ; bound = E.ReflPron ; ref,anchor = Unresolved ; sex = UnknownSex ;
+      name = n ; bound = E.fullRNP n ; anchor = Unresolved ; sex = UnknownSex ;
       isPron = False ; poss = mkQuant he_Pron ; boundPoss = E.ReflPossPron
       } ;
 
-    PLanguage l = mkPhrase (mkUtt l.name) ;
-    PCountry c = mkPhrase (mkUtt c.name) ;
+    PLanguage l = mkPhrase l.label ;
+    PCountry c = mkPhrase c.label ;
     PCitizenship c = mkPhrase (mkUtt c.male) ;
 
-    ADoVerbPhrase p v = mkCl (personNP p) (activityVP False p.ref v) ;
-    AModVerbPhrase m p v = mkCl (personNP p) (mkVP m.verb (activityVP m.bounded p.ref v)) ;
-    ADoVerbPhrasePlace p v x = mkCl (personNP p) (mkVP (activityVP False p.ref v) x.at) ;
-    AModVerbPhrasePlace m p v x = mkCl (personNP p) (mkVP m.verb (mkVP (activityVP m.bounded p.ref v) x.at)) ;
-    QWhereDoVerbPhrase p v = mkQS (mkQCl where_IAdv (mkCl (personNP p) (activityVP False p.ref v))) ;
-    QWhereModVerbPhrase m p v = mkQS (mkQCl where_IAdv (mkCl (personNP p) (mkVP m.verb (activityVP m.bounded p.ref v)))) ;
+    ADoVerbPhrase p v = mkCl (personNP p) (activityVP False (personRef p) v) ;
+    AModVerbPhrase m p v = mkCl (personNP p) (mkVP m.verb (activityVP m.bounded (personRef p) v)) ;
+    ADoVerbPhrasePlace p v x = mkCl (personNP p) (mkVP (activityVP False (personRef p) v) x.at) ;
+    AModVerbPhrasePlace m p v x = mkCl (personNP p) (mkVP m.verb (mkVP (activityVP m.bounded (personRef p) v) x.at)) ;
+    QWhereDoVerbPhrase p v = mkQS (mkQCl where_IAdv (mkCl (personNP p) (activityVP False (personRef p) v))) ;
+    QWhereModVerbPhrase m p v = mkQS (mkQCl where_IAdv (mkCl (personNP p) (mkVP m.verb (activityVP m.bounded (personRef p) v)))) ;
 
     PImperativeFamPos v = phrasePlease (mkUtt (mkImp (activityVP True Addressee v))) ;
     PImperativePolPos v = phrasePlease (mkUtt politeImpForm (mkImp (activityVP True Addressee v))) ;
@@ -99,7 +103,7 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
     VWrite = activity (mkVP <lin V L.write_V2 : V>) ;
     -- Buying requests denote a purchase, including a purchase of an
     -- unspecified amount. Consumption has an endpoint only for bounded objects.
-    V2Buy o = eventActivity (mkVP L.buy_V2 o.np) (mkVP buyPerfective_V2 o.np) ;
+    V2Buy o = eventActivity (mkVP L.buy_V2 (objectNP o)) (mkVP buyPerfective_V2 (objectNP o)) ;
     V2Drink o = consumption L.drink_V2 drinkPerfective_V2 o ;
     V2Eat o = consumption L.eat_V2 eatPerfective_V2 o ;
     V2Wait p = {
@@ -123,44 +127,83 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
     TheyMale = person ThirdMaleGroup Male they_Pron ;
     TheyFemale = person ThirdFemaleGroup Female (genderPron feminine they_Pron) ;
   oper
+    -- Objects and places are nominal descriptions, never personal pronouns.
+    -- Keep both agreements: quantified NPs can have different clause and
+    -- modifier agreement. Only their constant pronoun flags are reconstructed.
+    NominalForms : Type = R.NPForms ** {a : R.Agr ; m : R.ModifierAgr} ;
+    nominalForms : NP -> NominalForms = \np -> np ;
+    nominalNP : NominalForms -> NP = \np -> lin NP (np ** {
+      clit = np.s ; hasClit,isDrop,isPron = False
+      }) ;
+    NPPlace : Type = {name : NominalForms ; at,to : Adv} ;
+    placeName : NPPlace -> NP = \p -> nominalNP p.name ;
+    placeNP : Det -> CNPlace -> NPPlace = \det,kind ->
+      let np : NP = mkNP det kind.name in {
+        name = nominalForms np ;
+        at = SyntaxCze.mkAdv kind.at np ; to = SyntaxCze.mkAdv kind.to np
+        } ;
+    -- Persons are bare pronouns, proper names or unquantified kinship NPs.
+    -- Their modifier agreement follows a; isPron determines clitic eligibility
+    -- and neutral subject omission. Store these correlated choices only once.
+    PersonForms : Type = R.NPForms ** {clit : R.Case => Str ; a : R.Agr} ;
+    personForms : NP -> PersonForms = \np -> np ;
     NPPerson : Type = {
-      name : NP ; bound : E.RNP ; ref,anchor : Referent ; sex : HumanSex ;
+      name : PersonForms ; bound : E.BoundNPForms ;
+      anchor : Referent ; sex : HumanSex ;
       isPron : Bool ; poss,boundPoss : Quant
       } ;
     person : Referent -> HumanSex -> Pron -> NPPerson = \r,sex,p -> {
-      name = mkNP (E.ProDrop p) ; bound = E.ReflPron ; ref,anchor = r ; sex = sex ;
+      name = personForms (mkNP p) ; bound = E.ReflPron ; anchor = r ; sex = sex ;
       isPron = True ; poss = mkQuant p ; boundPoss = E.ReflPossPron
       } ;
     mkRelative : GNumber -> CN -> NPPerson -> NPPerson = \n,x,p ->
       let num = if_then_else Num n plNum sgNum in {
-        name = case p.isPron of {
+        name = personForms (case p.isPron of {
           True => mkNP p.poss num x ;
-          False => mkNP (mkNP the_Quant num x) (SyntaxCze.mkAdv possess_Prep p.name)
-          } ;
+          False => mkNP (mkNP the_Quant num x) (SyntaxCze.mkAdv possess_Prep (personNP p))
+          }) ;
         bound = case p.isPron of {
           -- Consume the owner's actual possessive forms in both readings.
-          -- RNP retains the case forms of the NP built by the public API.
+          -- Retain the RGL's case and constituent-placement forms.
           True => let np : NP = mkNP p.boundPoss num x in E.fullRNP np ;
-          False => E.AdvRNP (mkNP the_Quant num x) possess_Prep p.bound
+          False => E.AdvRNP (mkNP the_Quant num x) possess_Prep (personRNP p)
           } ;
-        anchor = p.anchor ; ref = Unresolved ; sex = UnknownSex ;
+        anchor = p.anchor ; sex = UnknownSex ;
         isPron = False ; poss = mkQuant he_Pron ; boundPoss = E.ReflPossPron
         } ;
-    personNP : NPPerson -> NP = \p -> p.name ;
+    personRef : NPPerson -> Referent = \p -> case p.isPron of {
+      True => p.anchor ; False => Unresolved
+      } ;
+    -- These are genuine RGL values, reconstructed at the composition boundary.
+    -- Keeping their derived parameters in NPPerson would multiply its states.
+    personNP : NPPerson -> NP = \p -> lin NP (p.name ** {
+      m = R.modifierAgr p.name.a ;
+      hasClit,isDrop,isPron = p.isPron
+      }) ;
+    personRNP : NPPerson -> E.RNP = \p -> lin RNP (p.bound ** {
+      m = case p.isPron of {
+        True => E.AntecedentHead ;
+        False => E.FixedHead (R.modifierAgr p.name.a)
+        } ;
+      isPron = p.isPron
+      }) ;
     personVP : Referent -> V2 -> NPPerson -> VP = \subject,v,p ->
       boundPersonVP (sameReferent subject p.anchor) v p ;
     boundPersonVP : Bool -> V2 -> NPPerson -> VP = \bound,v,p -> case bound of {
-      False => mkVP v p.name ;
-      True => E.ReflRNP (mkVPSlash v) p.bound
+      False => mkVP v (personNP p) ;
+      True => E.ReflRNP (mkVPSlash v) (personRNP p)
       } ;
 
     CzechCitizenship : Type = {modifier : A ; male,female : CN} ;
-    CzechCountry : Type = {name : NP ; at : Adv} ;
-    CzechLanguage : Type = {name : NP ; spoken : Adv} ;
+    -- These names occur only as citation utterances. The separate location
+    -- and spoken-language expressions have already received their own case.
+    CzechCountry : Type = {label : Utt ; at : Adv} ;
+    CzechLanguage : Type = {label : Utt ; spoken : Adv} ;
     CzechNationality : Type = {language : CzechLanguage ; country : CzechCountry ; citizenship : CzechCitizenship} ;
     CzechTransport : Type = {name : CN ; by : Adv ; motion : V} ;
-    CzechObject : Type = {np : NP ; bounded : Bool} ;
-    object : Bool -> NP -> CzechObject = \bounded,np -> {np = np ; bounded = bounded} ;
+    CzechObject : Type = {np : NominalForms ; bounded : Bool} ;
+    object : Bool -> NP -> CzechObject = \bounded,np -> {np = nominalForms np ; bounded = bounded} ;
+    objectNP : CzechObject -> NP = \o -> nominalNP o.np ;
     CzechModality : Type = {verb : VV ; bounded : Bool} ;
     CzechActivity : Type = {ongoing,event : Bool => VP ; owner : Referent} ;
     activityVP : Bool -> Referent -> CzechActivity -> VP = \bounded,subject,v ->
@@ -173,8 +216,8 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
       ongoing = \\_ => ongoing ; event = \\_ => event ; owner = Unresolved
       } ;
     consumption : V2 -> V2 -> CzechObject -> CzechActivity = \ongoing,event,o ->
-      eventActivity (mkVP ongoing o.np)
-        (mkVP (case o.bounded of {True => event ; False => ongoing}) o.np) ;
+      eventActivity (mkVP ongoing (objectNP o))
+        (mkVP (case o.bounded of {True => event ; False => ongoing}) (objectNP o)) ;
     buyPerfective_V2 : V2 = lin V2 (mkV2 (mkV "koupit" "koupím" "koupíš" "koupí" "koupíme" "koupíte" "koupí" "koupil" "koupili" "kup" "kupme" "kupte") );
     eatPerfective_V2 : V2 = lin V2 (mkV2 (mkV "sníst" "sním" "sníš" "sní" "sníme" "sníte" "snědí" "snědl" "snědli" "sněz" "snězme" "snězte") );
     drinkPerfective_V2 : V2 = lin V2 (mkV2 (mkV "vypít" "vypiji" "vypiješ" "vypije" "vypijeme" "vypijete" "vypijí" "vypil" "vypili" "vypij" "vypijme" "vypijte") );

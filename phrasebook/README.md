@@ -24,6 +24,41 @@ Run `sh tests/czech/check.sh` in that checkout to check its source constructions
 and its standard installed language and API modules. `SyntaxCzeExtra` has been replaced by the
 conventional `ExtraCzeAbs` / `ExtraCze` extension.
 
+Compilation also depends on the size of concrete parameter records: GF
+enumerates combinations even when fields are constant or correlated in the
+application. Czech uses compact application records and reconstructs full RGL
+values when a construction needs them:
+
+- Objects and places contain nominal descriptions, so their pronoun and clitic
+  flags are constant. Their clause and modifier agreement remain separate,
+  including for quantified objects.
+- Persons are bare pronouns, proper names or unquantified kinship descriptions.
+  Their modifier agreement follows their grammatical agreement; pronoun status
+  determines clitic eligibility and neutral subject omission. Only pronouns
+  establish a subject referent, while descriptions retain their possessor's
+  referent for nested binding. These choices are derived instead of stored twice.
+- Country and language names are composed as citation utterances. Location and
+  spoken-language expressions are built separately through the RGL. No later
+  phrasebook constructor needs to inflect the citation utterance.
+
+All case and constituent-placement forms come from the RGL. The conversion
+helpers in `SentencesCze.gf` rely on the domain restrictions above; extending
+`Person` with quantified or focused noun phrases would require revisiting them.
+The general RGL NP and RNP representations are unchanged.
+
+For a compilation regression check, use a fresh `BUILD_DIR` and a memory cap.
+On machines with `saferun`, for example:
+
+```sh
+saferun 8 -- timeout --kill-after=5s 180s \
+  make test-czech RGL_DIR="$RGL_DIR" BUILD_DIR="$(mktemp -d)"
+```
+
+With an optimized GF 3.12.0 and RGL revision `820382715`, a fresh English/Czech
+build and all 548 generation/parse round trips took 23.7 seconds and peaked at
+2.85 GiB resident memory. Before compaction, compilation exceeded a 16 GB cap.
+These measurements depend on the compiler, RGL revision and machine.
+
 ## Semantic application grammar
 
 The shared abstract API is unchanged. Its trees describe phrasebook meanings;
@@ -106,12 +141,13 @@ English retains its ordinary possessives and genitives. Thus
 at arbitrary kinship depth. These identity rules are implemented and tested in
 English and Czech; the legacy language concretes have not been migrated.
 
-Each person supplies its own reflexive RNP. Czech pronouns also supply ordinary
+Each person supplies its own reflexive forms. Czech pronouns also supply ordinary
 and reflexive possessive quantifiers; kinship constructions consume the owner's
 appropriate quantifier and preserve nested bound RNPs. The owner therefore
 contributes actual forms such as *svou* or *svého* to the parsing derivation,
-without an artificial empty-string dependency. Czech projects the case forms
-of an RGL-built possessive NP into an RNP; the RGL still supplies all morphology.
+without an artificial empty-string dependency. Czech retains the case and
+constituent-placement forms of RGL-built NPs and RNPs, reconstructing their
+derived metadata when they are used; the RGL still supplies all morphology.
 
 Parsing need not recover a unique tree: *miluje sebe* can describe either
 `ALove He He` or `ALove She She`. Round-trip tests require the intended tree to

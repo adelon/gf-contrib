@@ -66,6 +66,10 @@ Phrase	PSentence (SProp (PropAction (AHasChildren IFemale (NNumeral (num (pot2as
 Phrase	PQuestion (WherePerson (Children IMale))	where are my children ?	kde jsou mé děti ?
 Phrase	PSentence (SProp (PropAction (ATired (Children IMale))))	my children are tired .	mé děti jsou unavené .
 Phrase	PSentence (SProp (PropAction (ACitizen (Children IMale) (CitiNat English))))	my children are English .	mé děti mají anglickou národnost .
+Phrase	PQuestion (HowFarFrom (SuperlPlace TheBest Bank) (ThePlace School))	how far is the school from the best bank ?	jak daleko je škola od nejlepší banky ?
+Phrase	PSentence (SHave IMale (ObjAndObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))) Pizza) (OneObj (DrinkNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n3)))))) Beer))))	I have two pizzas and three beers .	mám dvě pizzy a tři piva .
+Phrase	PSentence (SProp (PropAction (ALove (PersonName NameNN) (Wife IMale))))	NN loves my wife .	NN miluje mou manželku .
+Phrase	PSentence (SProp (PropAction (ALove IMale (PersonName NameNN))))	I love NN .	miluji NN .
 Phrase	PSentence (SProp (PropAction (ACitizen (PersonName NameNN) (CitiNat English))))	NN is English .	NN má anglickou národnost .
 Phrase	PSentence (SProp (PropAction (AMarried (PersonName NameNN))))	NN is married .	NN je v manželství .
 Phrase	PSentence (SProp (PropAction (ALike IMale (This Pizza))))	I like this pizza .	mám rád tuto pizzu .
