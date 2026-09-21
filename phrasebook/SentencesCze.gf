@@ -128,7 +128,7 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
       isPron : Bool ; poss,boundPoss : Quant
       } ;
     person : Referent -> HumanSex -> Pron -> NPPerson = \r,sex,p -> {
-      name = mkNP p ; bound = E.ReflPron ; ref,anchor = r ; sex = sex ;
+      name = mkNP (E.ProDrop p) ; bound = E.ReflPron ; ref,anchor = r ; sex = sex ;
       isPron = True ; poss = mkQuant p ; boundPoss = E.ReflPossPron
       } ;
     mkRelative : GNumber -> CN -> NPPerson -> NPPerson = \n,x,p ->
@@ -140,7 +140,7 @@ Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
         bound = case p.isPron of {
           -- Consume the owner's actual possessive forms in both readings.
           -- RNP retains the case forms of the NP built by the public API.
-          True => let np : NP = mkNP p.boundPoss num x in lin RNP {s = np.s ; prep = np.prep} ;
+          True => let np : NP = mkNP p.boundPoss num x in E.fullRNP np ;
           False => E.AdvRNP (mkNP the_Quant num x) possess_Prep p.bound
           } ;
         anchor = p.anchor ; ref = Unresolved ; sex = UnknownSex ;

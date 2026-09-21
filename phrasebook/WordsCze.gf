@@ -151,7 +151,7 @@ lin
   AHasAge p n = DativeCopulaCl (personNP p) (mkNP n L.year_N) ;
   QWhatAge p = mkQS (DativeCopulaQCl (personNP p) (mkIP how8many_IDet (mkCN L.year_N))) ;
   AHasChildren p n = mkCl (personNP p) have_V2 (mkNP n L.child_N) ;
-  ALike p item = mkCl (personNP p) (PredV2AP have_V2 like_AP item) ;
+  ALike p item = mkCl (personNP p) (mkVP (SlashV2AP have_V2 like_AP) item) ;
   ALive p country = mkCl (personNP p) (mkVP (mkVP live_V) country.at) ;
   AMarried p = case p.sex of {
     Male => mkCl (personNP p) (mkA "ženatý") ;

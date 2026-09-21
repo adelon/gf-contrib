@@ -55,8 +55,8 @@ Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1
 Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))))))	I am two years old .	jsou mi dva roky .
 Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))))))	I am five years old .	je mi pět let .
 Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot1to19 n4))))))))	I am fourteen years old .	je mi čtrnáct let .
-Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 pot01))))))))	I am twenty &+ - &+ one years old .	je mi dvacet jeden rok .
-Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 (pot0 n2)))))))))	I am twenty &+ - &+ two years old .	jsou mi dvacet dva roky .
+Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 pot01))))))))	I am twenty &+ - &+ one years old .	je mi dvacet jedna let .
+Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 (pot0 n2)))))))))	I am twenty &+ - &+ two years old .	je mi dvacet dva let .
 Phrase	PSentence (SProp (PropAction (AHasAge (Son IMale) (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))))))	my son is five years old .	mému synovi je pět let .
 Phrase	PQuestion (QWhatAge YouPolFemale)	how old are you ?	kolik let vám je ?
 Phrase	PQuestion (QWhatAge (Daughter IMale))	how old is my daughter ?	kolik let je mé dceři ?
