@@ -2,29 +2,42 @@
 set -eu
 : "${GF:?Set GF to your GF executable}"
 pgf=${1:-build/Phrasebook.pgf}
+other=${2:-Cze}
+case "$other" in
+  Cze)
+    cases=tests/czech.tsv
+    missing='ObjPlur ThesPlur ThesePlur ThosePlur'
+    ;;
+  Fre)
+    cases=tests/french.tsv
+    # Existing French vocabulary and upstream numeral gaps, outside these tests.
+    missing='Chinese Hindi India Indian ObjPlur Rupee ThesPlur ThesePlur ThosePlur Yuan pot21 pot31 pot3decimal pot4 pot41 pot4decimal pot4plus pot5 pot51 pot5decimal pot5plus'
+    ;;
+  *) echo "Unsupported test language: $other" >&2; exit 1 ;;
+esac
 work=$(mktemp -d "${TMPDIR:-/tmp}/phrasebook-tests.XXXXXX")
 trap 'rm -rf "$work"' EXIT HUP INT TERM
 tab=$(printf '\t')
 count=0
 log=${pgf%.pgf}.roundtrips.log
 
-# Import the PGF once: loading the Czech morphology for every assertion is slow.
+# Import the PGF once instead of loading the morphology for every assertion.
 # Each parse has a 100-candidate budget, with one lookahead for truncation.
-while IFS="$tab" read -r category tree english czech forbidden; do
-  for lang in Eng Cze; do
+while IFS="$tab" read -r category tree english translation forbidden; do
+  for lang in Eng "$other"; do
     count=$((count + 1))
-    case "$lang" in Eng) expected=$english ;; Cze) expected=$czech ;; esac
+    case "$lang" in Eng) expected=$english ;; *) expected=$translation ;; esac
     printf '%s\t%s\t%s\t%s\t%s\n' "$count" "$lang" "$tree" "$expected" "$forbidden" >> "$work/expected"
     printf 'ps "GEN %s"\nl -lang=Phrasebook%s %s\n' "$count" "$lang" "$tree" >> "$work/commands"
     printf 'ps "PARSE %s"\np -lang=Phrasebook%s -cat=%s "%s" | pt -number=101\n' \
       "$count" "$lang" "$category" "$expected" >> "$work/commands"
   done
-done < tests/czech.tsv
+done < "$cases"
 printf 'ps "MISSING"\npg -missing\nps "DONE"\nq\n' >> "$work/commands"
 # Bound the whole batch as well as the number of parses. A timeout is a failure.
 perl -e 'alarm 120; exec @ARGV or die $!' "$GF" -run "$pgf" < "$work/commands" > "$work/actual"
 
-awk -F '\t' -v log_path="$log" -v total="$count" '
+awk -F '\t' -v log_path="$log" -v total="$count" -v other="$other" -v other_missing="$missing" '
   NR == FNR {lang[$1]=$2; tree[$1]=$3; expected[$1]=$4; forbidden[$1]=$5; next}
   function fail(message) {print message > "/dev/stderr"; failed=1}
   function finish() {
@@ -43,7 +56,8 @@ awk -F '\t' -v log_path="$log" -v total="$count" '
     print lang[id] ": " expected[id] > log_path; next
   }
   /^MISSING$/ {finish(); mode="MISSING"; next}
-  mode == "MISSING" && /^Phrasebook(Eng|Cze) : ObjPlur ThesPlur ThesePlur ThosePlur$/ {missing++; next}
+  mode == "MISSING" && $0 == "PhrasebookEng : ObjPlur ThesPlur ThesePlur ThosePlur" {missing++; next}
+  mode == "MISSING" && $0 == "Phrasebook" other " : " other_missing {missing++; next}
   /^DONE$/ {finish(); mode=""; done=1; next}
   /^$/ {next}
   mode == "GEN" {

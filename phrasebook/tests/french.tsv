@@ -1,0 +1,13 @@
+Phrase	PSentence (SProp (Is (This Pizza) (PropQuality Cheap)))	this pizza is cheap .	cette pizza est bon marché .
+Phrase	PSentence (SProp (Is (These Pizza) (PropQuality Cheap)))	these pizzas are cheap .	ces pizzas sont bon marché .
+Word	PPlace (SuperlPlace TheCheapest Hotel)	the cheapest hotel	l' &+ hôtel le meilleur marché
+Word	PPlace (SuperlPlace TheCheapest Bank)	the cheapest bank	la banque la meilleur marché
+Word	PPlace (SuperlPlace TheCheapest Toilet)	the cheapest toilet	les toilettes les meilleur marché
+Phrase	PSentence (SProp (PropAction (AWantGo IMale (SuperlPlace TheCheapest Hotel))))	I want to go to the cheapest hotel .	je veux aller à l' &+ hôtel le meilleur marché .
+Phrase	PSentence (SProp (PropAction (ABePlace IFemale (SuperlPlace TheCheapest Toilet))))	I am in the cheapest toilet .	je suis aux toilettes les meilleur marché .
+Word	PPlace (SuperlPlace TheBest Hotel)	the best hotel	le meilleur hôtel
+Word	PPlace (SuperlPlace TheBest Toilet)	the best toilet	les meilleures toilettes
+Word	PPlace (SuperlPlace TheMostExpensive Toilet)	the most expensive toilet	les plus chères toilettes
+Word	PPlace (SuperlPlace TheClosest Hotel)	the nearest hotel	le plus proche hôtel
+Word	PPlace (SuperlPlace TheMostPopular Bank)	the most popular bank	la plus populaire banque
+Word	PPlace (SuperlPlace TheWorst Hotel)	the worst hotel	le pire hôtel

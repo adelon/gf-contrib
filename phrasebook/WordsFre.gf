@@ -5,8 +5,8 @@ concrete WordsFre of Words = SentencesFre ** open
   IrregFre,
   (E = ExtraFre),
   (L = LexiconFre),
+  (R = CommonRomance),
   ParadigmsFre,
-  (M = MorphoFre),
   (P = ParadigmsFre),
   Prelude in {
 
@@ -34,7 +34,7 @@ lin
 
     Bad = L.bad_A ;
     Boring = mkA "ennuyeux" ;
-    Cheap = let bm = "bon marché" in mkA bm bm bm bm ;
+    Cheap = cheap_A ;
     Cold = L.cold_A ;
     Delicious = mkA "délicieux" ;
     Expensive = mkA "cher" ;
@@ -201,19 +201,24 @@ lin
 -- modifiers of places
     TheBest = mkSuperl True L.good_A ;
     TheClosest = mkSuperl True L.near_A ;
-    TheCheapest = mkSuperl False
-      (compADeg {s = \\_ => (M.mkAdj "bon marché" "bon marché" "bon marché" "bon marché").s ;
-       isPre = False ; copTyp = <> ; lock_A = <>}) ;
+    TheCheapest = mkSuperl False cheap_A ;
     TheMostExpensive = mkSuperl True (mkA "cher") ;
     TheMostPopular = mkSuperl True (mkA "populaire") ;
     TheWorst = mkSuperl True L.bad_A ;
 
     SuperlPlace sup kind =
       let
-        det  : Det = mkDet the_Art sup.s ;
+        number : Num = if_then_else Num kind.isPl plNum sgNum ;
+        det : Det = mkDet the_Art number sup.s ;
+        -- A postposed superlative repeats the article with the head's gender
+        -- and number: la banque la meilleur marché, les toilettes les meilleur marché.
+        post : NP = case kind.name.g of {
+          R.Fem => E.DetNPFem det ;
+          _ => mkNP det
+          } ;
         name : NP  = case sup.isPre of {
           True  => mkNP det kind.name ;                      -- le meilleur bar
-          False => mkNP the_Art (mkCN kind.name (mkNP det))  -- le bar le plus cher
+          False => mkNP (mkDet the_Art number) (mkCN kind.name post)
           }
       in {
         name = name ;
@@ -241,6 +246,9 @@ lin
       --      mkQS (mkQCl (mkCl (mkCN trans.name place.to))) ;
 
   oper
+    -- The positive and irregular comparison forms are both invariable.
+    cheap_A : A = mkA (P.invarA "bon marché") (P.invarA "meilleur marché") ;
+
     mkNat : Str -> Str -> NPNationality = \nat,co ->
       mkNPNationality (mkNP (mkPN nat)) (mkNP (mkPN co)) (mkA nat) ;
 

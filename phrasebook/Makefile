@@ -4,7 +4,7 @@ export GF RGL_DIR BUILD_DIR
 # Legacy app/demo targets keep their PGFs here, but share compiler/RGL selection.
 compile = BUILD_DIR=. sh ./build.sh
 
-.PHONY: Eng Cze EngCze test-czech forApp all demo compdemo linkdemo linkdemothb fin missing clean
+.PHONY: Eng Cze EngCze test-czech test-french forApp all demo compdemo linkdemo linkdemothb fin missing clean
 Eng:
 	sh ./build.sh Eng
 
@@ -16,6 +16,10 @@ EngCze:
 
 test-czech: EngCze
 	sh tests/check.sh "$(BUILD_DIR)/Phrasebook.pgf"
+
+test-french:
+	BUILD_DIR="$(BUILD_DIR)/french" sh ./build.sh -make Eng Fre
+	sh tests/check.sh "$(BUILD_DIR)/french/Phrasebook.pgf" Fre
 
 forApp:
 	$(compile) Bul Cat Chi Cze Dut Eng Est Fin Fre Ger Hin Ita Jpn Rus Spa Swe Tha Urd

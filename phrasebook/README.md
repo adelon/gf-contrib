@@ -30,11 +30,20 @@ separate from using an optimized GF compiler executable.
 When migrating from previously optimized legacy PGFs, run `make clean` before
 rebuilding: GF's timestamp check does not detect changed optimization options.
 
-The complete legacy app/demo language set still needs separate compatibility
-work against current RGL APIs. For example, with RGL `820382715`,
-`WordsFre.TheCheapest` fails because its old adjective record expects a string
-where `MorphoFre.mkAdj` now supplies a table. This does not affect the bilingual
-English/Czech build or the Czech target in `Makefile2`.
+French uses `ParadigmsFre.invarA` and the irregular-comparison overload of `mkA`
+for *bon marché* / *meilleur marché*, shared by `Cheap` and `TheCheapest`.
+Both forms are invariable ([Larousse, « marché »](https://www.larousse.fr/dictionnaires/francais/march%C3%A9/49391)).
+Superlative places retain their number, and postposed superlatives use the RGL's
+gendered determiner constructors for the repeated article.
+
+Run `make test-french RGL_DIR="$RGL_DIR"` for the focused English/French
+generation and parsing regressions. This builds `$(BUILD_DIR)/french/Phrasebook.pgf`
+separately from the English/Czech grammar. The missing-linearization check records
+the existing French gaps: `Chinese`, `Hindi`, `India`, `Indian`, `Rupee`, `Yuan`,
+the empty `PlurKind` vocabulary, and numeral constructors not yet implemented
+by the French RGL. With RGL `820382715`, the legacy `forApp` build now passes
+French and next stops in `SentencesRus`, which still refers to the removed
+`MorphoRus.pronYa`, `pronTu` and `pronVu` operations.
 
 The Czech source requires the companion RGL revisions providing `ExtraCze`,
 the standard `ExtendCze` reflexive noun-phrase constructions,
