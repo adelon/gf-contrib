@@ -1,9 +1,10 @@
 RGL_DIR ?= ../../gf-rgl
 BUILD_DIR ?= build
 export GF RGL_DIR BUILD_DIR
-compile = runghc Compile
+# Legacy app/demo targets keep their PGFs here, but share compiler/RGL selection.
+compile = BUILD_DIR=. sh ./build.sh
 
-.PHONY: Eng Cze EngCze test-czech
+.PHONY: Eng Cze EngCze test-czech forApp all demo compdemo linkdemo linkdemothb fin missing clean
 Eng:
 	sh ./build.sh Eng
 
@@ -16,23 +17,27 @@ EngCze:
 test-czech: EngCze
 	sh tests/check.sh "$(BUILD_DIR)/Phrasebook.pgf"
 
-forApp: 
-	$(compile) -opt Bul Cat Chi Dut Eng Est Fin Fre Ger Hin Ita Jpn Rus Spa Swe Tha Urd
-	make gfos
+forApp:
+	$(compile) Bul Cat Chi Cze Dut Eng Est Fin Fre Ger Hin Ita Jpn Rus Spa Swe Tha Urd
+	$(MAKE) gfos
 
 .PHONY: gfos
 
 Chi:
 	$(compile) Chi
 
-all: demo missing gfos
+all: demo
+	$(MAKE) missing gfos
 
 gfos:
-	mkdir -p gfos && cp -p *.gfo gfos
+	mkdir -p gfos
+	@set -e; for file in *.gfo Phrasebook*/*.gfo DisambPhrasebook*/*.gfo; do \
+	  if test -f "$$file"; then cp -p "$$file" gfos/; fi; \
+	done
 
 thaidroid: #thaiscript
 	cp -p Phrasebook.pgf FullPhrasebook.pgf
-	$(compile) -opt Eng Swe Tha Thb DisambPhrasebookEng
+	$(compile) Eng Swe Tha Thb DisambPhrasebookEng
 	$(compile) -link Eng Fin Swe Tha Thb DisambPhrasebookEng
 	mv Phrasebook.pgf Thaidroid.pgf
 	mv FullPhrasebook.pgf Phrasebook.pgf
@@ -40,20 +45,21 @@ thaidroid: #thaiscript
 thaiscript:
 	runghc ../../lib/src/thai/ThaiScript.hs
 
-demo: compdemo fin linkdemo
+demo: compdemo fin
+	$(MAKE) linkdemo
 
 compdemo:
-	$(compile) -opt Bul Cat Chi Dan Dut Eng Fre Ger Hin Ita Jpn Lav Nor Pes Pol Ron Rus Spa Swe Tha Urd DisambPhrasebookEng
+	$(compile) Bul Cat Chi Cze Dan Dut Eng Fre Ger Hin Ita Jpn Lav Nor Pes Pol Ron Rus Spa Swe Tha Urd DisambPhrasebookEng
 
 linkdemo:
-	$(compile) -link Eng Bul Cat Chi Dan Dut Fin Fre Ger Hin Ita Jpn Lav Nor Pes Pol Ron Rus Spa Swe Tha Urd DisambPhrasebookEng
+	$(compile) -link Eng Bul Cat Chi Cze Dan Dut Fin Fre Ger Hin Ita Jpn Lav Nor Pes Pol Ron Rus Spa Swe Tha Urd DisambPhrasebookEng
 
 linkdemothb:
-	$(compile) -link Eng Bul Cat Chi Dan Dut Fin Fre Ger Ita Jpn Nor Pol Ron Rus Spa Swe Tha Thb Urd DisambPhrasebookEng 
+	$(compile) -link Eng Bul Cat Chi Cze Dan Dut Fin Fre Ger Ita Jpn Nor Pol Ron Rus Spa Swe Tha Thb Urd DisambPhrasebookEng
 
 #separate, because slow...
 fin:
-	$(compile) -opt Fin
+	$(compile) Fin
 
 missing:
 	echo "pg -missing | wf -file=missing.txt" | "$(GF)" -run Phrasebook.pgf
@@ -69,7 +75,7 @@ doc:
 	rm -f Ontology.gf Implementation.gf
 
 clean:
-	rm *.gfo *.pgf
+	rm -f *.gfo *.pgf Phrasebook*/*.gfo DisambPhrasebook*/*.gfo
 
 upload:: Phrasebook.pgf
 	rsync -avb Phrasebook.pgf www.grammaticalframework.org:/usr/local/www/GF-demos/www/grammars

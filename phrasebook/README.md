@@ -13,9 +13,28 @@ make test-czech RGL_DIR="$HOME/Code/gf-rgl"
 The bilingual grammar is `build/Phrasebook.pgf`. Czech is compiled from RGL
 sources, so local Czech fixes are included without reinstalling the RGL.
 English uses the installed present-tense profile. `BUILD_DIR` selects a fresh
-output directory, and the existing `GF_LIB_PATH` is left intact. The legacy
-multilingual targets still use `Compile.hs`; these targets use `build.sh` and
-`$GF`.
+output directory, and the existing `GF_LIB_PATH` is left intact. Both Makefiles
+use `build.sh` and `$GF`, including the legacy app/demo targets. Czech is included
+in their compile and link lists and uses the same RGL source paths as `make Cze`.
+
+The legacy targets retain their output layout: PGFs are written in this directory,
+with intermediate GFOs under each module's name. `make gfos` collects those GFOs
+for the app. To build only Czech through the parallel Makefile, use
+`make -f Makefile2 PhrasebookCze.pgf RGL_DIR="$RGL_DIR"`.
+The historical `Compile.hs` script is no longer used by either Makefile.
+
+The builds retain both `Phrase` and `Word`. They do not enable `-optimize-pgf`:
+GF's global PGF optimization keeps only components reachable from `startcat`
+(`Phrase`), which removes the standalone `Word` linearizations. This option is
+separate from using an optimized GF compiler executable.
+When migrating from previously optimized legacy PGFs, run `make clean` before
+rebuilding: GF's timestamp check does not detect changed optimization options.
+
+The complete legacy app/demo language set still needs separate compatibility
+work against current RGL APIs. For example, with RGL `820382715`,
+`WordsFre.TheCheapest` fails because its old adjective record expects a string
+where `MorphoFre.mkAdj` now supplies a table. This does not affect the bilingual
+English/Czech build or the Czech target in `Makefile2`.
 
 The Czech source requires the companion RGL revisions providing `ExtraCze`,
 the standard `ExtendCze` reflexive noun-phrase constructions,
