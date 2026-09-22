@@ -188,6 +188,11 @@ and the interpretation of each domain action:
 - Productive farewells combine the fixed idiom *na shledanou* with the
   supplied place and date.
 
+Czech greetings retain their punctuation until they become phrases:
+*jak se máš?* and *kolik je hodin?* are questions. Composed farewells and
+the optional unpunctuated forms preserve the same greeting content.
+This specialization leaves the shared abstract API and other languages unchanged.
+
 Grammatical gender alone does not identify a person's sex. In particular,
 *děti* has feminine plural agreement. For `Children` and an opaque
 `PersonName`, nationality uses *mít ... národnost* and marital status uses

@@ -135,7 +135,7 @@ lin
 
   PSeeYouDate d = farewell d ;
   PSeeYouPlace p = farewell p.at ;
-  PSeeYouPlaceDate p d = mkText (farewell p.at) (mkPhrase (mkUtt d)) ;
+  PSeeYouPlaceDate p d = advGreeting (farewell p.at) d ;
 
   ByFoot = P.mkAdv "pěšky" ;
   Bike = (transport ((mestoN "kolo") ** {sloc = "kole"}) ride_V) ** {by = SyntaxCze.mkAdv on_Prep (mkNP ((mestoN "kolo") ** {sloc = "kole"}))} ;
@@ -218,7 +218,7 @@ oper
     citizenship = c ; language = l ; country = n
     } ;
   superlative : A -> Det = \a -> mkDet the_Quant (mkOrd a) ;
-  farewell : Adv -> Text = \a -> mkText (mkGreeting "na shledanou") (mkPhrase (mkUtt a)) ;
+  farewell : Adv -> CzechGreeting = \a -> advGreeting (mkGreeting "na shledanou") a ;
   like_AP : AP = shortAP "rád" "ráda" "rádo" "rádi" "rády" "ráda" ;
   name_V : V = reflV (mkV "jmenovat" "jmenuji" "jmenuješ" "jmenuje" "jmenujeme" "jmenujete" "jmenují" "jmenoval" "jmenovali" "jmenuj" "jmenujme" "jmenujte") accusative ;
   live_V : V = mkV "žít" "žiji" "žiješ" "žije" "žijeme" "žijete" "žijí" "žil" "žili" "žij" "žijme" "žijte" ;

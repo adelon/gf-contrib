@@ -297,3 +297,11 @@ Phrase	PGreetingMale (GObjectPlease (OneObj (ObjItem (ThisMass (MassDrink Water)
 Phrase	PGreetingMale (GObjectPlease (ObjAndObj (ObjIndef (SuchKind (PropQuality Good) Pizza)) (OneObj (DrinkNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 pot01))))) Coffee))))	a good pizza and one coffee please !	dobrou pizzu a jednu kávu prosím !
 Word	PObject (OneObj (DrinkNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 pot01))))) Coffee))	one coffee	jedna káva
 Word	PObject (OneObj (ObjIndef Pizza))	a pizza	pizza
+Phrase	PGreetingMale GHowAreYou	how are you !	jak se máš ?
+Phrase	PGreetingFemale GHowAreYou	how are you !	jak se máš ?
+Phrase	PGreetingMale GWhatTime	what time is it !	kolik je hodin ?
+Phrase	PGreetingFemale GWhatTime	what time is it !	kolik je hodin ?
+Phrase	PGreetingMale PYes	yes !	ano !
+Phrase	PGreetingFemale PNo	no !	ne !
+Phrase	PGreetingMale PYesToNo	yes !	ano !
+Message	MContinue (PGreetingFemale GWhatTime) (MPhrase (PGreetingMale GThanks))	what time is it ! thank you !	kolik je hodin ? děkuji !

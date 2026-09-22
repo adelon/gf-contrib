@@ -1,4 +1,4 @@
-concrete GreetingsCze of Greetings = SentencesCze [Greeting,mkGreeting] ** {
+concrete GreetingsCze of Greetings = SentencesCze [Greeting,mkGreeting,mkQuestionGreeting] ** {
 lin
   GBye = mkGreeting "ahoj" ;
   GCheers = mkGreeting "na zdraví" ;
@@ -12,7 +12,7 @@ lin
   GGoodbye = mkGreeting "na shledanou" ;
   GHello = mkGreeting "ahoj" ;
   GHelp = mkGreeting "pomoc" ;
-  GHowAreYou = mkGreeting "jak se máš" ;
+  GHowAreYou = mkQuestionGreeting "jak se máš" ;
   GLookOut = mkGreeting "pozor" ;
   GNiceToMeetYou = mkGreeting "těší mě" ;
   GPleaseGive = mkGreeting "prosím" ;
@@ -25,5 +25,5 @@ lin
   GCongratulations = mkGreeting "blahopřeji" ;
   GHappyBirthday = mkGreeting "všechno nejlepší k narozeninám" ;
   GGoodLuck = mkGreeting "hodně štěstí" ;
-  GWhatTime = mkGreeting "kolik je hodin" ;
+  GWhatTime = mkQuestionGreeting "kolik je hodin" ;
 }

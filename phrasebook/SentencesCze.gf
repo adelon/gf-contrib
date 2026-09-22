@@ -1,4 +1,5 @@
 concrete SentencesCze of Sentences = NumeralCze ** SentencesI - [
+    Greeting, PGreetingMale, PGreetingFemale, PYes, PNo, PYesToNo, mkGreeting,
     Object, PrimObject, ObjItem, ObjNumber, ObjIndef, ObjPlural, ObjPlur, ObjMass,
     ObjAndObj, OneObj, DrinkNumber, PObject, GObjectPlease, SHave, QDoHave,
     Modality, MCan, MKnow, MMust, MWant, AKnowPerson,
@@ -24,6 +25,7 @@ concrete SentencesCze of Sentences = NumeralCze ** SentencesI - [
   param
     HumanSex = Male | Female | UnknownSex ;
   lincat
+    Greeting = CzechGreeting ;
     Place = NPPlace ;
     Object, PrimObject = CzechObject ;
     Modality = CzechModality ;
@@ -35,6 +37,11 @@ concrete SentencesCze of Sentences = NumeralCze ** SentencesI - [
     Country = CzechCountry ;
     VerbPhrase = CzechActivity ;
   lin
+    PGreetingMale, PGreetingFemale = \g ->
+      mkText (lin Phr (ss g.text.s)) g.punct | g.text ;
+    PYes, PYesToNo = greeting exclMarkPunct (mkPhrase yes_Utt) ;
+    PNo = greeting exclMarkPunct (mkPhrase no_Utt) ;
+
     ObjItem i = object True i ;
     ObjNumber n k = object True (mkNP n k) ;
     ObjIndef k = object True (mkNP a_Quant k) ;
@@ -45,7 +52,9 @@ concrete SentencesCze of Sentences = NumeralCze ** SentencesI - [
     OneObj o = o ;
     DrinkNumber n k = object True (mkNP n k) ;
     PObject o = mkPhrase (mkUtt (objectNP o)) ;
-    GObjectPlease o = lin Text (mkPhr noPConj (E.UttAccNP (objectNP o)) please_Voc) | lin Text (E.UttAccNP (objectNP o)) ;
+    GObjectPlease o = greeting exclMarkPunct
+      (lin Text (mkPhr noPConj (E.UttAccNP (objectNP o)) please_Voc)
+        | lin Text (E.UttAccNP (objectNP o))) ;
     SHave p o = mkS (mkCl (personNP p) have_V2 (objectNP o)) ;
     QDoHave p o = mkQS (mkQCl (mkCl (personNP p) have_V2 (objectNP o))) ;
     PPlace p = mkPhrase (mkUtt (placeName p)) ;
@@ -127,6 +136,18 @@ concrete SentencesCze of Sentences = NumeralCze ** SentencesI - [
     TheyMale = person ThirdMaleGroup Male they_Pron ;
     TheyFemale = person ThirdFemaleGroup Female (genderPron feminine they_Pron) ;
   oper
+    -- Fixed greetings include questions; carry their punctuation until they
+    -- become phrases. Appended places and dates preserve that choice.
+    CzechGreeting : Type = {text : Text ; punct : Punct} ;
+    greeting : Punct -> Text -> CzechGreeting = \punct,text -> {
+      text = text ; punct = punct
+      } ;
+    mkGreeting : Str -> CzechGreeting = \s -> greeting exclMarkPunct (lin Text (ss s)) ;
+    mkQuestionGreeting : Str -> CzechGreeting = \s -> greeting questMarkPunct (lin Text (ss s)) ;
+    advGreeting : CzechGreeting -> Adv -> CzechGreeting = \g,a -> g ** {
+      text = mkText g.text (mkPhrase (mkUtt a))
+      } ;
+
     -- Objects and places are nominal descriptions, never personal pronouns.
     -- Keep both agreements: quantified NPs can have different clause and
     -- modifier agreement. Only their constant pronoun flags are reconstructed.
