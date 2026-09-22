@@ -25,20 +25,27 @@ for lang do
   case "$lang" in ???) module=Phrasebook$lang ;; *) module=$lang ;; esac
   if test "$mode" != link; then
     mkdir -p "$BUILD_DIR/$module"
-    # Compile these languages from source so local RGL fixes are included.
-    case "$lang" in
-      Cze|PhrasebookCze)
-        path=".:$RGL_DIR/src/api:$RGL_DIR/src/czech:$RGL_DIR/src/common:$RGL_DIR/src/abstract:$RGL_DIR/src/prelude"
-        ;;
-      Rus|PhrasebookRus)
+    # Use one source profile for local fixes and language-specific Extra modules.
+    # Scandinavian grammars also depend on the shared functor sources.
+    case "$module" in
+      PhrasebookCze) source_dirs="$RGL_DIR/src/czech" ;;
+      PhrasebookDan) source_dirs="$RGL_DIR/src/danish:$RGL_DIR/src/scandinavian" ;;
+      PhrasebookLav) source_dirs="$RGL_DIR/src/latvian" ;;
+      PhrasebookNor) source_dirs="$RGL_DIR/src/norwegian:$RGL_DIR/src/scandinavian" ;;
+      PhrasebookPol) source_dirs="$RGL_DIR/src/polish" ;;
+      PhrasebookRon) source_dirs="$RGL_DIR/src/romanian" ;;
+      PhrasebookRus)
         # Russian's tense patterns require the complete RGL tense parameters.
-        path=".:$RGL_DIR/src/api:$RGL_DIR/src/russian:$RGL_DIR/src/common:$RGL_DIR/src/abstract:$RGL_DIR/src/prelude"
+        source_dirs="$RGL_DIR/src/russian"
         ;;
-      Tha|PhrasebookTha)
-        path=".:$RGL_DIR/src/api:$RGL_DIR/src/thai:$RGL_DIR/src/common:$RGL_DIR/src/abstract:$RGL_DIR/src/prelude"
-        ;;
-      *) path=".:$RGL_DIR/dist/present:$RGL_DIR/dist/alltenses:$RGL_DIR/dist/prelude" ;;
+      PhrasebookTha) source_dirs="$RGL_DIR/src/thai" ;;
+      *) source_dirs= ;;
     esac
+    if test -n "$source_dirs"; then
+      path=".:$RGL_DIR/src/api:$source_dirs:$RGL_DIR/src/common:$RGL_DIR/src/abstract:$RGL_DIR/src/prelude"
+    else
+      path=".:$RGL_DIR/dist/present:$RGL_DIR/dist/alltenses:$RGL_DIR/dist/prelude"
+    fi
     # As in the RGL installer, skip PMCFG generation for library modules.
     # Linking generates the parser for the phrasebook's own abstract syntax.
     "$GF" -make -no-pmcfg $opt -path="$path" -name="$module" \

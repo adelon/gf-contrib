@@ -154,7 +154,7 @@ concrete WordsNor of Words = SentencesNor **
 
     QWhatName p = mkQS (mkQCl whatSg_IP p.name (mkV2 hete_V)) ;
     QWhatAge p = mkQS (mkQCl (ICompAP (mkAP L.old_A)) p.name) ;
-    HowMuchCost item = mkQS (mkQCl how8much_IAdv (mkCl item (mkV "koste"))) ; 
+    HowMuchCost item = mkQS (mkQCl cost_IAdv (mkCl item (mkV "koste"))) ;
     ItCost item price = mkCl item (mkV2 (mkV "koste")) price ;
 
     PropOpen p = mkCl p.name open_A ;
@@ -257,7 +257,7 @@ concrete WordsNor of Words = SentencesNor **
 
     far_IAdv = ExtraNor.IAdvAdv (ParadigmsNor.mkAdv "langt") ;
 
-    how8much_IAdv : IAdv = ss "hvor mye" ** {lock_IAdv = <>};
+    cost_IAdv : IAdv = ss "hvor mye" ** {lock_IAdv = <>};
 
   relativePersonNor : GNumber -> CN -> (Num -> NP -> CN -> NP) -> NPPerson -> NPPerson = 
     \n,x,f,p -> 

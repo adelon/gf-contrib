@@ -155,7 +155,7 @@ concrete WordsDan of Words = SentencesDan **
 
     QWhatName p = mkQS (mkQCl whatSg_IP p.name (mkV2 hede_V)) ;
     QWhatAge p = mkQS (mkQCl (ICompAP (mkAP L.old_A)) p.name) ;
-    HowMuchCost item = mkQS (mkQCl how8much_IAdv (mkCl item (mkV "koste"))) ; 
+    HowMuchCost item = mkQS (mkQCl cost_IAdv (mkCl item (mkV "koste"))) ;
     ItCost item price = mkCl item (mkV2 (mkV "koste")) price ;
 
     PropOpen p = mkCl p.name (mkVP (mkVP have_V) open_Adv) ;
@@ -256,5 +256,5 @@ concrete WordsDan of Words = SentencesDan **
 
     far_IAdv = ExtraDan.IAdvAdv L.far_Adv ;
     long_IAdv : IAdv = ss "hvor langt" ** {lock_IAdv = <>};
-    how8much_IAdv : IAdv = ss "hvad" ** {lock_IAdv = <>};
+    cost_IAdv : IAdv = ss "hvad" ** {lock_IAdv = <>};
 }

@@ -10,8 +10,9 @@ make EngCze RGL_DIR="$HOME/Code/gf-rgl"
 make test-czech RGL_DIR="$HOME/Code/gf-rgl"
 ```
 
-The bilingual grammar is `build/Phrasebook.pgf`. Czech, Russian and Thai are compiled
-from RGL sources, so local fixes are included without reinstalling the RGL.
+The bilingual grammar is `build/Phrasebook.pgf`. Czech, Danish, Latvian, Norwegian,
+Polish, Romanian, Russian and Thai are compiled from RGL sources, so local fixes
+and language-specific extensions are available without reinstalling the RGL.
 English uses the installed present-tense profile. `BUILD_DIR` selects a fresh
 output directory, and the existing `GF_LIB_PATH` is left intact. Both Makefiles
 use `build.sh` and `$GF`, including the legacy app/demo targets. Czech is included
@@ -22,6 +23,21 @@ with intermediate GFOs under each module's name. `make gfos` collects those GFOs
 for the app. To build only Czech through the parallel Makefile, use
 `make -f Makefile2 PhrasebookCze.pgf RGL_DIR="$RGL_DIR"`.
 The historical `Compile.hs` script is no longer used by either Makefile.
+
+Run `make test-legacy RGL_DIR="$RGL_DIR"` for the Danish, Latvian, Norwegian,
+Polish and Romanian build/API regressions. Each language is linked with English
+under `$(BUILD_DIR)/legacy/<language>/` and checked for generation, parsing and
+its existing missing-linearization baseline. Danish and Norwegian include the
+shared Scandinavian source modules. Polish uses `ExtendPol` for subject omission
+and feminine pronouns, and uses the adjective paradigms' `A` results directly.
+
+Source compilation uses `-no-pmcfg`, as the RGL installer does. This skips
+generating parser tables for entire RGL modules; GF generates the phrasebook's
+parser when linking its PGF. Without this option, compiling the Latvian and
+Romanian verb modules exhausted 8 GB and 4 GB respectively before reaching the
+application grammar. With the optimized GF 3.12.0, a fresh `test-legacy` build
+using deferred parser generation took about 47 seconds and peaked at 625 MiB
+on this machine.
 
 The builds retain both `Phrase` and `Word`. They do not enable `-optimize-pgf`:
 GF's global PGF optimization keeps only components reachable from `startcat`

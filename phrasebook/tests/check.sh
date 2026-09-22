@@ -14,6 +14,11 @@ case "$other" in
     cases=tests/czech.tsv
     missing='ObjPlur ThesPlur ThesePlur ThosePlur'
     ;;
+  Dan|Lav|Nor|Pol|Ron)
+    cases=tests/legacy-$other.tsv
+    # Existing vocabulary, greeting and numeral gaps in these legacy concretes.
+    missing='Chinese GWhatTime Hindi India Indian ObjPlur Rupee ThesPlur ThesePlur ThosePlur Yuan pot21 pot31 pot3decimal pot4 pot41 pot4decimal pot4plus pot5 pot51 pot5decimal pot5plus'
+    ;;
   Fre)
     cases=tests/french.tsv
     # Existing French vocabulary and upstream numeral gaps, outside these tests.

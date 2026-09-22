@@ -32,17 +32,17 @@ concrete WordsPol of Words = SentencesPol **
     Water = mkCN L.water_N ;
     Wine = mkCN L.wine_N ;
 
--- Properties; many of them are in the resource lexicon, others can be built by $mkA$.
+-- Properties use the resource lexicon or adjective paradigms returning A.
 
     Bad = L.bad_A ;
-    Boring = mkA (mkRegAdj "nudny" "nudniejszy" "nudno" "nudniej" );
-    Cheap = mkA (mkRegAdj "tani" "tańszy" "tanio" "taniej" );
+    Boring = mkRegAdj "nudny" "nudniejszy" "nudno" "nudniej" ;
+    Cheap = mkRegAdj "tani" "tańszy" "tanio" "taniej" ;
     Cold = L.cold_A ;
-    Delicious = mkA (mkRegAdj "pyszny" "pyszniejszy" "pysznie" "pyszniej") ;
-    Expensive = mkA (mkRegAdj "drogi" "droższy" "drogo" "drożej" );
-    Fresh = mkA (mkRegAdj "świeży" "świeższy" "świeżo" "świeżej" );
+    Delicious = mkRegAdj "pyszny" "pyszniejszy" "pysznie" "pyszniej" ;
+    Expensive = mkRegAdj "drogi" "droższy" "drogo" "drożej" ;
+    Fresh = mkRegAdj "świeży" "świeższy" "świeżo" "świeżej" ;
     Good = L.good_A ;
-    Suspect = mkA (mkCompAdj "podejrzany" "podejrzanie" );
+    Suspect = mkCompAdj "podejrzany" "podejrzanie" ;
     Warm = L.warm_A ;
 
 -- Places require different prepositions to express location; in some languages 
@@ -95,7 +95,7 @@ concrete WordsPol of Words = SentencesPol **
 
 -- Nationalities
 --  język, po języku, obywatelstwo, kraj, obywatelem, obywatelami, obywatelką
-    Belgian = {prop=mkA (mkCompAdj "belgijski"); citizenMSg="Belgiem"; citizenMPl="Belgami"; citizenF="Belgijką"};
+    Belgian = {prop=mkCompAdj "belgijski"; citizenMSg="Belgiem"; citizenMPl="Belgami"; citizenF="Belgijką"};
     Belgium = mkNP belgia ;
     Bulgarian = mkNat "bułgarski" ["po bułgarsku"] "bułgarski" bulgaria "Bułgarem" "Bułgarami" "Bułgarką";
     Catalan = mkNat "kataloński" ["po katalońsku"] "kataloński" katalonia "Katalończykiem" "Katalończykami" "Katalonką";
@@ -103,7 +103,7 @@ concrete WordsPol of Words = SentencesPol **
     Dutch =  mkNat "holenderski" ["po holendersku"] "holenderski" holandia "Holendrem" "Holendrami" "Holenderką";
     English = mkNat "angielski" ["po angielsku"] "angielski" anglia "Anglikiem" "Anglikami" "Angielką";
     Finnish = mkNat "fiński" ["po fińsku"] "finladzki" finlandia "Finem" "Finami" "Finką";
-    Flemish = mkA (mkCompAdj "flamandzki" ["po flamandzku"]);
+    Flemish = mkCompAdj "flamandzki" ["po flamandzku"];
     French = mkNat "francuski" ["po francusku"] "francuski" francja "Framcuzem" "Francuzami" "Francuzką";
     German = mkNat "niemiecki" ["po niemiecku"] "niemiecki" niemcy "Niemcem" "Niemcami" "Niemką";
     Italian = mkNat "włoski" ["po włosku"] "włoski" wlochy "Włochem" "Włochami" "Włoszką";
@@ -140,8 +140,8 @@ concrete WordsPol of Words = SentencesPol **
 
 
     AHasName p name = mkCl p.name (mkVP (mkComplicatedVerb (mkMonoVerb "być" conj1 Imperfective) name.nom));
-    AHungry p = mkCl p.name (mkA (mkRegAdj "głodny" "głodniejszy" "głodno" "głodniej" )) ;
-    AIll p = mkCl p.name (mkA (mkCompAdj "chory")) ;
+    AHungry p = mkCl p.name (mkRegAdj "głodny" "głodniejszy" "głodno" "głodniej") ;
+    AIll p = mkCl p.name (mkCompAdj "chory") ;
     AKnow p = mkCl p.name (mkVP (mkMonoVerb "wiedzieć" conj103 Imperfective)) ;
     ALike p item = mkCl p.name (L.like_V2) item ;
     ALive p co = mkCl p.name (mkVP (mkComplicatedVerb (mkMonoVerb "mieszkam" conj98 Imperfective) ("w" ++ co.dep!LocPrep)));
@@ -153,7 +153,7 @@ concrete WordsPol of Words = SentencesPol **
     AScared p = mkCl p.name (mkReflVerb (mkMonoVerb "bać" conjbac Imperfective)) ; 
     ASpeak p lang = mkCl p.name  (mkVP (mkComplicatedVerb (mkMonoVerb "mówić" conj72 Imperfective) lang.advpos)) ;
     AThirsty p = mkCl p.name (mkVP (mkComplicatedVerb (mkMonoVerb "chcieć" conj45 Imperfective) ["pić"]));
-    ATired p = mkCl p.name (mkA (mkCompAdj "zmęczony")) ;
+    ATired p = mkCl p.name (mkCompAdj "zmęczony") ;
     AUnderstand p = mkCl p.name (mkVP (mkV "rozumieć" conj101 "zrozumieć" conj101)) ;
     AWant p obj = mkCl p.name (dirV2 (mkMonoVerb "chcieć" conj45 Imperfective)) obj ; 
     AWantGo p place = mkCl p.name want_VV (mkVP (mkComplicatedVerb (mkV1 "iść" conj41a "pójść" conj42) place.to.s)) ;
@@ -211,9 +211,9 @@ concrete WordsPol of Words = SentencesPol **
 
     TheBest = mkSuperl L.good_A ;
     TheClosest = mkSuperl L.near_A ; 
-    TheCheapest = mkSuperl (mkA (mkRegAdj "tani" "tańszy" "tanio" "taniej") );
-    TheMostExpensive = mkSuperl (mkA (mkRegAdj "drogi" "droższy" "drogo" "drożej" ) );
-    TheMostPopular = mkSuperl (mkA (mkRegAdj "popularny" "popularniejszy" "popularnie" "popularniej" ) ) ;
+    TheCheapest = mkSuperl (mkRegAdj "tani" "tańszy" "tanio" "taniej");
+    TheMostExpensive = mkSuperl (mkRegAdj "drogi" "droższy" "drogo" "drożej");
+    TheMostPopular = mkSuperl (mkRegAdj "popularny" "popularniejszy" "popularnie" "popularniej") ;
     TheWorst = mkSuperl L.bad_A ;
 
     SuperlPlace sup p = placeNP sup p ;
@@ -268,8 +268,6 @@ concrete WordsPol of Words = SentencesPol **
 
   oper
   
-  mkA : Adj -> A = \adj -> adj ** { lock_A = <> };
-
   mkPlaceDo = overload {
     mkPlaceDo : N -> {name : CN ; at : Prep ; to : Prep; isPl : Bool} = \n -> {
       name = mkCN n; at = { s="w"; c=LocPrep; lock_Prep = <> }; to = {s="do"; c=GenPrep; lock_Prep = <>}; isPl = False };
@@ -332,11 +330,11 @@ concrete WordsPol of Words = SentencesPol **
   mkNat : Str -> Str -> Str -> N -> Str -> Str -> Str -> 
     { lang: A; prop: A; country: NP; citizenMSg:Str; citizenMPl: Str; citizenF:Str } = 
     \lang,ladv,prop,country,citiMsg, citiMpl, citiF -> {
-    lang = mkA (mkCompAdj lang ladv); prop = mkA (mkCompAdj prop); 
+    lang = mkCompAdj lang ladv; prop = mkCompAdj prop;
     country=mkNP country; citizenMSg=citiMsg; citizenMPl=citiMpl; citizenF=citiF };
  
-  open_A : A = (mkA (mkCompAdj "otwarty"));
-  closed_A : A = (mkA (mkCompAdj "zamknięty"));
+  open_A : A = mkCompAdj "otwarty";
+  closed_A : A = mkCompAdj "zamknięty";
     
   xOf : NPPerson -> Num -> N -> NPPerson = \p,num,n ->
       { name = case p.isPron of {

@@ -1,0 +1,10 @@
+Phrase	PSentence (SProp (PropAction (AHungry IFemale)))	I am hungry .	jestem głodna .
+Phrase	PSentence (SProp (PropAction (ATired IMale)))	I am tired .	jestem zmęczony .
+Phrase	PSentence (SProp (PropAction (ATired IFemale)))	I am tired .	jestem zmęczona .
+Phrase	PSentence (SProp (PropAction (ATired YouFamMale)))	you are tired .	jesteś zmęczony .
+Phrase	PSentence (SProp (PropAction (ATired YouFamFemale)))	you are tired .	jesteś zmęczona .
+Phrase	PSentence (SProp (PropAction (ALove He IMale)))	he loves me .	on kocha mnie .
+Phrase	PSentence (SProp (Is (This Pizza) (PropQuality Cheap)))	this pizza is cheap .	ta pizza jest tania .
+Word	PPlace (SuperlPlace TheCheapest Hotel)	the cheapest hotel	najtańszy hotel
+Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat English))))	I speak English .	mówię po angielsku .
+Word	PByTransport (ByTransp Train)	by train	pociągiem

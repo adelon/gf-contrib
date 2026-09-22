@@ -1,0 +1,4 @@
+Phrase	PQuestion (HowMuchCost (This Pizza))	how much does this pizza cost ?	hvad koster denne pizza ?
+Phrase	PQuestion (HowMuchCost (That Apple))	how much does that apple cost ?	hvad koster det der æble ?
+Phrase	PQuestion (HowFar (ThePlace Hotel))	how far is the hotel ?	hvor langt er det til hotellet ?
+Word	PByTransport (ByTransp Train)	by train	med tog

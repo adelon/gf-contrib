@@ -10,7 +10,7 @@ concrete SentencesPol of Sentences =
   (Syntax = SyntaxPol),
   (Symbolic = SymbolicPol),
   (Lexicon = LexiconPol) ** 
-  open (N = NounPol),(R = ResPol), (Pron = PronounMorphoPol), (E = ExtraPol), Prelude in {
+  open (N = NounPol),(R = ResPol), (Pron = PronounMorphoPol), (E = ExtendPol), Prelude in {
     
   flags  
     optimize =values ; coding =utf8 ; 
@@ -36,17 +36,11 @@ concrete SentencesPol of Sentences =
         };
          lock_Adv=<>};
 
---- AR 8/12/2010: using pro drop
-    IMale = mkPerson (E.ProDrop Pron.pronJa);
-    IFemale = mkPerson (E.ProDrop (Pron.pronJaFoo (R.PGen R.Fem)));
-    YouFamMale = mkPerson (E.ProDrop (Pron.pronTy));
-    YouFamFemale = mkPerson (E.ProDrop (Pron.pronTyFoo (R.PGen R.Fem)));
---    YouPolFemale = mkPerson (E.ProDrop (Pron.pronPani));
---    YouPolMale = mkPerson (E.ProDrop (Pron.pronPan));
-
---- original
----    IFemale = mkPerson (Pron.pronJaFoo (R.PGen R.Fem));
----    YouFamFemale = mkPerson (Pron.pronTyFoo (R.PGen R.Fem));
+    -- Omit ordinary subject pronouns; polite Pan/Pani retain nominal address.
+    IMale = mkPerson (E.ProDrop i_Pron);
+    IFemale = mkPerson (E.ProDrop E.iFem_Pron);
+    YouFamMale = mkPerson (E.ProDrop youSg_Pron);
+    YouFamFemale = mkPerson (E.ProDrop E.youFem_Pron);
     YouPolFemale = mkPerson (Pron.pronPani);
     YouPolMale = mkPerson (Pron.pronPan);
 }

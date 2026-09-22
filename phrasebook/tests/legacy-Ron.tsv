@@ -1,0 +1,3 @@
+Phrase	PSentence (SProp (PropAction (AHungry IFemale)))	I am hungry .	îmi este foame .
+Phrase	PSentence (SProp (PropAction (ATired IFemale)))	I am tired .	eu sunt obosită .
+Word	PByTransport (ByTransp Train)	by train	cu trenul

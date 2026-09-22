@@ -1,0 +1,4 @@
+Phrase	PSentence (SProp (PropAction (ATired IMale)))	I am tired .	es esmu noguris .
+Phrase	PSentence (SProp (PropAction (ATired IFemale)))	I am tired .	es esmu nogurusi .
+Phrase	PSentence (SProp (PropAction (ATired TheyFemale)))	they are tired .	viņas ir nogurušas .
+Word	PByTransport (ByTransp Train)	by train	ar vilcienu
