@@ -1,0 +1,5 @@
+Decimal	PosDecimal (IDig D_0)	0	๐
+Decimal	PosDecimal (IIDig D_4 (IDig D_2))	4 &+ 2	๔ ๒
+Digits	IIDig D_2 (IDig D_3)	2 &+ 3	๒ ๓
+Phrase	PNumber (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 (pot0 n3))))))	twenty &+ - &+ three .	ยี่ สิบ สาม .
+Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Euro)	five euros .	ห้า ยูโร .

@@ -10,7 +10,7 @@ make EngCze RGL_DIR="$HOME/Code/gf-rgl"
 make test-czech RGL_DIR="$HOME/Code/gf-rgl"
 ```
 
-The bilingual grammar is `build/Phrasebook.pgf`. Czech and Russian are compiled
+The bilingual grammar is `build/Phrasebook.pgf`. Czech, Russian and Thai are compiled
 from RGL sources, so local fixes are included without reinstalling the RGL.
 English uses the installed present-tense profile. `BUILD_DIR` selects a fresh
 output directory, and the existing `GF_LIB_PATH` is left intact. Both Makefiles
@@ -67,8 +67,19 @@ include Russian RGL adjective agreement after small numerals (for example,
 `две датской кроны` instead of `две датские кроны`), negation of some possession
 actions, and the referent-sensitive reflexives described below, which remain
 implemented only for English and Czech.
-The legacy `forApp` build now passes Russian, Spanish and Swedish, then stops
-while linking Thai with `GrammarToPGF.mkFId: missing category Decimal`.
+
+Thai requires RGL commit `1de278785`, which imports `Decimal` into `NumeralTha`.
+Without that category, linking the numeral grammar or phrasebook fails with
+`GrammarToPGF.mkFId: missing category Decimal`. The phrasebook builds Thai from
+source so the fix does not depend on reinstalling the compiled RGL.
+Run `sh tests/thai/check.sh` in the RGL checkout for the standalone linking
+regression, or `make test-thai RGL_DIR="$RGL_DIR"` here for English/Thai generation,
+parsing and missing-linearization checks in `$(BUILD_DIR)/thai/Phrasebook.pgf`.
+These use the RGL's existing tokenized Thai output. The tests cover digits,
+integer-valued `Decimal` trees, number phrases and prices; existing missing
+vocabulary, fractional/negative decimal rules and higher numeral constructors
+remain recorded in the coverage baseline. The full legacy `forApp` build now
+completes, including Thai, Urdu and collection of the app's GFO files.
 
 The Czech source requires the companion RGL revisions providing `ExtraCze`,
 the standard `ExtendCze` reflexive noun-phrase constructions,
