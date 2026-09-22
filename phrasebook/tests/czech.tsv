@@ -50,6 +50,8 @@ Phrase	PSentence (SPropNot (Is (This Pizza) (PropQuality Good)))	this pizza isn'
 Phrase	PSentence (SProp (PropAction (AModVerbPhrase MKnow IFemale VSwim)))	I can swim .	umím plavat .
 Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))) Pizza)))))	I want two pizzas .	chci dvě pizzy .
 Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Pizza)))))	I want five pizzas .	chci pět pizz .
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 pot01))))) Pizza)))))	I want twenty &+ - &+ one pizzas .	chci dvacet jedna pizz .
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 (pot0 n2)))))) Pizza)))))	I want twenty &+ - &+ two pizzas .	chci dvacet dva pizz .
 Phrase	PSentence (SProp (PropAction (ADoVerbPhrase IMale (V2Wait She))))	I wait for her .	čekám na ni .
 Phrase	PSentence (SProp (PropAction (ALove IMale She)))	I love her .	miluji ji .
 Phrase	PSentence (SProp (PropAction (AKnowQuestion IMale (QProp (PropAction (ATired YouFamMale))))))	I know if you are tired .	vím , jestli jsi unavený .
@@ -214,6 +216,8 @@ Phrase	PSentence (SProp (PropAction (ACitizen WeMale (CitiNat Swedish))))	we are
 Phrase	PSentence (SProp (PropAction (ACitizen WeFemale (CitiNat Swedish))))	we are Swedish .	jsme Švédky .
 Phrase	PSentence (SProp (PropAction (ALive YouPolMale (CountryNat Swedish))))	you live in Sweden .	žijete ve Švédsku .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Euro)	five euros .	pět eur .
+Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 pot01))))) Euro)	twenty &+ - &+ one euros .	dvacet jedna eur .
+Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 (pot0 n2)))))) Euro)	twenty &+ - &+ two euros .	dvacet dva eur .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Dollar)	five dollars .	pět dolarů .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Rouble)	five roubles .	pět rublů .
 Phrase	PPrice (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) DanishCrown)	five Danish crowns .	pět dánských korun .
