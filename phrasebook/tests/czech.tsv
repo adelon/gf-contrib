@@ -36,6 +36,15 @@ Phrase	PSentence (SProp (PropAction (ALove IMale YouFamFemale)))	I love you .	mi
 Phrase	PQuestion (WherePerson (Wife IMale))	where is my wife ?	kde je má manželka ?
 Phrase	PQuestion (WherePerson (Wife YouPolMale))	where is your wife ?	kde je vaše manželka ?
 Phrase	PQuestion (WherePerson (Wife (Son IMale)))	where is my son's wife ?	kde je manželka mého syna ?
+Phrase	PSentence (SProp (PropAction (ALove IMale (Daughter YouPolFemale))))	I love your daughter .	miluji vaši dceru .
+Phrase	PSentence (SProp (PropAction (ALove He (Daughter WeMale))))	he loves our daughter .	miluje naši dceru .
+Phrase	PSentence (SProp (PropAction (AHasAge (Daughter YouPolFemale) (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))))))	your daughter is five years old .	vaší dceři je pět let .
+Phrase	PSentence (SProp (PropAction (AHasAge (Daughter WeMale) (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))))))	our daughter is five years old .	naší dceři je pět let .
+Phrase	PQuestion (WherePerson (Son (Wife YouPolFemale)))	where is your wife's son ?	kde je syn vaší manželky ?
+Phrase	PQuestion (WherePerson (Son (Daughter WeMale)))	where is our daughter's son ?	kde je syn naší dcery ?
+Phrase	PSentence (SProp (PropAction (ALove IMale (Daughter YouPlurFamFemale))))	I love your daughter .	miluji vaši dceru .
+Phrase	PSentence (SProp (PropAction (ALove IMale (Husband YouPolFemale))))	I love your husband .	miluji vašeho manžela .
+Phrase	PSentence (SProp (PropAction (ALove He (Children WeMale))))	he loves our children .	miluje naše děti .
 Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjIndef Pizza)))))	I want a pizza .	chci pizzu .
 Phrase	PQuestion (QDoHave YouPolMale (OneObj (ObjIndef Pizza)))	do you have a pizza ?	máte pizzu ?
 Phrase	PSentence (SProp (Is (This Pizza) (PropQuality Good)))	this pizza is good .	tato pizza je dobrá .
@@ -50,6 +59,10 @@ Phrase	PSentence (SPropNot (Is (This Pizza) (PropQuality Good)))	this pizza isn'
 Phrase	PSentence (SProp (PropAction (AModVerbPhrase MKnow IFemale VSwim)))	I can swim .	umím plavat .
 Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))) Pizza)))))	I want two pizzas .	chci dvě pizzy .
 Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Pizza)))))	I want five pizzas .	chci pět pizz .
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))) (SuchKind (PropQuality Fresh) Apple))))))	I want two fresh apples .	chci dvě čerstvá jablka .
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Apple)))))	I want five apples .	chci pět jablek .
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) (SuchKind (PropQuality Fresh) Apple))))))	I want five fresh apples .	chci pět čerstvých jablek .
+Phrase	PImperativePolPos (V2Buy (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Apple)))	buy five apples	kupte pět jablek
 Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 pot01))))) Pizza)))))	I want twenty &+ - &+ one pizzas .	chci dvacet jedna pizz .
 Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjNumber (NNumeral (num (pot2as3 (pot1as2 (pot1plus n2 (pot0 n2)))))) Pizza)))))	I want twenty &+ - &+ two pizzas .	chci dvacet dva pizz .
 Phrase	PSentence (SProp (PropAction (ADoVerbPhrase IMale (V2Wait She))))	I wait for her .	čekám na ni .
