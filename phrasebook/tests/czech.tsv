@@ -10,6 +10,8 @@ Phrase	PQuestion (WherePlace (ThePlace Hotel))	where is the hotel ?	kde je hotel
 Phrase	PSentence (SProp (PropAction (ABePlace IFemale (ThePlace School))))	I am at the school .	jsem ve škole .
 Phrase	PSentence (SProp (PropAction (ABePlace IMale (ThePlace Bank))))	I am at the bank .	jsem v bance .
 Phrase	PSentence (SProp (PropAction (AWantGo IMale (ThePlace Hotel))))	I want to go to the hotel .	chci jít do hotelu .
+Phrase	PSentence (SProp (PropAction (AWantGo IMale (ThePlace Church))))	I want to go to the church .	chci jít do kostela .
+Phrase	PSentence (SProp (PropAction (ABePlace IFemale (ThePlace Church))))	I am in the church .	jsem v kostele .
 Phrase	PSentence (SProp (PropAction (AWantGo YouPolFemale (ThePlace Airport))))	you want to go to the airport .	chcete jít na letiště .
 Phrase	PSentence (SProp (PropAction (AModVerbPhrase MCan IMale VSwim)))	I can swim .	mohu plavat .
 Phrase	PSentence (SProp (PropAction (AModVerbPhrase MMust IFemale VRead)))	I have to read .	musím číst .

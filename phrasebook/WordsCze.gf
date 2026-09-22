@@ -36,7 +36,7 @@ lin
   Cafeteria = indoors (zenaN "jídelna") ;
   Center = indoors (mkN "centrum" "centra" neuter) ;
   Cinema = indoors ((mestoN "kino") ** {sloc = "kině"}) ;
-  Church = indoors ((hradN "kostel") ** {sloc = "kostele"}) ;
+  Church = indoors ((hradN "kostel") ** {sgen = "kostela" ; sloc = "kostele"}) ;
   Disco = place (mkCN (zenaN "diskotéka")) on_Prep (P.mkPrep "na" accusative) ;
   Hospital = indoors (ruzeN "nemocnice") ;
   Hotel = indoors (hradN "hotel") ;
