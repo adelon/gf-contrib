@@ -113,6 +113,8 @@ the standard `ExtendCze` reflexive noun-phrase constructions,
 subject omission, quantified agreement, clitic domains and `v_Prep`.
 The case-form regressions require RGL fixes `c43776414` for `náš`/`váš`
 and `b6ef81f92` for the irregular plural of `jablko`.
+Requests such as *jednu kávu prosím* require `UttAccNP` from RGL commit
+`c318c305c`; standalone vocabulary labels retain the nominative.
 Run `sh tests/czech/check.sh` in that checkout to check its source constructions
 and its standard installed language and API modules. `SyntaxCzeExtra` has been replaced by the
 conventional `ExtraCzeAbs` / `ExtraCze` extension.

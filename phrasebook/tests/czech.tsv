@@ -291,3 +291,9 @@ Phrase	PImperativePolPos (V2Drink (OneObj (ObjItem (ThisMass (MassDrink Water)))
 Phrase	PImperativePolPos (V2Drink (OneObj (ObjMass (MassDrink Water))))	drink water	pijte vodu
 Phrase	PSentence (SProp (PropAction (AMarried (Daughter IMale))))	my daughter is married .	má dcera je vdaná .
 Phrase	PSentence (SProp (PropAction (ACitizen (Children IMale) (CitiNat English))))	my children are English .	mé děti mají anglickou národnost .
+Phrase	PGreetingMale (GObjectPlease (OneObj (DrinkNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 pot01))))) Coffee)))	one coffee please !	jednu kávu prosím !
+Phrase	PGreetingFemale (GObjectPlease (OneObj (ObjIndef Pizza)))	a pizza please !	pizzu prosím !
+Phrase	PGreetingMale (GObjectPlease (OneObj (ObjItem (ThisMass (MassDrink Water)))))	this water please !	tuto vodu prosím !
+Phrase	PGreetingMale (GObjectPlease (ObjAndObj (ObjIndef (SuchKind (PropQuality Good) Pizza)) (OneObj (DrinkNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 pot01))))) Coffee))))	a good pizza and one coffee please !	dobrou pizzu a jednu kávu prosím !
+Word	PObject (OneObj (DrinkNumber (NNumeral (num (pot2as3 (pot1as2 (pot0as1 pot01))))) Coffee))	one coffee	jedna káva
+Word	PObject (OneObj (ObjIndef Pizza))	a pizza	pizza
