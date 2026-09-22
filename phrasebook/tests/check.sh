@@ -3,7 +3,13 @@ set -eu
 : "${GF:?Set GF to your GF executable}"
 pgf=${1:-build/Phrasebook.pgf}
 other=${2:-Cze}
+other_concrete=Phrasebook$other
 case "$other" in
+  DisambEng)
+    cases=tests/disamb-english.tsv
+    other_concrete=DisambPhrasebookEng
+    missing='ObjPlur ThesPlur ThesePlur ThosePlur'
+    ;;
   Cze)
     cases=tests/czech.tsv
     missing='ObjPlur ThesPlur ThesePlur ThosePlur'
@@ -36,18 +42,21 @@ log=${pgf%.pgf}.roundtrips.log
 while IFS="$tab" read -r category tree english translation forbidden; do
   for lang in Eng "$other"; do
     count=$((count + 1))
-    case "$lang" in Eng) expected=$english ;; *) expected=$translation ;; esac
+    case "$lang" in
+      Eng) expected=$english; concrete=PhrasebookEng ;;
+      *) expected=$translation; concrete=$other_concrete ;;
+    esac
     printf '%s\t%s\t%s\t%s\t%s\n' "$count" "$lang" "$tree" "$expected" "$forbidden" >> "$work/expected"
-    printf 'ps "GEN %s"\nl -lang=Phrasebook%s %s\n' "$count" "$lang" "$tree" >> "$work/commands"
-    printf 'ps "PARSE %s"\np -lang=Phrasebook%s -cat=%s "%s" | pt -number=101\n' \
-      "$count" "$lang" "$category" "$expected" >> "$work/commands"
+    printf 'ps "GEN %s"\nl -lang=%s %s\n' "$count" "$concrete" "$tree" >> "$work/commands"
+    printf 'ps "PARSE %s"\np -lang=%s -cat=%s "%s" | pt -number=101\n' \
+      "$count" "$concrete" "$category" "$expected" >> "$work/commands"
   done
 done < "$cases"
 printf 'ps "MISSING"\npg -missing\nps "DONE"\nq\n' >> "$work/commands"
 # Bound the whole batch as well as the number of parses. A timeout is a failure.
 perl -e 'alarm 120; exec @ARGV or die $!' "$GF" -run "$pgf" < "$work/commands" > "$work/actual"
 
-awk -F '\t' -v log_path="$log" -v total="$count" -v other="$other" -v other_missing="$missing" '
+awk -F '\t' -v log_path="$log" -v total="$count" -v other="$other_concrete" -v other_missing="$missing" '
   NR == FNR {lang[$1]=$2; tree[$1]=$3; expected[$1]=$4; forbidden[$1]=$5; next}
   function fail(message) {print message > "/dev/stderr"; failed=1}
   function finish() {
@@ -67,7 +76,7 @@ awk -F '\t' -v log_path="$log" -v total="$count" -v other="$other" -v other_miss
   }
   /^MISSING$/ {finish(); mode="MISSING"; next}
   mode == "MISSING" && $0 == "PhrasebookEng : ObjPlur ThesPlur ThesePlur ThosePlur" {missing++; next}
-  mode == "MISSING" && $0 == "Phrasebook" other " : " other_missing {missing++; next}
+  mode == "MISSING" && $0 == other " : " other_missing {missing++; next}
   /^DONE$/ {finish(); mode=""; done=1; next}
   /^$/ {next}
   mode == "GEN" {

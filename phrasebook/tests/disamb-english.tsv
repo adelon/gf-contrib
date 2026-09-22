@@ -1,0 +1,41 @@
+Phrase	PSentence (SProp (PropAction (ATired IMale)))	I am tired .	I (male) am tired .
+Phrase	PSentence (SProp (PropAction (ATired IFemale)))	I am tired .	I (female) am tired .
+Phrase	PSentence (SProp (PropAction (ATired WeMale)))	we are tired .	we (male) are tired .
+Phrase	PSentence (SProp (PropAction (ATired WeFemale)))	we are tired .	we (female) are tired .
+Phrase	PSentence (SProp (PropAction (ATired YouFamMale)))	you are tired .	you (singular,familiar,male) are tired .
+Phrase	PSentence (SProp (PropAction (ATired YouFamFemale)))	you are tired .	you (singular,familiar,female) are tired .
+Phrase	PSentence (SProp (PropAction (ATired YouPolMale)))	you are tired .	you (singular,polite,male) are tired .
+Phrase	PSentence (SProp (PropAction (ATired YouPolFemale)))	you are tired .	you (singular,polite,female) are tired .
+Phrase	PSentence (SProp (PropAction (ATired YouPlurFamMale)))	you are tired .	you (plural,familiar,male) are tired .
+Phrase	PSentence (SProp (PropAction (ATired YouPlurFamFemale)))	you are tired .	you (plural,familiar,female) are tired .
+Phrase	PSentence (SProp (PropAction (ATired YouPlurPolMale)))	you are tired .	you (plural,polite,male) are tired .
+Phrase	PSentence (SProp (PropAction (ATired YouPlurPolFemale)))	you are tired .	you (plural,polite,female) are tired .
+Phrase	PSentence (SProp (PropAction (ATired TheyMale)))	they are tired .	they (male) are tired .
+Phrase	PSentence (SProp (PropAction (ATired TheyFemale)))	they are tired .	they (female) are tired .
+Phrase	PSentence (SProp (PropAction (ALove IFemale IFemale)))	I love myself .	I (female) love myself (female) .
+Phrase	PSentence (SProp (PropAction (ALove WeFemale WeFemale)))	we love ourselves .	we (female) love ourselves (female) .
+Phrase	PSentence (SProp (PropAction (ALove TheyFemale TheyFemale)))	they love themselves .	they (female) love themselves (female) .
+Phrase	PSentence (SProp (PropAction (ALove YouPlurFamFemale YouPlurFamFemale)))	you love yourselves .	you (plural,familiar,female) love yourselves (plural,familiar,female) .
+Phrase	PSentence (SProp (PropAction (ALove YouPolMale YouFamFemale)))	you love yourself .	you (singular,polite,male) love yourself (singular,familiar,female) .
+Phrase	PSentence (SProp (PropAction (ALove She YouFamMale)))	she loves you .	she loves you (singular,familiar,male) .
+Phrase	PQuestion (WherePerson (Wife IMale))	where is my wife ?	where is my (male) wife ?
+Phrase	PQuestion (WherePerson (Wife IFemale))	where is my wife ?	where is my (female) wife ?
+Phrase	PQuestion (WherePerson (Wife YouPlurPolFemale))	where is your wife ?	where is your (plural,polite,female) wife ?
+Phrase	PQuestion (WherePerson (Children WeFemale))	where are our children ?	where are our (female) children ?
+Phrase	PQuestion (WherePerson (Son TheyMale))	where is their son ?	where is their (male) son ?
+Phrase	PQuestion (WherePerson (Wife (Son IFemale)))	where is my son's wife ?	where is my (female) son's wife ?
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MWant YouPlurPolFemale (V2Wait YouPlurFamFemale))))	you want to wait for yourselves .	you (plural,polite,female) want to wait for yourselves (plural,familiar,female) .
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MCan IFemale (V2Wait YouPolMale))))	I can wait for you .	I (female) can wait for you (singular,polite,male) .
+Phrase	PImperativeFamPos (V2Wait YouFamMale)	wait for yourself	wait for yourself (singular,familiar,male) (singular,familiar)
+Phrase	PImperativeFamNeg (V2Wait YouPolFemale)	don't wait for yourself	don't wait for yourself (singular,polite,female) (singular,familiar)
+Phrase	PImperativePolPos (V2Wait YouPolFemale)	wait for yourself	wait for yourself (singular,polite,female) (singular,polite)
+Phrase	PImperativePolNeg (V2Wait YouFamMale)	don't wait for yourself	don't wait for yourself (singular,familiar,male) (singular,polite)
+Phrase	PImperativePlurPos (V2Wait YouPlurFamFemale)	wait for yourselves	wait for yourselves (plural,familiar,female) (plural,familiar)	PImperativePlurPos (V2Wait YouPolFemale)
+Phrase	PImperativePlurNeg (V2Wait YouPlurPolMale)	don't wait for yourselves	don't wait for yourselves (plural,polite,male) (plural,familiar)
+Phrase	PImperativePlurPos (V2Wait YouPolFemale)	wait for you	wait for you (singular,polite,female) (plural,familiar)	PImperativePlurPos (V2Wait YouPlurFamFemale)
+Phrase	PImperativeFamPos VRead	read	read (singular,familiar)
+Phrase	PSentence (SProp (PropAction (AModVerbPhrase MKnow IFemale VSwim)))	I can swim .	I (female) know how to swim .
+Phrase	PGreetingMale GExcusePol	excuse me !	excuse me (polite) (by male)
+Phrase	PGreetingFemale GExcuse	excuse me !	excuse me (familiar) (by female)
+Phrase	PSentence (SProp (PropAction (AWant IMale (OneObj (ObjMass Cheese)))))	I want cheese .	I (male) want cheese (a portion of) .
+Word	PLanguage (LangNat French)	French	French (language)

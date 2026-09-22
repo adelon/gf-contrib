@@ -30,6 +30,17 @@ separate from using an optimized GF compiler executable.
 When migrating from previously optimized legacy PGFs, run `make clean` before
 rebuilding: GF's timestamp check does not detect changed optimization options.
 
+`DisambPhrasebookEng` adds feedback labels to ordinary English trees when the
+input leaves gender, address or other phrasebook distinctions ambiguous. It
+annotates the base English person values, retaining their agreement and referent
+identity. Labels remain visible in possessives and reflexives. Imperatives use
+the base grammar's binding rules before receiving their address labels.
+
+Run `make test-disamb-english RGL_DIR="$RGL_DIR"` to build and link ordinary and
+disambiguated English in `$(BUILD_DIR)/disamb-english/Phrasebook.pgf`. The tests
+check generation, bounded parsing and missing linearizations in both concretes,
+including nested possession, modal reflexives and all six imperative forms.
+
 French uses `ParadigmsFre.invarA` and the irregular-comparison overload of `mkA`
 for *bon marché* / *meilleur marché*, shared by `Cheap` and `TheCheapest`.
 Both forms are invariable ([Larousse, « marché »](https://www.larousse.fr/dictionnaires/francais/march%C3%A9/49391)).
