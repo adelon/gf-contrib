@@ -39,7 +39,9 @@ for lang do
         ;;
       *) path=".:$RGL_DIR/dist/present:$RGL_DIR/dist/alltenses:$RGL_DIR/dist/prelude" ;;
     esac
-    "$GF" -make $opt -path="$path" -name="$module" \
+    # As in the RGL installer, skip PMCFG generation for library modules.
+    # Linking generates the parser for the phrasebook's own abstract syntax.
+    "$GF" -make -no-pmcfg $opt -path="$path" -name="$module" \
       -gfo-dir="$BUILD_DIR/$module" -output-dir="$BUILD_DIR" "$module.gf"
   fi
 done
