@@ -10,8 +10,8 @@ make EngCze RGL_DIR="$HOME/Code/gf-rgl"
 make test-czech RGL_DIR="$HOME/Code/gf-rgl"
 ```
 
-The bilingual grammar is `build/Phrasebook.pgf`. Czech is compiled from RGL
-sources, so local Czech fixes are included without reinstalling the RGL.
+The bilingual grammar is `build/Phrasebook.pgf`. Czech and Russian are compiled
+from RGL sources, so local fixes are included without reinstalling the RGL.
 English uses the installed present-tense profile. `BUILD_DIR` selects a fresh
 output directory, and the existing `GF_LIB_PATH` is left intact. Both Makefiles
 use `build.sh` and `$GF`, including the legacy app/demo targets. Czech is included
@@ -41,9 +41,34 @@ generation and parsing regressions. This builds `$(BUILD_DIR)/french/Phrasebook.
 separately from the English/Czech grammar. The missing-linearization check records
 the existing French gaps: `Chinese`, `Hindi`, `India`, `Indian`, `Rupee`, `Yuan`,
 the empty `PlurKind` vocabulary, and numeral constructors not yet implemented
-by the French RGL. With RGL `820382715`, the legacy `forApp` build now passes
-French and next stops in `SentencesRus`, which still refers to the removed
-`MorphoRus.pronYa`, `pronTu` and `pronVu` operations.
+by the French RGL.
+
+Run `make test-russian RGL_DIR="$RGL_DIR"` for the English/Russian regressions,
+building `$(BUILD_DIR)/russian/Phrasebook.pgf`. Russian uses the current public
+pronouns, noun and verb paradigms, and RGL lexical entries. Person records retain
+sex separately from agreement: polite `вы` takes plural agreement, while marital
+status selects `женаты` or `замужем`. Unspecified sex uses `в браке`.
+
+Russian requires RGL commit `64c354dc4`, which enables `ExtendRus.ProDrop` and
+preserves the pronoun's non-subject forms. Name clauses use an omitted
+third-person plural subject: `как зовут вас?`. Run `sh tests/russian/check.sh`
+in the RGL checkout for its focused regression. The phrasebook uses the full
+source profile because Russian resource patterns reference tense constructors
+removed by the installed `present` profile; that profile incorrectly generated
+past-tense statements. Use a fresh `BUILD_DIR` or clean the legacy outputs when
+switching profiles.
+
+The Russian tests cover generation, intended-tree membership among bounded
+parse candidates, and the existing missing-linearization baseline: `Belgian`,
+`Belgium`, `Chinese`, `Flemish`, `GWhatTime`, `Hindi`, `India`, `Indian`, `Rupee`,
+`Yuan`, the empty `PlurKind` vocabulary, and unsupported RGL numeral constructors.
+This API migration is not a complete linguistic audit. Existing limitations
+include Russian RGL adjective agreement after small numerals (for example,
+`две датской кроны` instead of `две датские кроны`), negation of some possession
+actions, and the referent-sensitive reflexives described below, which remain
+implemented only for English and Czech.
+The legacy `forApp` build now passes Russian, Spanish and Swedish, then stops
+while linking Thai with `GrammarToPGF.mkFId: missing category Decimal`.
 
 The Czech source requires the companion RGL revisions providing `ExtraCze`,
 the standard `ExtendCze` reflexive noun-phrase constructions,

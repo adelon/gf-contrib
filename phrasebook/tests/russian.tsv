@@ -1,0 +1,68 @@
+Phrase	PSentence (SProp (PropAction (AHungry IMale)))	I am hungry .	я голоден .
+Phrase	PSentence (SProp (PropAction (AHungry IFemale)))	I am hungry .	я голодна .
+Phrase	PSentence (SProp (PropAction (AHungry YouPolFemale)))	you are hungry .	вы голодны .
+Phrase	PSentence (SProp (PropAction (AReady IFemale)))	I am ready .	я готова .
+Phrase	PSentence (SProp (PropAction (AIll IFemale)))	I am ill .	я больна .
+Phrase	PSentence (SProp (PropAction (ATired IFemale)))	I am tired .	я устала .
+Phrase	PSentence (SProp (PropAction (AMarried YouPolMale)))	you are married .	вы женаты .
+Phrase	PSentence (SProp (PropAction (AMarried YouPolFemale)))	you are married .	вы замужем .
+Phrase	PSentence (SProp (PropAction (AMarried (Children IMale))))	my children are married .	мои дети в браке .
+Phrase	PSentence (SProp (PropAction (AHasName He NameNN)))	his name is NN .	зовут его NN .
+Phrase	PQuestion (QWhatName She)	what is her name ?	как зовут её ?
+Phrase	PSentence (SProp (PropAction (AHasAge IMale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))))))	I am five years old .	мне пять лет .
+Phrase	PQuestion (QWhatAge YouPolFemale)	how old are you ?	сколько лет вам ?
+Phrase	PSentence (SHave He (OneObj (ObjIndef Pizza)))	he has a pizza .	пицца у н &+ его .
+Phrase	PSentence (SHaveNo He Pizza)	he doesn't have pizzas .	нет пиццы у н &+ его .
+Phrase	PSentence (SProp (PropAction (AHasChildren He (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))))))	he has two children .	два ребёнка у н &+ его .
+Phrase	PSentence (SProp (PropAction (AHasRoom YouPolMale (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))))))	you have a room for two persons .	есть номер для двух людей у вас .
+Phrase	PSentence (SProp (PropAction (ALike She (This Pizza))))	she likes this pizza .	эта пицца нравит &+ ся ей .
+Phrase	PSentence (SProp (PropAction (AScared YouPolFemale)))	you are scared .	вы боите &+ сь .
+Phrase	PSentence (SProp (PropAction (AWantGo IFemale (ThePlace Church))))	I want to go to the church .	я хочу пойти в церковь .
+Phrase	PSentence (SProp (PropAction (ABePlace IMale (ThePlace Church))))	I am in the church .	я в церкви .
+Phrase	PSentence (SProp (PropOpen (ThePlace Church)))	the church is open .	церковь открыта .
+Phrase	PSentence (SProp (PropClosedDay (ThePlace Museum) Monday))	the museum is closed on Mondays .	музей закрыт по понедельникам .
+Phrase	PSentence (SProp (PropAction (AWantGo IMale (ThePlace Cinema))))	I want to go to the cinema .	я хочу пойти в кино .
+Phrase	PSentence (SProp (PropAction (AWantGo IMale (ThePlace Station))))	I want to go to the station .	я хочу пойти на станцию .
+Phrase	PSentence (SProp (PropAction (ALive IMale (CountryNat Dutch))))	I live in the Netherlands .	я живу в Нидерландах .
+Phrase	PSentence (SProp (PropAction (ALove He She)))	he loves her .	он любит её .
+Phrase	PSentence (SProp (PropAction (ASpeak IFemale (LangNat Russian))))	I speak Russian .	я говорю на русском языке .
+Phrase	PSentence (SProp (PropAction (AThirsty WeMale)))	we are thirsty .	мы хотим пить .
+Phrase	PSentence (SProp (PropAction (AWant YouPolFemale (OneObj (ObjIndef Pizza)))))	you want a pizza .	вы хотите пиццу .
+Phrase	PSentence (SProp (ItCost (This Pizza) (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Zloty)))	this pizza costs five zloty .	эта пицца стоит пять злотых .
+Phrase	PQuestion (HowMuchCost (This Pizza))	how much does this pizza cost ?	сколько эта пицца стоит ?
+Phrase	PSentence (SProp (PropAction (AHasName (Daughter IMale) NameNN)))	my daughter's name is NN .	зовут мою дочь NN .
+Phrase	PSentence (SProp (PropOpenDate (ThePlace Museum) (OnDay Wednesday)))	the museum is open on Wednesday .	музей открыт в среду .
+Phrase	PSentence (SProp (PropAction (AHungry YouFamFemale)))	you are hungry .	ты голодна .
+Phrase	PSentence (SProp (PropAction (AReady YouPolFemale)))	you are ready .	вы готовы .
+Phrase	PSentence (SProp (PropAction (AIll IMale)))	I am ill .	я болен .
+Phrase	PSentence (SProp (PropAction (AMarried IMale)))	I am married .	я женат .
+Phrase	PSentence (SProp (PropAction (AMarried IFemale)))	I am married .	я замужем .
+Phrase	PSentence (SProp (PropAction (AMarried WeMale)))	we are married .	мы женаты .
+Phrase	PSentence (SProp (PropAction (AMarried TheyFemale)))	they are married .	они замужем .
+Phrase	PSentence (SProp (PropAction (AMarried (Wife IMale))))	my wife is married .	моя жена замужем .
+Phrase	PSentence (SProp (PropAction (AMarried (Husband IFemale))))	my husband is married .	мой муж женат .
+Phrase	PSentence (SProp (PropAction (AMarried (PersonName NameNN))))	NN is married .	NN в браке .
+Phrase	PSentence (SProp (PropAction (ALove IMale (Daughter YouPolFemale))))	I love your daughter .	я люблю вашу дочь .
+Phrase	PSentence (SProp (PropAction (ALove IFemale (Son He))))	I love his son .	я люблю его сына .
+Phrase	PSentence (SProp (PropAction (ALike He (These Pizza))))	he likes these pizzas .	эти пиццы нравят &+ ся ему .
+Phrase	PSentence (SProp (PropAction (AKnow YouPolMale)))	you know .	вы знаете .
+Phrase	PSentence (SPropNot (PropAction (AUnderstand IFemale)))	I don't understand .	я не понимаю .
+Phrase	PSentence (SProp (PropAction (AThirsty IMale)))	I am thirsty .	я хочу пить .
+Phrase	PSentence (SProp (PropAction (AScared WeFemale)))	we are scared .	мы боим &+ ся .
+Phrase	PSentence (SPropNot (PropAction (AMarried YouPolFemale)))	you aren't married .	вы не замужем .
+Phrase	PSentence (SPropNot (PropAction (AReady YouFamFemale)))	you aren't ready .	ты не готова .
+Phrase	PQuestion (QWhatName YouPolFemale)	what is your name ?	как зовут вас ?
+Phrase	PQuestion (QWhatAge He)	how old is he ?	сколько лет ему ?
+Phrase	PSentence (SHaveNoMass She (MassDrink Coffee))	she doesn't have coffee .	нет кофе у н &+ её .
+Word	PByTransport (ByTransp Taxi)	by taxi	на такси
+Word	PByTransport (ByTransp Subway)	by subway	на метро
+Phrase	PSentence (SProp (IsMass (MassDrink Coffee) (PropQuality Good)))	coffee is good .	кофе является хорошим .
+Phrase	PSentence (SProp (ItCost (These Pizza) (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n2)))))) Euro)))	these pizzas cost two euros .	эти пиццы стоят два евро .
+Phrase	PSentence (SProp (ItCost (This Pizza) (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Rouble)))	this pizza costs five roubles .	эта пицца стоит пять рублей .
+Phrase	PSentence (SProp (ItCost (This Pizza) (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) Leva)))	this pizza costs five levs .	эта пицца стоит пять левов .
+Phrase	PSentence (SProp (ItCost (This Pizza) (AmountCurrency (NNumeral (num (pot2as3 (pot1as2 (pot0as1 (pot0 n5)))))) DanishCrown)))	this pizza costs five Danish crowns .	эта пицца стоит пять датских крон .
+Phrase	PSentence (SProp (PropClosedDate (ThePlace Church) (OnDay Sunday)))	the church is closed on Sunday .	церковь закрыта в воскресенье .
+Phrase	PSentence (SProp (PropClosedDay (ThePlace Museum) Wednesday))	the museum is closed on Wednesdays .	музей закрыт по средам .
+Phrase	PSentence (SProp (PropAction (ABePlace IFemale (ThePlace Station))))	I am at the station .	я на станции .
+Phrase	PSentence (SProp (PropAction (ALive YouPolFemale (CountryNat Russian))))	you live in Russia .	вы живёте в России .
+Phrase	PSentence (SProp (PropAction (ASpeak He (LangNat French))))	he speaks French .	он говорит на французском языке .

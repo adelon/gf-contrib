@@ -1,7 +1,7 @@
 -- (C) 2009 Aarne Ranta under LGPL
 
 concrete WordsRus of Words = SentencesRus ** 
-    open SyntaxRus, (P = ParadigmsRus), (L = LexiconRus), ExtraRus, (R = ResRus), Prelude in {
+    open SyntaxRus, (P = ParadigmsRus), (L = LexiconRus), (E = ExtendRus), ExtraRus, Prelude in {
 
 flags coding = utf8 ;
 
@@ -14,7 +14,7 @@ flags coding = utf8 ;
     Bread = mkCN L.bread_N ;
     Cheese = mkCN L.cheese_N ;
     Chicken = mkCN (P.mkN "курица") ;
-    Coffee = mkCN (P.mkIndeclinableNoun "кофе" P.masculine P.inanimate) ;
+    Coffee = mkCN (P.mkN "кофе" P.masculine P.inanimate "0") ;
     Fish = mkCN L.fish_N ;
     Meat = mkCN (P.mkN "мясо") ;
     Milk = mkCN L.milk_N ; 
@@ -42,32 +42,32 @@ flags coding = utf8 ;
 
 -- places
  
-    Airport = mkPlace "аэропорт" in_Prep ; 
+    Airport = mkPlace (P.mkN "аэропорт") in_Prep to2_Prep ;
     AmusementPark = mkPlace2 "развлечения" "парк" in_Prep;
-    Bank = mkPlace "банк" in_Prep ;
-    Bar = mkPlace "бар" in_Prep ;  
-    Cafeteria = mkPlace "кафетерий" in_Prep ;
-    Center = mkPlace "центр" in_Prep ;
-    Church = mkPlace "церковь" in_Prep ; 
-    Cinema = mkPlace "кино" in_Prep ;  
-    Disco = mkPlace "дискотека" on_Prep ;
-    Hospital = mkPlace "больница" in_Prep ; 
-    Hotel = mkPlace "отель" in_Prep ; 
-    Museum = mkPlace "музей" in_Prep ; 
-    Park = mkPlace "парк" in_Prep ; 
-    Parking = mkPlace "автостоянка" on_Prep ; 
-    Pharmacy = mkPlace "аптека" in_Prep ;
-    PostOffice = mkPlace "почта" on_Prep ;
-    Pub = mkPlace "паб" in_Prep ;
-    Restaurant = mkPlace "ресторан" in_Prep ; 
-    Shop = mkPlace "магазин" in_Prep ;  
-    School = mkPlace "школа" in_Prep ; 
-    Station = mkPlace "станция" on_Prep ; 
-    Supermarket = mkPlace "супермаркет" in_Prep ;
-    Theatre = mkPlace "театр" in_Prep ;
-    Toilet = mkPlace "туалет" in_Prep ; 
-    University = mkPlace "университет" in_Prep ; 
-    Zoo = mkPlace "зоопарк" in_Prep ;
+    Bank = mkPlace (P.mkN "банк") in_Prep to2_Prep ;
+    Bar = mkPlace (P.mkN "бар") in_Prep to2_Prep ;
+    Cafeteria = mkPlace (P.mkN "кафетерий") in_Prep to2_Prep ;
+    Center = mkPlace (P.mkN "центр") in_Prep to2_Prep ;
+    Church = mkPlace (P.mkN "церковь" P.feminine P.inanimate "8*e") in_Prep to2_Prep ;
+    Cinema = mkPlace (P.mkN "кино" P.neuter P.inanimate "0") in_Prep to2_Prep ;
+    Disco = mkPlace (P.mkN "дискотека") on_Prep on2_Prep ;
+    Hospital = mkPlace (P.mkN "больница") in_Prep to2_Prep ;
+    Hotel = mkPlace (P.mkN "отель") in_Prep to2_Prep ;
+    Museum = mkPlace (P.mkN "музей") in_Prep to2_Prep ;
+    Park = mkPlace (P.mkN "парк") in_Prep to2_Prep ;
+    Parking = mkPlace (P.mkN "автостоянка") on_Prep on2_Prep ;
+    Pharmacy = mkPlace (P.mkN "аптека") in_Prep to2_Prep ;
+    PostOffice = mkPlace (P.mkN "почта") on_Prep on2_Prep ;
+    Pub = mkPlace (P.mkN "паб") in_Prep to2_Prep ;
+    Restaurant = mkPlace (P.mkN "ресторан") in_Prep to2_Prep ;
+    Shop = mkPlace (P.mkN "магазин") in_Prep to2_Prep ;
+    School = mkPlace (P.mkN "школа") in_Prep to2_Prep ;
+    Station = mkPlace (P.mkN "станция") on_Prep on2_Prep ;
+    Supermarket = mkPlace (P.mkN "супермаркет") in_Prep to2_Prep ;
+    Theatre = mkPlace (P.mkN "театр") in_Prep to2_Prep ;
+    Toilet = mkPlace (P.mkN "туалет") in_Prep to2_Prep ;
+    University = mkPlace (P.mkN "университет") in_Prep to2_Prep ;
+    Zoo = mkPlace (P.mkN "зоопарк") in_Prep to2_Prep ;
 
  
     CitRestaurant cit = 
@@ -76,37 +76,35 @@ flags coding = utf8 ;
 
 -- currencies
 
-    DanishCrown = mkCN (P.mkA "датский") (P.mkN "крона" P.inanimate) ;
-    Dollar = mkCN (P.mkN "доллар" P.inanimate) ;
-    Euro = mkCN (P.mkIndeclinableNoun "евро" P.neuter P.inanimate) ;
-    Lei = mkCN (P.mkN "лей" P.inanimate) ;
-    Leva = mkCN (P.mkN "лев" P.inanimate) ;
-    NorwegianCrown = mkCN (P.mkA "норвежский") (P.mkN "крона" P.inanimate) ;  
-    Pound = mkCN (P.mkN "фунт" P.inanimate);
-    Rouble = mkCN (P.mkN "рубль" P.inanimate) ;
-    SwedishCrown = mkCN (P.mkA "шведский") (P.mkN "крона" P.inanimate) ;
-    Zloty = mkCN (P.mkN "злотый" P.inanimate) ;
+    DanishCrown = mkCN (P.mkA "датский") (P.mkN "крона") ;
+    Dollar = mkCN (P.mkN "доллар") ;
+    Euro = mkCN (P.mkN "евро" P.neuter P.inanimate "0") ;
+    Lei = mkCN (P.mkN "лей") ;
+    Leva = mkCN (P.mkN "лев" P.masculine P.inanimate "1a") ;
+    NorwegianCrown = mkCN (P.mkA "норвежский") (P.mkN "крона") ;
+    Pound = mkCN (P.mkN "фунт");
+    Rouble = mkCN (P.mkN "рубль" P.masculine P.inanimate) ;
+    SwedishCrown = mkCN (P.mkA "шведский") (P.mkN "крона") ;
+    Zloty = mkCN (P.mkN (P.mkA "злотый") P.masculine P.inanimate) ;
 
 
 -- Nationalities
 
---    Belgian = mkNat "бельгийский" (P.mkPN "Бельгия" P.feminine P.singular P.inanimate) ;
-    Bulgarian = mkNat "болгарский" (P.mkPN "Болгария" P.feminine P.singular P.animate) ;
-    Catalan = mkNat "каталонский" (P.mkPN "Каталония" P.feminine P.singular P.animate) ;
-    Danish = mkNat "датский" (P.mkPN "Дания" P.feminine P.singular P.animate) ;
-    Dutch = mkNat "нидерландский" (P.mkPN "Нидерланды" P.neuter P.plural P.inanimate) ;
-    English = mkNat "английский" (P.mkPN "Англия" P.feminine P.singular P.animate) ;
-    Finnish = mkNat "финский" (P.mkPN "Финляндия" P.feminine P.singular P.animate) ;
---    Flemish = mkNat "фландрийский" (P.mkPN "Фландрия" P.feminine P.singular P.animate) ;
-    French = mkNat "французский" (P.mkPN "Франция" P.feminine P.singular P.animate) ;
-    German = mkNat "немецкий" (P.mkPN "Германия" P.feminine P.singular P.animate) ;
-    Italian = mkNat "итальянский" (P.mkPN "Италия" P.feminine P.singular P.animate) ;
-    Norwegian = mkNat "норвежский" (P.mkPN "Норвегия" P.feminine P.singular P.animate) ;
-    Polish = mkNat "польский" (P.mkPN "Польша" P.feminine P.singular P.animate) ;
-    Romanian = mkNat "румынский" (P.mkPN "Румыния" P.feminine P.singular P.animate) ;
-    Russian = mkNat "русский" (P.mkPN "Россия" P.feminine P.singular P.animate) ;
-    Spanish = mkNat "испанский" (P.mkPN "Испания" P.feminine P.singular P.inanimate) ;
-    Swedish = mkNat "шведский" (P.mkPN "Швеция" P.feminine P.singular P.animate) ;
+    Bulgarian = mkNat "болгарский" (P.mkPN (P.mkN "Болгария" P.feminine P.inanimate)) ;
+    Catalan = mkNat "каталонский" (P.mkPN (P.mkN "Каталония" P.feminine P.inanimate)) ;
+    Danish = mkNat "датский" (P.mkPN (P.mkN "Дания" P.feminine P.inanimate)) ;
+    Dutch = mkNat "нидерландский" (P.mkPN (P.mkN "Нидерланды" P.neuter P.inanimate "1a" P.only_plural)) ;
+    English = mkNat "английский" (P.mkPN (P.mkN "Англия" P.feminine P.inanimate)) ;
+    Finnish = mkNat "финский" (P.mkPN (P.mkN "Финляндия" P.feminine P.inanimate)) ;
+    French = mkNat "французский" (P.mkPN (P.mkN "Франция" P.feminine P.inanimate)) ;
+    German = mkNat "немецкий" (P.mkPN (P.mkN "Германия" P.feminine P.inanimate)) ;
+    Italian = mkNat "итальянский" (P.mkPN (P.mkN "Италия" P.feminine P.inanimate)) ;
+    Norwegian = mkNat "норвежский" (P.mkPN (P.mkN "Норвегия" P.feminine P.inanimate)) ;
+    Polish = mkNat "польский" (P.mkPN (P.mkN "Польша" P.feminine P.inanimate)) ;
+    Romanian = mkNat "румынский" (P.mkPN (P.mkN "Румыния" P.feminine P.inanimate)) ;
+    Russian = mkNat "русский" (P.mkPN (P.mkN "Россия" P.feminine P.inanimate)) ;
+    Spanish = mkNat "испанский" (P.mkPN (P.mkN "Испания" P.feminine P.inanimate)) ;
+    Swedish = mkNat "шведский" (P.mkPN (P.mkN "Швеция" P.feminine P.inanimate)) ;
 
 
 -- Means of transportation
@@ -117,8 +115,8 @@ flags coding = utf8 ;
     Car = mkTransport (P.mkN "автомобиль");
     Ferry = mkTransport (P.mkN "паром") ;
     Plane = mkTransport (P.mkN "самолет") ;
-    Subway = mkTransport (P.mkIndeclinableNoun "метро" P.neuter P.inanimate) ;
-    Taxi = mkTransport (P.mkIndeclinableNoun "такси" P.neuter P.inanimate) ;
+    Subway = mkTransport (P.mkN "метро" P.neuter P.inanimate "0") ;
+    Taxi = mkTransport (P.mkN "такси" P.neuter P.inanimate "0") ;
     Tram = mkTransport (P.mkN "трамвай") ;
     Train = mkTransport (P.mkN "поезд") ;
 
@@ -127,9 +125,10 @@ flags coding = utf8 ;
 
 
 -- actions
---    AHasAge p num = mkCl p.name (mkNP num L.year_N) ; 
-    AHasAge p num = mkCl (mkVP be_V3 (mkNP num L.year_N) p.name) ; 
-    AHasName p name = mkCl (mkVP (P.mkV3 name_is_V "" "" P.nominative P.accusative) name p.name) ;
+    AHasAge p num = mkCl (mkVP (P.mkV3 be_ell_V P.dative P.nominative)
+      p.name (mkNP num L.year_N)) ;
+    AHasName p name = mkCl unnamedCallers
+      (mkVP (P.mkV3 name_is_V P.accusative P.nominative) p.name name) ;
     AHasChildren p num = mkCl (mkVP have_V3 (mkNP num L.child_N) p.name) ; 
     AHasRoom p num = mkCl (mkVP have2_V3 
       (mkNP (mkNP a_Det (P.mkN "номер")) 
@@ -137,33 +136,37 @@ flags coding = utf8 ;
     AHasTable p num = mkCl (mkVP have2_V3 
       (mkNP (mkNP a_Det (P.mkN "стол")) 
         (SyntaxRus.mkAdv for_Prep (mkNP num (L.man_N)))) p.name) ;
-    AHungry p = mkCl p.name (P.mkA "голодный") ;
-    AIll p = mkCl p.name (P.mkA "больной") ; 
-    AKnow p = mkCl p.name (P.regV P.imperfective P.first "зна" "ю" "знал" "знай" "знать" ) ; 
-    ALike p item = mkCl item (P.mkV2 (P.mkV P.imperfective "нравлюсь" "нравишься" "нравится" "нравимся" "нравитесь" "нравятся" "нравился" "нравься" "нравиться") [] P.dative) p.name ;
-    ALive p co = mkCl p.name (mkVP (mkVP (P.regV P.imperfective P.firstE "жив" "у" "жил" "живи" "жить")) (SyntaxRus.mkAdv in_Prep co)) ; 
-    ALove p q = mkCl p.name (P.dirV2 (P.regV P.imperfective P.second "люб" "лю" "любил" "люби" "любить" )) q.name ; 
---    AMarried p = mkCl p.name (P.mkA "женатый") ; 
-    AMarried p = let status = case p.name.g of {
-    		       R.PGen R.Masc => P.mkAdv "женат" ;
-    		       _         => P.mkAdv "замужем"
-    		       } in mkCl p.name status ;
-    AReady p = mkCl p.name (P.mkA "готовый") ; 
-    AScared p = mkCl p.name (P.mkV P.imperfective "боюсь" "боишься" "боится" "боимся" "бойтесь" "боятся" "боялся" "бойся" "бояться") ;
-    ASpeak p lang = mkCl p.name (P.mkV2 (P.regV P.imperfective P.secondA "говор" "ю" "говорил" "говори" "говорить") "на" P.prepositional) lang ; 
-    AThirsty p = mkCl p.name want_VV (mkVP (P.regV P.imperfective P.firstE "пь" "ю" "пил" "пей" "пить" )) ;
-    ATired p = mkCl p.name (P.mkA "уставший" R.Rel) ; 
-    AUnderstand p = mkCl p.name (P.regV P.imperfective P.first "понима" "ю" "понимал" "понимай" "понимать") ;
-    AWant p obj = mkCl p.name (P.dirV2 (P.regV P.imperfective P.mixed "хо" "чу" "хотел" "хоти" "хотеть")) obj ; 
-    AWantGo p place = mkCl p.name want_VV (mkVP (mkVP (P.mkV P.perfective "пошёл" "пошёл" "пошёл" "пошли" "пошли" "пошли" "пошёл" "пойди" "пойти")) place.to) ;
-    --AWantGo p place = mkCl p.name want_VV (mkVP (mkVP (P.mkV P.imperfective "иду" "идёшь" "идёт" "идём" "идёте" "идут" "шёл" "иди" "идти")) place.to) ; 
+    AHungry p = mkCl p.name (P.mkA "голодный" "голоднее" "1*a" P.short) ;
+    AIll p = mkCl p.name (P.mkA "больной" "больнее" "1*b" P.short) ;
+    AKnow p = mkCl p.name <lin V L.know_V2 : V> ;
+    ALike p item = mkCl item L.like_V2 p.name ;
+    ALive p co = mkCl p.name (mkVP (mkVP L.live_V) (SyntaxRus.mkAdv in_Prep co)) ;
+    ALove p q = mkCl p.name L.love_V2 q.name ;
+    AMarried p = case p.sex of {
+      Male => mkCl p.name (P.ShortenA (P.mkA "женатый")) ;
+      Female => mkAdvCl p.name (P.mkAdv "замужем") ;
+      Unknown => mkAdvCl p.name (SyntaxRus.mkAdv in_Prep (mkNP (P.mkN "брак")))
+      } ;
+    AReady p = mkCl p.name (P.ShortenA (P.mkA "готовый")) ;
+    AScared p = mkCl p.name <lin V L.fear_V2 : V> ;
+    ASpeak p lang = mkCl p.name (P.mkV2
+      (P.mkV P.imperfective P.intransitive "говорить" "говорю" "говорит")
+      (P.mkPrep "на" P.prepositional)) lang ;
+    AThirsty p = mkCl p.name want_VV (mkVP <lin V L.drink_V2 : V>) ;
+    ATired p = mkCl p.name (P.ShortenA (P.mkA "усталый")) ;
+    AUnderstand p = mkCl p.name <lin V L.understand_V2 : V> ;
+    AWant p obj = mkCl p.name (P.mkV2 (P.mkV P.imperfective P.transitive "хотеть")) obj ;
+    AWantGo p place = mkCl p.name want_VV
+      (mkVP (mkVP (P.mkV P.perfective P.intransitive "пойти")) place.to) ;
     
 -- miscellaneous
 
-    QWhatName p = mkQS (mkQCl how_IAdv (mkCl (mkVP (P.mkV2 name_is_V "" P.accusative) p.name))) ;
-    QWhatAge p = mkQS (mkQCl (mkIP how8many_IDet L.year_N) p.name);
+    QWhatName p = mkQS (mkQCl how_IAdv
+      (mkCl unnamedCallers (P.mkV2 name_is_V P.accusative) p.name)) ;
+    QWhatAge p = mkQS (mkQCl (mkIP how8many_IDet L.year_N)
+      (mkVP (mkVP be_ell_V) (SyntaxRus.mkAdv to_dat_Prep p.name))) ;
     HowMuchCost item = mkQS (mkQCl how8much_IAdv (mkCl item cost_V)) ; 
-    ItCost item price = mkCl item (P.mkV2 cost_V "" P.accusative) price ;
+    ItCost item price = mkCl item (P.mkV2 cost_V P.accusative) price ;
 
     PropOpen p = mkCl p.name open_A ; 
     PropClosed p = mkCl p.name closed_A ; 
@@ -187,24 +190,23 @@ flags coding = utf8 ;
 -- below. Languages without productive genitives must use an equivalent of
 -- "the wife of my son" for non-pronouns.
 
-    Wife = xOf sing (P.mkN "жена" P.animate) ; 
-    Husband = xOf sing (P.mkN "муж" P.animate) ;
-    Son = xOf sing (P.mkN "сын" P.animate) ;
-    Daughter = xOf sing (P.mkN "дочь" "дочери" "дочери" "дочь" "дочерью" "дочери" "дочь" "дочери" "дочерей" "дочерям" "дочерей" "дочерьми" "дочерях" P.feminine P.animate) ;
---    Daughter = xOf sing E.daughter_N ;
-    Children = xOf plur L.child_N ; 
+    Wife = xOf Female sing L.wife_N ;
+    Husband = xOf Male sing L.husband_N ;
+    Son = xOf Male sing (P.mkN "сын" P.masculine P.animate) ;
+    Daughter = xOf Female sing (P.mkN "дочь" "дочери" "дочери" "дочь" "дочерью" "дочери" "дочери" "дочери" "дочерей" "дочерям" "дочерей" "дочерьми" "дочерях" P.feminine P.animate) ;
+    Children = xOf Unknown plur L.child_N ;
 
 
  
 -- week days
 
-    Monday = mkDay "понедельник" P.masculine ;
-    Tuesday = mkDay "вторник" P.masculine ;
-    Wednesday = mkDay "среда" P.feminine ;
-    Thursday = mkDay "четверг" P.masculine ;
-    Friday = mkDay "пятница" P.feminine ;
-    Saturday = mkDay "суббота" P.feminine ;
-    Sunday = mkDay "воскресенье" P.neuter ;
+    Monday = mkDay (P.mkN "понедельник") ;
+    Tuesday = mkDay (P.mkN "вторник") ;
+    Wednesday = mkDay (P.mkN "среда") ;
+    Thursday = mkDay (P.mkN "четверг") ;
+    Friday = mkDay (P.mkN "пятница") ;
+    Saturday = mkDay (P.mkN "суббота") ;
+    Sunday = mkDay (P.mkN "воскресенье") ;
 
   Tomorrow = P.mkAdv "завтра" ;
 
@@ -239,36 +241,37 @@ flags coding = utf8 ;
     mkNat : Str -> PN -> NPNationality = \la,co -> 
       mkNPNationality (mkNP (mkCN (P.mkA la) (P.mkN "язык"))) (mkNP co) (P.mkA la) ;
 
-    mkDay : Str -> P.Gender -> {name : NP ; point : Adv ; habitual : Adv} =
-      \d,g -> mkNPDay (mkNP (P.mkPN d g P.singular P.inanimate)) (mkAdv (P.mkPrep "в" P.accusative) (mkNP (P.mkPN d g P.singular P.inanimate))) 
-                                ---- (mkAdv on_Prep (mkNP (P.mkPN d))) 
-        (mkAdv (P.mkPrep "по" P.dative) (mkNP a_Quant plNum (mkCN (P.mkN d)))) ;
+    mkDay : N -> NPDay = \d ->
+      mkNPDay (mkNP d)
+        (mkAdv (P.mkPrep "в" P.accusative) (mkNP d))
+        (mkAdv (P.mkPrep "по" P.dative) (mkNP aPl_Det d)) ;
 
---    mkPlace : N -> Str -> {name : CN ; at : Prep ; to : Prep} = \p,i -> 
---      mkCNPlace (mkCN p) (P.mkPrep i P.prepositional) to_Prep ;
-    mkPlace : Str -> Prep -> {name : CN ; at : Prep ; to : Prep ; isPl : Bool} = \p,i -> 
-      mkCNPlace (mkCN (P.mkN p)) i to_Prep;
+    mkPlace : N -> Prep -> Prep -> CNPlace = \p,i,t ->
+      mkCNPlace (mkCN p) i t ;
 
     mkPlace2 : Str -> Str -> Prep -> {name : CN ; at : Prep ; to : Prep ; isPl : Bool} = \p,p2,i -> 
-      mkCNPlace (mkCN (P.mkN2 (P.mkN p2)) (mkNP (P.mkN p))) i to_Prep;
+      mkCNPlace (mkCN (P.mkN2 (P.mkN p2)) (mkNP (P.mkN p))) i to2_Prep;
 
-    open_A = P.mkA "открытый";
-    closed_A = P.mkA "закрытый";
+    open_A = P.ShortenA (P.mkA "открытый") ;
+    closed_A = P.ShortenA (P.mkA "закрытый") ;
 
-    cost_V = P.regV P.imperfective P.secondA "сто" "ю" "стоил" "стой" "стоить" ;
+    cost_V = P.mkV P.imperfective P.transitive "стоить" "стою" "стоит" "4a" ;
 
-    name_is_V = P.mkV P.imperfective "зову" "зовëшь" "зовут" "зовëм" "зовëте" "зовут" "звал" "зови" "звать" ;
+    name_is_V = P.mkV P.imperfective P.transitive "звать" "зову" "зовёт" "6°b/c" ;
+    -- Russian names use an indefinite personal clause: "меня зовут NN".
+    unnamedCallers : NP = mkNP (E.ProDrop they_Pron) ;
 
-   xOf : GNumber -> N -> NPPerson -> NPPerson = \n,x,p -> 
-      relativePerson n (mkCN x) (\a,b,c -> mkNP (mkNP the_Quant a c) (SyntaxRus.mkAdv possess_Prep b)) p ;
+    xOf : Sex -> GNumber -> N -> NPPerson -> NPPerson = \s,n,x,p ->
+      relativePerson n (mkCN x)
+        (\a,b,c -> mkNP (mkNP the_Quant a c) (SyntaxRus.mkAdv possess_Prep b)) p
+        ** {sex = s} ;
 
      mkTransport : N -> {name : CN ; by : Adv} = \n -> {
       name = mkCN n ;  
      by = SyntaxRus.mkAdv on_Prep (mkNP the_Det n)
       } ;
 
-     far_IAdv = ss "как далеко" ** {lock_IAdv = <>} ;
-     long_IAdv = ss "как долго" ** {lock_IAdv = <>};
+     far_IAdv = P.mkIAdv "как далеко" ;
 
      mkSuperl : A -> Det = \a -> SyntaxRus.mkDet the_Art (SyntaxRus.mkOrd a) ;
 

@@ -25,10 +25,14 @@ for lang do
   case "$lang" in ???) module=Phrasebook$lang ;; *) module=$lang ;; esac
   if test "$mode" != link; then
     mkdir -p "$BUILD_DIR/$module"
-    # Compile Czech from the checkout so edits cannot be hidden by installed RGL files.
+    # Compile Czech and Russian from source so local RGL fixes are included.
     case "$lang" in
       Cze|PhrasebookCze)
         path=".:$RGL_DIR/src/api:$RGL_DIR/src/czech:$RGL_DIR/src/common:$RGL_DIR/src/abstract:$RGL_DIR/src/prelude"
+        ;;
+      Rus|PhrasebookRus)
+        # Russian's tense patterns require the complete RGL tense parameters.
+        path=".:$RGL_DIR/src/api:$RGL_DIR/src/russian:$RGL_DIR/src/common:$RGL_DIR/src/abstract:$RGL_DIR/src/prelude"
         ;;
       *) path=".:$RGL_DIR/dist/present:$RGL_DIR/dist/alltenses:$RGL_DIR/dist/prelude" ;;
     esac

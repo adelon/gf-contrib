@@ -13,6 +13,11 @@ case "$other" in
     # Existing French vocabulary and upstream numeral gaps, outside these tests.
     missing='Chinese Hindi India Indian ObjPlur Rupee ThesPlur ThesePlur ThosePlur Yuan pot21 pot31 pot3decimal pot4 pot41 pot4decimal pot4plus pot5 pot51 pot5decimal pot5plus'
     ;;
+  Rus)
+    cases=tests/russian.tsv
+    # Existing Russian vocabulary and upstream numeral gaps.
+    missing='Belgian Belgium Chinese Flemish GWhatTime Hindi India Indian ObjPlur Rupee ThesPlur ThesePlur ThosePlur Yuan pot21 pot31 pot3decimal pot4 pot41 pot4decimal pot4plus pot5 pot51 pot5decimal pot5plus'
+    ;;
   *) echo "Unsupported test language: $other" >&2; exit 1 ;;
 esac
 work=$(mktemp -d "${TMPDIR:-/tmp}/phrasebook-tests.XXXXXX")
