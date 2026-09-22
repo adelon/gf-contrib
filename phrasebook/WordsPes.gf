@@ -221,11 +221,12 @@ flags coding = utf8 ;
 -- transports
 
 
-    HowFar place = mkQS (mkQCl far_IAdv (mkNP tA_Prep place.name)) ;
-    HowFarFrom x y = mkQS (mkQCl far_IAdv (mkNP (mkNP from_Prep x.name) (SyntaxPes.mkAdv tA_Prep y.name ))) ;
-    HowFarFromBy x y t =
-      mkQS (mkQCl far_IAdv (mkNP (mkNP (mkNP from_Prep x.name) (SyntaxPes.mkAdv tA_Prep y.name)) t)) ;
-    HowFarBy y t = mkQS (mkQCl far_IAdv (mkNP (mkNP tA_Prep y.name) t)) ;
+    HowFar place = distanceQuestion (SyntaxPes.mkAdv tA_Prep place.name) ;
+    HowFarFrom x y = distanceQuestion
+      (routeAdv (SyntaxPes.mkAdv from_Prep x.name) (SyntaxPes.mkAdv tA_Prep y.name)) ;
+    HowFarFromBy x y t = distanceQuestion
+      (routeAdv (routeAdv (SyntaxPes.mkAdv from_Prep x.name) (SyntaxPes.mkAdv tA_Prep y.name)) t) ;
+    HowFarBy y t = distanceQuestion (routeAdv (SyntaxPes.mkAdv tA_Prep y.name) t) ;
 
     WhichTranspPlace trans place =
       mkQS (mkQCl (SyntaxPes.mkIP which_IDet trans.name) (mkVP (mkVP L.go_V) place.to)) ;
@@ -271,16 +272,22 @@ flags coding = utf8 ;
       by = SyntaxPes.mkAdv by8means_Prep (mkNP n)
       } ;
 
---    mkSuperl : A -> Det = \a -> SyntaxPes.mkDet the_Art (SyntaxPes.mkOrd a) ;
-      mkSuperl : A -> Det = \a -> lin Det { s = a.s ! Bare ++ "ترین" ; n = Sg ; isNum = False ; mod = Bare} ;
+    mkSuperl : A -> Det = \a -> SyntaxPes.mkDet the_Quant (SyntaxPes.mkOrd a) ;
 
---   far_IAdv = ExtraPes.IAdvAdv (P.mkAdv "دور") ;
-   far_IAdv = lin IAdv {s = "چقدر راه"} ;
+    -- Route adverbials precede the existential question "how much distance is there?".
+    -- Persian QS is a complete string; the public API has no Adv -> QS -> QS constructor.
+    distanceQuestion : Adv -> QS = \route ->
+      let question : QS = mkQS (mkQCl (SyntaxPes.mkIP howMuch_IDet (mkN01 "راه" Inanimate)))
+      in lin QS {s = route.s ++ question.s} ;
+
+    routeAdv : Adv -> Adv -> Adv = \first,second -> P.mkAdv (first.s ++ second.s) ;
+    howMuch_IDet : IDet = lin IDet {s = "چقدر" ; n = singular ; isNum = False} ;
+
    howMuchAge_IAdv = lin IAdv {s = "چند"} ;
    howMuchCost_IAdv = lin IAdv {s = "چقدر"} ;
    what_IAdv = lin IAdv {s = ["چه چیزی"]} ;
-   no_Prep = lin Prep {s = ""} ;
-   tA_Prep = lin Prep {s = "تا"} ;
+   no_Prep = P.mkPrep "" ;
+   tA_Prep = P.mkPrep "تا" ;
 -------------------
 --modN : N -> N = \noun -> lin N {s = \\n,c =>noun.s!n!c++"ک" ; g =noun.g} ;
 --modQuant : Quant -> Quant = \q -> lin Quant {s = \\n,g,c => q.s ! n ! Fem ! c ; a = q.a};

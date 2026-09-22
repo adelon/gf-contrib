@@ -70,6 +70,22 @@ the existing French gaps: `Chinese`, `Hindi`, `India`, `Indian`, `Rupee`, `Yuan`
 the empty `PlurKind` vocabulary, and numeral constructors not yet implemented
 by the French RGL.
 
+Persian superlatives use `mkOrd` and `mkDet`, preserving the RGL's adjective
+degrees, irregular comparison and suffix binding: *بهترین هتل* ("the best hotel").
+Prepositions use `ParadigmsPes.mkPrep`. Distance questions compose route
+adverbials with an existential question, as in *تا هتل چقدر راه است*
+("how far is the hotel?"); the pattern is illustrated in the
+[Middle East Institute's Persian 201 materials, p. 2](https://www.mei.edu/sites/default/files/syllabi/Persian%20201.pdf#page=2).
+The small local helper prefixes these adverbials to a complete Persian `QS`,
+since the public API has no constructor for that combination.
+
+Run `make test-persian RGL_DIR="$RGL_DIR"` for English/Persian generation,
+bounded parsing and missing-linearization checks in
+`$(BUILD_DIR)/persian/Phrasebook.pgf`. The tests cover all six superlatives,
+composed requests, route endpoints, transport and weekday adverbials.
+Existing vocabulary, modal/verb and numeral gaps remain recorded in the test
+baseline, including phrasebook functions that depend on the missing numerals.
+
 Run `make test-russian RGL_DIR="$RGL_DIR"` for the English/Russian regressions,
 building `$(BUILD_DIR)/russian/Phrasebook.pgf`. Russian uses the current public
 pronouns, noun and verb paradigms, and RGL lexical entries. Person records retain

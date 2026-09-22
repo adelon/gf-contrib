@@ -1,0 +1,14 @@
+Word	PPlace (SuperlPlace TheBest Hotel)	the best hotel	بهتر &+ ین هتل
+Word	PPlace (SuperlPlace TheClosest Hotel)	the nearest hotel	نزدیکتر &+ ین هتل
+Word	PPlace (SuperlPlace TheCheapest Bank)	the cheapest bank	ارزانتر &+ ین بانک
+Word	PPlace (SuperlPlace TheMostExpensive Hotel)	the most expensive hotel	گرانتر &+ ین هتل
+Word	PPlace (SuperlPlace TheMostPopular Restaurant)	the most popular restaurant	پرطرفدارتر &+ ین رستوران
+Word	PPlace (SuperlPlace TheWorst Hotel)	the worst hotel	بدتر &+ ین هتل
+Phrase	PSentence (SProp (PropAction (AWantGo IMale (SuperlPlace TheBest Bank))))	I want to go to the best bank .	من می‌ &+ خواهم به بهتر &+ ین بانک بروم ۔
+Phrase	PQuestion (HowFar (SuperlPlace TheCheapest Hotel))	how far is the cheapest hotel ?	تا ارزانتر &+ ین هتل چقدر راه است
+Phrase	PQuestion (HowFarFrom (ThePlace Bank) (ThePlace Hotel))	how far is the hotel from the bank ?	از بانک تا هتل چقدر راه است	PQuestion (HowFarFrom (ThePlace Hotel) (ThePlace Bank))
+Phrase	PQuestion (HowFarFrom (ThePlace Hotel) (ThePlace Bank))	how far is the bank from the hotel ?	از هتل تا بانک چقدر راه است	PQuestion (HowFarFrom (ThePlace Bank) (ThePlace Hotel))
+Phrase	PQuestion (HowFarBy (ThePlace Hotel) (ByTransp Taxi))	how far is the hotel by taxi ?	تا هتل با تاکسی چقدر راه است
+Phrase	PQuestion (HowFarFromBy (ThePlace Bank) (ThePlace Hotel) (ByTransp Taxi))	how far is the hotel from the bank by taxi ?	از بانک تا هتل با تاکسی چقدر راه است
+Phrase	PQuestion (HowFarFromBy (ThePlace Hotel) (ThePlace Bank) ByFoot)	how far is the bank from the hotel by foot ?	از هتل تا بانک پیاده چقدر راه است
+Date	OnDay Monday	on Monday	دوشنبه

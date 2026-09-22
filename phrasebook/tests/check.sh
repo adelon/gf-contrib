@@ -24,6 +24,11 @@ case "$other" in
     # Existing French vocabulary and upstream numeral gaps, outside these tests.
     missing='Chinese Hindi India Indian ObjPlur Rupee ThesPlur ThesePlur ThosePlur Yuan pot21 pot31 pot3decimal pot4 pot41 pot4decimal pot4plus pot5 pot51 pot5decimal pot5plus'
     ;;
+  Pes)
+    cases=tests/persian.tsv
+    # Existing Persian vocabulary, modal/verb and numeral gaps, including their callers.
+    missing='AHasAge AHasChildren AHasRoom AHasTable AmountCurrency Belgian Chinese DrinkNumber GWhatTime Hindi India Indian ItCost MCan MKnow MMust NNumeral ObjNumber ObjPlur PNumber PPrice Rupee ThesPlur ThesePlur ThosePlur V2Wait VWait Yuan pot21 pot31 pot3as4 pot3decimal pot4 pot41 pot4as5 pot4decimal pot4plus pot5 pot51 pot5decimal pot5plus'
+    ;;
   Rus)
     cases=tests/russian.tsv
     # Existing Russian vocabulary and upstream numeral gaps.
